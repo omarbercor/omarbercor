@@ -1,0 +1,34 @@
+---
+/**
+ * CircleTransitionOverlay.astro
+ * Capa persistente entre navegaciones para la transición en círculo expansivo (Interlude style).
+ * Mantiene la cobertura visual mientras Astro intercambia el DOM sin saltos en blanco.
+ */
+---
+
+<div
+  id="circle-transition-overlay"
+  class="circle-transition-overlay"
+  aria-hidden="true"
+  transition:persist="circle-transition"
+></div>
+
+<style is:global>
+  .circle-transition-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100dvh;
+    z-index: 99999;
+    background-color: #0d0d0f;
+    visibility: hidden;
+    pointer-events: none;
+    will-change: clip-path, mask-image;
+  }
+</style>
+
+<script>
+  import { initCircleTransitions } from '@/motion/circle-transition';
+  initCircleTransitions();
+</script>

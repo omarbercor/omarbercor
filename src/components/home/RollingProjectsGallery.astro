@@ -86,6 +86,7 @@ const projects = [
           class="rolling-item"
           data-image={project.image}
           data-slug={project.slug}
+          data-transition="circle"
           title={`Abrir caso de estudio: ${project.shortTitle}`}
         >
           <span class="sr-only">{project.shortTitle} — {project.client}</span>
@@ -101,16 +102,15 @@ const projects = [
   let galleryInstance: { destroy: () => void } | null = null;
 
   function mountGallery() {
+    galleryInstance?.destroy();
     galleryInstance = initRollingProjectsGallery('#rolling-projects-section');
   }
 
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', mountGallery);
-  } else {
-    mountGallery();
-  }
+  // Compatible con Astro ClientRouter: se ejecuta en carga inicial y navegación de páginas
+  document.addEventListener('astro:page-load', mountGallery);
 
-  window.addEventListener('beforeunload', () => {
+  document.addEventListener('astro:before-swap', () => {
     galleryInstance?.destroy();
+    galleryInstance = null;
   });
 </script>

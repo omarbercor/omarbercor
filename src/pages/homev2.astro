@@ -7,16 +7,18 @@
  * 3. Galería de Proyectos Enrollables 3D al Scroll (Codrops Demo 8) con Marquesina interactiva (100dvh)
  * 4. Bloque Óptico de Lente (10% periférico con estela de inercia)
  */
-import '@/styles/fonts.css';
-import '@/styles/homev2.css';
-import FilmGrainOverlay from '@/components/ui/FilmGrainOverlay.astro';
-import RollingProjectsGallery from '@/components/home/RollingProjectsGallery.astro';
-import { SITE_OPTICS_CONFIG } from '@/config/site-optics';
+import "@/styles/fonts.css";
+import "@/styles/homev2.css";
+import { ClientRouter } from 'astro:transitions';
+import FilmGrainOverlay from "@/components/ui/FilmGrainOverlay.astro";
+import CircleTransitionOverlay from "@/components/ui/CircleTransitionOverlay.astro";
+import RollingProjectsGallery from "@/components/home/RollingProjectsGallery.astro";
+import { SITE_OPTICS_CONFIG } from "@/config/site-optics";
 
 const unsplashImages = [
-  '/images/unsplash/col1.jpg',
-  '/images/unsplash/col2.jpg',
-  '/images/unsplash/col3.jpg',
+  "/images/unsplash/col1.jpg",
+  "/images/unsplash/col2.jpg",
+  "/images/unsplash/col3.jpg",
 ];
 ---
 
@@ -25,15 +27,30 @@ const unsplashImages = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Laboratorio V2: Rolling Projects 3D, Lente 10% & Grano 6% — Omar Bermúdez</title>
-    <link rel="preload" href="/fonts/gloock-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+    <title>
+      Laboratorio V2: Rolling Projects 3D, Lente 10% & Grano 6% — Omar Bermúdez
+    </title>
+    <link
+      rel="preload"
+      href="/fonts/gloock-latin-400-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <ClientRouter />
   </head>
   <body>
+    <!-- Capa de transición circular persistente (Interlude) -->
+    <CircleTransitionOverlay />
+
     <!-- Grano analógico continuo global -->
     <FilmGrainOverlay />
 
     <header class="v2-top-bar">
-      <span class="v2-badge">Laboratorio V2 • Rolling Projects + Aberración por Puntero (Thibaut Lefrançois)</span>
+      <span class="v2-badge"
+        >Laboratorio V2 • Rolling Projects + Aberración por Puntero (Thibaut
+        Lefrançois)</span
+      >
       <a href="/" class="v2-back-link">← Volver al Home Principal</a>
     </header>
 
@@ -43,8 +60,12 @@ const unsplashImages = [
         <span class="v2-hero-tag">Bloque 01: Hero Reservado (90dvh)</span>
         <h1 class="v2-hero-title">Espacio para Hero</h1>
         <p class="v2-hero-desc">
-          Área reservada para la propuesta principal. Haz scroll hacia abajo para interactuar con el 
-          <strong>Bloque 02: Galería de Proyectos Enrollables (Codrops Demo 8 en 100dvh)</strong>.
+          Área reservada para la propuesta principal. Haz scroll hacia abajo
+          para interactuar con el
+          <strong
+            >Bloque 02: Galería de Proyectos Enrollables (Codrops Demo 8 en
+            100dvh)</strong
+          >.
         </p>
       </div>
       <div class="v2-scroll-hint">
@@ -61,8 +82,8 @@ const unsplashImages = [
       <header class="v2-gallery-header">
         <h2 class="v2-gallery-title">Óptica de Lente & Estela por Scroll</h2>
         <p class="v2-gallery-subtitle">
-          Distorsión periférica al 10% combinada con estela cinemática en bordes. 
-          Gobernado globalmente por <code>site-optics.ts</code>.
+          Distorsión periférica al 10% combinada con estela cinemática en
+          bordes. Gobernado globalmente por <code>site-optics.ts</code>.
         </p>
       </header>
 
@@ -74,39 +95,45 @@ const unsplashImages = [
         <div class="v2-controls-group">
           <div class="v2-control-item">
             <label for="aberration-slider">Aberración:</label>
-            <input 
-              type="range" 
-              id="aberration-slider" 
-              min="0" 
-              max="1.5" 
-              step="0.05" 
-              value={SITE_OPTICS_CONFIG.lens.strength} 
+            <input
+              type="range"
+              id="aberration-slider"
+              min="0"
+              max="1.5"
+              step="0.05"
+              value={SITE_OPTICS_CONFIG.lens.strength}
             />
-            <span id="aberration-val">{SITE_OPTICS_CONFIG.lens.strength.toFixed(2)}</span>
+            <span id="aberration-val"
+              >{SITE_OPTICS_CONFIG.lens.strength.toFixed(2)}</span
+            >
           </div>
           <div class="v2-control-item">
             <label for="trail-slider">Distancia Estela:</label>
-            <input 
-              type="range" 
-              id="trail-slider" 
-              min="0" 
-              max="1.0" 
-              step="0.05" 
-              value={SITE_OPTICS_CONFIG.lens.trail.distance} 
+            <input
+              type="range"
+              id="trail-slider"
+              min="0"
+              max="1.0"
+              step="0.05"
+              value={SITE_OPTICS_CONFIG.lens.trail.distance}
             />
-            <span id="trail-val">{SITE_OPTICS_CONFIG.lens.trail.distance.toFixed(2)}</span>
+            <span id="trail-val"
+              >{SITE_OPTICS_CONFIG.lens.trail.distance.toFixed(2)}</span
+            >
           </div>
           <div class="v2-control-item">
             <label for="grain-slider">Grano 35mm:</label>
-            <input 
-              type="range" 
-              id="grain-slider" 
-              min="0" 
-              max="0.30" 
-              step="0.01" 
-              value={SITE_OPTICS_CONFIG.grain.opacity} 
+            <input
+              type="range"
+              id="grain-slider"
+              min="0"
+              max="0.30"
+              step="0.01"
+              value={SITE_OPTICS_CONFIG.grain.opacity}
             />
-            <span id="grain-val">{Math.round(SITE_OPTICS_CONFIG.grain.opacity * 100)}%</span>
+            <span id="grain-val"
+              >{Math.round(SITE_OPTICS_CONFIG.grain.opacity * 100)}%</span
+            >
           </div>
         </div>
         <button id="toggle-lens-btn" class="v2-toggle-btn" type="button">
@@ -120,46 +147,56 @@ const unsplashImages = [
     </script>
 
     <script>
-      import { initFilmGrain } from '@/motion/film-grain';
-      import { initLensAberrationGallery } from '@/motion/lens-aberration';
-      import { SITE_OPTICS_CONFIG } from '@/config/site-optics';
+      import { initFilmGrain } from "@/motion/film-grain";
+      import { initLensAberrationGallery } from "@/motion/lens-aberration";
+      import { SITE_OPTICS_CONFIG } from "@/config/site-optics";
 
-      let grainControls: { destroy: () => void; setOpacity: (v: number) => void } | null = null;
-      let lensGallery: { 
-        destroy: () => void; 
-        setStrength: (v: number) => void; 
-        setGrainStrength: (v: number) => void; 
+      let grainControls: {
+        destroy: () => void;
+        setOpacity: (v: number) => void;
+      } | null = null;
+      let lensGallery: {
+        destroy: () => void;
+        setStrength: (v: number) => void;
+        setGrainStrength: (v: number) => void;
         setEdgeWidth: (v: number) => void;
         setTrailDistance: (v: number) => void;
         setTrailSpeed: (v: number) => void;
       } | null = null;
 
       function setup() {
-        grainControls = initFilmGrain('film-grain-canvas');
+        grainControls = initFilmGrain("film-grain-canvas");
         const images = (window as any).__UNSPLASH_GALLERY__ || [];
-        lensGallery = initLensAberrationGallery('lens-gallery-canvas', images);
+        lensGallery = initLensAberrationGallery("lens-gallery-canvas", images);
 
-        const abSlider = document.getElementById('aberration-slider') as HTMLInputElement | null;
-        const abVal = document.getElementById('aberration-val');
-        const trSlider = document.getElementById('trail-slider') as HTMLInputElement | null;
-        const trVal = document.getElementById('trail-val');
-        const grSlider = document.getElementById('grain-slider') as HTMLInputElement | null;
-        const grVal = document.getElementById('grain-val');
-        const toggleBtn = document.getElementById('toggle-lens-btn');
+        const abSlider = document.getElementById(
+          "aberration-slider",
+        ) as HTMLInputElement | null;
+        const abVal = document.getElementById("aberration-val");
+        const trSlider = document.getElementById(
+          "trail-slider",
+        ) as HTMLInputElement | null;
+        const trVal = document.getElementById("trail-val");
+        const grSlider = document.getElementById(
+          "grain-slider",
+        ) as HTMLInputElement | null;
+        const grVal = document.getElementById("grain-val");
+        const toggleBtn = document.getElementById("toggle-lens-btn");
 
         let isEffectOn = true;
         let currentStrength = SITE_OPTICS_CONFIG.lens.strength;
 
         if (abSlider && abVal) {
-          abSlider.addEventListener('input', (e) => {
+          abSlider.addEventListener("input", (e) => {
             currentStrength = parseFloat((e.target as HTMLInputElement).value);
             abVal.textContent = currentStrength.toFixed(2);
-            if (isEffectOn && lensGallery) lensGallery.setStrength(currentStrength);
+            if (isEffectOn && lensGallery)
+              lensGallery.setStrength(currentStrength);
           });
         }
 
         if (trSlider && trVal) {
-          trSlider.addEventListener('input', (e) => {
+          trSlider.addEventListener("input", (e) => {
             const v = parseFloat((e.target as HTMLInputElement).value);
             trVal.textContent = v.toFixed(2);
             if (lensGallery) lensGallery.setTrailDistance(v);
@@ -167,30 +204,31 @@ const unsplashImages = [
         }
 
         if (grSlider && grVal) {
-          grSlider.addEventListener('input', (e) => {
+          grSlider.addEventListener("input", (e) => {
             const v = parseFloat((e.target as HTMLInputElement).value);
-            grVal.textContent = Math.round(v * 100) + '%';
+            grVal.textContent = Math.round(v * 100) + "%";
             if (grainControls) grainControls.setOpacity(v);
             if (lensGallery) lensGallery.setGrainStrength(v);
           });
         }
 
         if (toggleBtn) {
-          toggleBtn.addEventListener('click', () => {
+          toggleBtn.addEventListener("click", () => {
             isEffectOn = !isEffectOn;
-            toggleBtn.textContent = isEffectOn ? 'Efecto Lente: ON' : 'Efecto Lente: OFF';
-            if (lensGallery) lensGallery.setStrength(isEffectOn ? currentStrength : 0.0);
+            toggleBtn.textContent = isEffectOn
+              ? "Efecto Lente: ON"
+              : "Efecto Lente: OFF";
+            if (lensGallery)
+              lensGallery.setStrength(isEffectOn ? currentStrength : 0.0);
           });
         }
       }
 
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setup);
-      } else {
+      document.addEventListener("astro:page-load", () => {
         setup();
-      }
+      });
 
-      window.addEventListener('beforeunload', () => {
+      document.addEventListener("astro:before-swap", () => {
         grainControls?.destroy();
         lensGallery?.destroy();
       });

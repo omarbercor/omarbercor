@@ -12,13 +12,13 @@ const { backHref = '/', backLabel = '← Inicio' } = Astro.props;
 
 <header class="editorial-topbar" id="editorial-topbar">
   <div class="editorial-topbar-inner">
-    <a href="/" class="editorial-logo" title="Volver al Inicio">
+    <a href="/" class="editorial-logo" data-transition="circle" title="Volver al Inicio">
       <span class="editorial-logo-first">OMAR</span>
       <span class="editorial-logo-last">BERMÚDEZ</span>
     </a>
 
     <div class="editorial-topbar-actions">
-      <a href={backHref} class="editorial-back-link">
+      <a href={backHref} class="editorial-back-link" data-transition="circle">
         <span>{backLabel}</span>
       </a>
     </div>

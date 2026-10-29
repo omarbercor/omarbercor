@@ -3,10 +3,12 @@
  * BaseLayout — Shell HTML unificado para todas las vistas de producción
  */
 import '@/styles/main.css';
+import { ClientRouter } from 'astro:transitions';
 import { resolveLocalImage } from '@/lib/images';
 import CustomCursor from '@/components/layout/CustomCursor.astro';
 import EditorialTopbar from '@/components/layout/EditorialTopbar.astro';
 import ContactFooter from '@/components/layout/ContactFooter.astro';
+import CircleTransitionOverlay from '@/components/ui/CircleTransitionOverlay.astro';
 
 interface Props {
   title: string;
@@ -61,9 +63,11 @@ const resolvedOgImage = resolveLocalImage(ogImage)?.src ?? ogImage;
     <meta property="og:type" content={ogType} />
     <meta property="og:image" content={resolvedOgImage} />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <ClientRouter />
     <slot name="head" />
   </head>
   <body class={bodyClass}>
+    <CircleTransitionOverlay />
     <CustomCursor />
     {showTopbar && <EditorialTopbar backHref={backHref} backLabel={backLabel} />}
     <slot />

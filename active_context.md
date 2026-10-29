@@ -1,4 +1,4 @@
-> Last Updated: 2026-10-29 | Version: 3.1 | Fase: Reactividad a la Velocidad del Puntero en Aberración Óptica
+> Last Updated: 2026-10-29 | Version: 3.2 | Fase: Transición de Página en Círculo Expansivo (Interlude Style)
 
 # Active Context — RAM y Memoria Persistente del Proyecto
 
@@ -12,12 +12,12 @@
 ## 🗓️ Última Actualización
 
 - **Fecha**: 2026-10-29
-- **Sesión**: Dinámica de velocidad del puntero integrada en la aberración cromática:
-  1. **Reactividad por Velocidad**: El split RGB escala proporcionalmente a la velocidad del ratón (`velocitySensitivity: 1.8`).
-  2. **Retorno a Mínimo (`minStrength: 0.0`)**: Al detener el cursor, la aberración decae suavemente con fricción LERP (`velocityDecay: 0.07`) hasta llegar a 0% (imagen 100% nítida).
-  3. **Límite Máximo Configurable (`maxStrength: 0.075`)**: La distorsión está acotada para evitar que movimientos ultrarrápidos rompan la legibilidad.
-  4. **Gobernanza Centralizada**: Variables expuestas en `SITE_OPTICS_CONFIG.pointerAberration` en `src/config/site-optics.ts`.
-- **Estado**: 🟢 Estable (`36 page(s) built in 2.03s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
+- **Sesión**: Implementación de la transición de página en círculo expansivo (estilo *Interlude* de Codrops):
+  1. **URLs reales y distintas sin recarga dura**: Habilitado Astro `<ClientRouter />` en layouts y vistas para mantener navegación fluida e instantánea entre `/homev2` y las páginas individuales `/work/[slug]`.
+  2. **Expansión concéntrica desde el punto de clic**: `src/motion/circle-transition.ts` calcula las coordenadas exactas `(clientX, clientY)` al hacer clic sobre cualquier foto del carrusel y expande un overlay circular (`clip-path: circle(...)`) hacia la esquina más lejana (`farthestCorner`).
+  3. **Apertura de orificio al llegar**: Al cargar la página destino, se abre un agujero mediante CSS mask concéntrico (`radial-gradient`) que revela el caso de estudio con suavidad sin saltos en blanco.
+  4. **Capa persistente**: `<CircleTransitionOverlay />` vive con `transition:persist="circle-transition"` para garantizar continuidad entre rutas.
+- **Estado**: 🟢 Estable (`36 page(s) built in 2.36s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
 
 ---
 
