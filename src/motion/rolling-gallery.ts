@@ -106,11 +106,12 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
 
   function positionItems() {
     const itemWidth = itemLinks[0]?.offsetWidth || 480;
-    const freeSpace = (window.innerWidth - itemWidth) / 2;
-    const amplitude = Math.min(window.innerWidth * 0.14, Math.max(freeSpace * 0.6, 0));
+    const maxOffset = (window.innerWidth - itemWidth) / 2;
+    // Distribución horizontal equilibrada y más amplia en la pantalla (izquierda, centro, derecha)
+    const offsets = [-0.65, 0.45, -0.40, 0.60, -0.25];
     itemLinks.forEach((item, i) => {
-      const angle = i * 0.8;
-      gsap.set(item, { x: Math.sin(angle) * amplitude });
+      const factor = offsets[i % offsets.length];
+      gsap.set(item, { x: factor * maxOffset * 0.75 });
     });
   }
 

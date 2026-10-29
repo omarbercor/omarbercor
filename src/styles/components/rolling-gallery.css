@@ -45,7 +45,7 @@
   left: 0;
   width: 100%;
   transform: translateY(-50%);
-  z-index: 20; /* Superior al canvas WebGL de fotos */
+  z-index: 10; /* Detrás de las tarjetas interactivas (z-index 15) para que el click en fotos funcione siempre */
   pointer-events: none;
   overflow: hidden;
   mix-blend-mode: difference;
@@ -58,6 +58,7 @@
   width: max-content;
   white-space: nowrap;
   will-change: transform;
+  pointer-events: none;
 }
 
 .rolling-marquee__item {
@@ -68,14 +69,8 @@
   font-size: clamp(3.5rem, 12vw, 9.5rem);
   text-transform: uppercase;
   color: #FAF7F3;
-  text-decoration: none;
-  pointer-events: auto;
-  cursor: pointer;
-  transition: color 0.25s ease;
-}
-
-.rolling-marquee__item:hover {
-  color: #F15D49;
+  pointer-events: none;
+  user-select: none;
 }
 
 .rolling-marquee__divider {
@@ -95,7 +90,7 @@
   align-items: center;
   gap: clamp(16dvh, 24dvh, 32dvh);
   padding: 45dvh 0 55dvh 0;
-  z-index: 15;
+  z-index: 15; /* Por encima de la marquesina */
   will-change: transform;
   pointer-events: none;
 }
@@ -113,11 +108,16 @@
   border-radius: 8px;
   outline: none;
   /* La textura la renderiza Three.js en la posición geométrica exacta */
-  visibility: hidden;
+  opacity: 0;
   will-change: transform;
 }
 
+.rolling-item:hover {
+  cursor: pointer;
+}
+
 .rolling-item:focus-visible {
+  opacity: 1;
   outline: 2px solid #F15D49;
   outline-offset: 4px;
 }

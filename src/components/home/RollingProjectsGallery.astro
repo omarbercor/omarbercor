@@ -51,29 +51,29 @@ const projects = [
     <!-- Canvas WebGL fijado dentro del pin stage -->
     <canvas class="webgl-rolling" aria-hidden="true"></canvas>
 
-    <!-- Marquesina fija de títulos superpuesta sobre las fotos pero contenida en el stage -->
-    <div class="rolling-marquee" aria-hidden="false">
+    <!-- Marquesina fija de títulos superpuesta sobre las fotos pero contenida en el stage (sin link para no interferir con las fotos) -->
+    <div class="rolling-marquee" aria-hidden="true">
       <div class="rolling-marquee__inner">
         <!-- Set previo de continuidad (evita vacíos a la izquierda al centrar el primer proyecto) -->
         {projects.map((project) => (
-          <a href={`/work/${project.slug}`} class="rolling-marquee__item is-clone" aria-hidden="true" tabindex="-1">
+          <div class="rolling-marquee__item is-clone">
             <span>{project.shortTitle}</span>
             <span class="rolling-marquee__divider">/</span>
-          </a>
+          </div>
         ))}
         <!-- Set principal sincronizado 1:1 con las fotos en vertical -->
         {projects.map((project) => (
-          <a href={`/work/${project.slug}`} class="rolling-marquee__item is-main" title={`Ver proyecto: ${project.shortTitle}`}>
+          <div class="rolling-marquee__item is-main">
             <span class="rolling-marquee__title">{project.shortTitle}</span>
             <span class="rolling-marquee__divider">/</span>
-          </a>
+          </div>
         ))}
         <!-- Set posterior de continuidad (evita vacíos a la derecha al centrar el último proyecto) -->
         {projects.map((project) => (
-          <a href={`/work/${project.slug}`} class="rolling-marquee__item is-clone" aria-hidden="true" tabindex="-1">
+          <div class="rolling-marquee__item is-clone">
             <span>{project.shortTitle}</span>
             <span class="rolling-marquee__divider">/</span>
-          </a>
+          </div>
         ))}
       </div>
     </div>
