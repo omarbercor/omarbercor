@@ -6,6 +6,11 @@ import { ROLLING_GALLERY_SHADERS } from './rolling-shaders';
 
 gsap.registerPlugin(ScrollTrigger);
 
+interface SyncPoint {
+  trackY: number;
+  marqueeX: number;
+}
+
 export function initRollingProjectsGallery(containerSelector = '#rolling-projects-section'): {
   destroy: () => void;
 } {
@@ -15,8 +20,9 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
   const track = container?.querySelector('.rolling-items-track') as HTMLElement | null;
   const marqueeInner = container?.querySelector('.rolling-marquee__inner') as HTMLElement | null;
   const itemLinks = gsap.utils.toArray<HTMLElement>(`${containerSelector} .rolling-item`);
+  const mainTitles = gsap.utils.toArray<HTMLElement>(`${containerSelector} .rolling-marquee__item.is-main`);
 
-  if (!container || !pinStage || !canvas || !track || itemLinks.length === 0) {
+  if (!container || !pinStage || !canvas || !track || !marqueeInner || itemLinks.length === 0) {
     return { destroy: () => {} };
   }
 
@@ -40,15 +46,62 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
 
   const viewport = { width: 0, height: 0 };
   const angles = [-0.18, 0.16, -0.14, 0.18, -0.15];
+  const syncPoints: SyncPoint[] = [];
 
-  function resize() {
-    viewport.width = pinStage!.clientWidth;
-    viewport.height = pinStage!.clientHeight;
-    renderer.setSize(viewport.width, viewport.height, false);
-    camera.aspect = viewport.width / viewport.height;
-    camera.fov = 2 * Math.atan(viewport.height / 2 / camera.position.z) * (180 / Math.PI);
-    camera.updateProjectionMatrix();
-    positionItems();
+  function getItemCenterY(itemEl: HTMLElement, trk: HTMLElement): number {
+    const trkRect = trk.getBoundingClientRect();
+    const itemRect = itemEl.getBoundingClientRect();
+    return (itemRect.top - trkRect.top) + (itemRect.height / 2);
+  }
+
+  function getTitleCenterX(titleEl: HTMLElement, inner: HTMLElement): number {
+    const titleSpan = (titleEl.querySelector('.rolling-marquee__title') || titleEl) as HTMLElement;
+    const innerRect = inner.getBoundingClientRect();
+    const spanRect = titleSpan.getBoundingClientRect();
+    return (spanRect.left - innerRect.left) + (spanRect.width / 2);
+  }
+
+  function computeSyncPoints() {
+    syncPoints.length = 0;
+    const vMidY = viewport.height / 2;
+    const vMidX = viewport.width / 2;
+
+    mainTitles.forEach((titleEl, i) => {
+      const itemEl = itemLinks[i];
+      if (!itemEl) return;
+      const Y_i = getItemCenterY(itemEl, track!);
+      const X_i = getTitleCenterX(titleEl, marqueeInner!);
+      syncPoints.push({
+        trackY: vMidY - Y_i,
+        marqueeX: vMidX - X_i,
+      });
+    });
+  }
+
+  function getMarqueeXForTrackY(currentTrackY: number, points: SyncPoint[]): number {
+    if (points.length === 0) return 0;
+    if (points.length === 1) return points[0].marqueeX;
+
+    if (currentTrackY >= points[0].trackY) {
+      const slope = (points[1].marqueeX - points[0].marqueeX) / (points[1].trackY - points[0].trackY);
+      return points[0].marqueeX + slope * (currentTrackY - points[0].trackY);
+    }
+
+    const last = points.length - 1;
+    if (currentTrackY <= points[last].trackY) {
+      const slope = (points[last].marqueeX - points[last - 1].marqueeX) / (points[last].trackY - points[last - 1].trackY);
+      return points[last].marqueeX + slope * (currentTrackY - points[last].trackY);
+    }
+
+    for (let i = 0; i < last; i++) {
+      const pA = points[i];
+      const pB = points[i + 1];
+      if (currentTrackY <= pA.trackY && currentTrackY >= pB.trackY) {
+        const alpha = (currentTrackY - pA.trackY) / (pB.trackY - pA.trackY);
+        return gsap.utils.interpolate(pA.marqueeX, pB.marqueeX, alpha);
+      }
+    }
+    return points[0].marqueeX;
   }
 
   function positionItems() {
@@ -87,13 +140,23 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
     planes.push(plane);
   });
 
+  function resize() {
+    viewport.width = pinStage!.clientWidth;
+    viewport.height = pinStage!.clientHeight;
+    renderer.setSize(viewport.width, viewport.height, false);
+    camera.aspect = viewport.width / viewport.height;
+    camera.fov = 2 * Math.atan(viewport.height / 2 / camera.position.z) * (180 / Math.PI);
+    camera.updateProjectionMatrix();
+    positionItems();
+    computeSyncPoints();
+  }
+
   resize();
   window.addEventListener('resize', resize);
 
-  // Distancia total de desplazamiento vertical del carril para que pase hasta el último proyecto
-  const totalVerticalScroll = () => Math.max(track.scrollHeight - window.innerHeight, window.innerHeight * 2.5);
+  const lastTrackY = () => syncPoints[syncPoints.length - 1]?.trackY ?? -2000;
+  const totalVerticalScroll = () => Math.abs(lastTrackY()) + viewport.height * 0.55;
 
-  // Timeline maestro con Pinning: clava el escenario al llegar a top 0
   const pinTimeline = gsap.timeline({
     scrollTrigger: {
       trigger: container,
@@ -106,29 +169,18 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
     },
   });
 
-  // 1. Las imágenes se desplazan verticalmente a lo largo del scroll
-  pinTimeline.to(
-    track,
-    {
-      y: () => -totalVerticalScroll(),
-      ease: 'none',
+  pinTimeline.to(track, {
+    y: () => -totalVerticalScroll(),
+    ease: 'none',
+    onUpdate: () => {
+      const currentTrackY = (gsap.getProperty(track, 'y') as number) || 0;
+      const targetMarqueeX = getMarqueeXForTrackY(currentTrackY, syncPoints);
+      gsap.set(marqueeInner, { x: targetMarqueeX });
     },
-    0
-  );
-
-  // 2. La marquesina se desplaza horizontalmente sobre las fotos
-  if (marqueeInner) {
-    pinTimeline.fromTo(
-      marqueeInner,
-      { x: '8vw' },
-      { xPercent: -50, ease: 'none' },
-      0
-    );
-  }
+  });
 
   triggers.push(pinTimeline.scrollTrigger!);
 
-  // Mantiene plano y nítido el objeto al cruzar el centro
   function holdAtMiddle(progress: number, hold = 0.22) {
     const half = hold * 0.5;
     if (progress < 0.5 - half) return gsap.utils.mapRange(0, 0.5 - half, 0, 0.5, progress);
@@ -149,7 +201,6 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
       plane.position.y = viewport.height / 2 - cy;
       plane.material.uniforms.uSize.value.set(itemRect.width, itemRect.height);
 
-      // Física de curvado al entrar por abajo, aplanado en el centro y enrollado al salir por arriba
       const reach = itemRect.height * 0.5 + 40;
       const startY = viewport.height + reach;
       const endY = -reach;

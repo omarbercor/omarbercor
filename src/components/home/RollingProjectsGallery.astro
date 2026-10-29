@@ -54,14 +54,23 @@ const projects = [
     <!-- Marquesina fija de títulos superpuesta sobre las fotos pero contenida en el stage -->
     <div class="rolling-marquee" aria-hidden="false">
       <div class="rolling-marquee__inner">
+        <!-- Set previo de continuidad (evita vacíos a la izquierda al centrar el primer proyecto) -->
         {projects.map((project) => (
-          <a href={`/work/${project.slug}`} class="rolling-marquee__item" title={`Ver proyecto: ${project.shortTitle}`}>
+          <a href={`/work/${project.slug}`} class="rolling-marquee__item is-clone" aria-hidden="true" tabindex="-1">
             <span>{project.shortTitle}</span>
             <span class="rolling-marquee__divider">/</span>
           </a>
         ))}
+        <!-- Set principal sincronizado 1:1 con las fotos en vertical -->
         {projects.map((project) => (
-          <a href={`/work/${project.slug}`} class="rolling-marquee__item" aria-hidden="true" tabindex="-1">
+          <a href={`/work/${project.slug}`} class="rolling-marquee__item is-main" title={`Ver proyecto: ${project.shortTitle}`}>
+            <span class="rolling-marquee__title">{project.shortTitle}</span>
+            <span class="rolling-marquee__divider">/</span>
+          </a>
+        ))}
+        <!-- Set posterior de continuidad (evita vacíos a la derecha al centrar el último proyecto) -->
+        {projects.map((project) => (
+          <a href={`/work/${project.slug}`} class="rolling-marquee__item is-clone" aria-hidden="true" tabindex="-1">
             <span>{project.shortTitle}</span>
             <span class="rolling-marquee__divider">/</span>
           </a>
