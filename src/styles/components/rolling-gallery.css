@@ -106,7 +106,7 @@
   position: relative;
   display: block;
   flex-shrink: 0;
-  width: clamp(280px, 42vw, 580px);
+  width: clamp(340px, 50vw, 700px);
   aspect-ratio: 14 / 9;
   text-decoration: none;
   cursor: pointer;
@@ -120,30 +120,4 @@
 .rolling-item:focus-visible {
   outline: 2px solid #F15D49;
   outline-offset: 4px;
-}
-
-/* Metadatos de cliente debajo de cada foto */
-.rolling-item-meta {
-  position: absolute;
-  bottom: -2.8rem;
-  left: 0;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 0.82rem;
-  font-weight: 600;
-  color: #A1A1AA;
-  pointer-events: none;
-  visibility: visible !important;
-}
-
-.rolling-item-client {
-  color: #FAF7F3;
-  letter-spacing: 0.05em;
-  text-transform: uppercase;
-}
-
-.rolling-item-year {
-  color: #71717A;
 }
