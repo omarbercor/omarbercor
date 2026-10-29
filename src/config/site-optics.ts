@@ -29,7 +29,10 @@ export interface OpticsConfig {
   pointerAberration: {
     enabled: boolean;       // Aberración cromática controlada por puntero (estilo Thibaut Lefrançois)
     radius: number;         // Radio de alcance esférico alrededor del cursor (0.1 - 0.6)
-    strength: number;       // Intensidad del split RGB radial (0.01 - 0.1)
+    minStrength: number;    // Intensidad mínima cuando el cursor está estático (ej: 0.0 o sutil 0.005)
+    maxStrength: number;    // Intensidad máxima alcanzable con movimiento rápido (ej: 0.06 - 0.12)
+    velocitySensitivity: number; // Sensibilidad de reacción a la velocidad del ratón (ej: 1.5)
+    velocityDecay: number;  // Fricción / amortiguación LERP para retornar a minStrength (ej: 0.08)
     smoothing: number;      // Factor de amortiguación LERP del puntero (0.05 - 0.25)
   };
 }
@@ -56,7 +59,10 @@ export const SITE_OPTICS_CONFIG: OpticsConfig = {
   pointerAberration: {
     enabled: true,
     radius: 0.32,
-    strength: 0.045,
+    minStrength: 0.0,       // 0% cuando está estático
+    maxStrength: 0.075,     // 7.5% máximo a toda velocidad
+    velocitySensitivity: 1.8,
+    velocityDecay: 0.07,
     smoothing: 0.12,
   },
 };

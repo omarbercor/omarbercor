@@ -1,4 +1,4 @@
-> Last Updated: 2026-10-29 | Version: 3.0 | Fase: Módulo Reutilizable de Aberración por Puntero (Thibaut Lefrançois)
+> Last Updated: 2026-10-29 | Version: 3.1 | Fase: Reactividad a la Velocidad del Puntero en Aberración Óptica
 
 # Active Context — RAM y Memoria Persistente del Proyecto
 
@@ -12,12 +12,12 @@
 ## 🗓️ Última Actualización
 
 - **Fecha**: 2026-10-29
-- **Sesión**: Creación del módulo óptico interactivo de aberración cromática controlada por puntero (estilo *3D Carousel* de Thibaut Lefrançois):
-  1. **Configuración Global (`src/config/site-optics.ts`)**: Parámetros centralizados `pointerAberration` (`radius: 0.32`, `strength: 0.045`, `smoothing: 0.12`, `enabled: true`).
-  2. **Módulo Reutilizable (`src/motion/pointer-aberration.ts`)**: Clase `PointerAberrationController` y función GLSL `applyPointerAberration` que puede vincularse a uno o múltiples materiales y elementos WebGL/Three.js.
-  3. **Aplicación al Carrusel de Proyectos**: Integrado en `src/motion/rolling-shaders.ts` y `src/motion/rolling-gallery.ts`. Al mover el cursor o interactuar con las fotos, los canales RGB se separan radialmente desde el punto exacto del puntero con amortiguación suave LERP.
-  4. **Clics y Distribución**: Clic exclusivo en las fotos hacia `/work/[slug]` (marquesina pasiva) y fotos repartidas de forma armónica por el ancho del viewport.
-- **Estado**: 🟢 Estable (`36 page(s) built in 1.97s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
+- **Sesión**: Dinámica de velocidad del puntero integrada en la aberración cromática:
+  1. **Reactividad por Velocidad**: El split RGB escala proporcionalmente a la velocidad del ratón (`velocitySensitivity: 1.8`).
+  2. **Retorno a Mínimo (`minStrength: 0.0`)**: Al detener el cursor, la aberración decae suavemente con fricción LERP (`velocityDecay: 0.07`) hasta llegar a 0% (imagen 100% nítida).
+  3. **Límite Máximo Configurable (`maxStrength: 0.075`)**: La distorsión está acotada para evitar que movimientos ultrarrápidos rompan la legibilidad.
+  4. **Gobernanza Centralizada**: Variables expuestas en `SITE_OPTICS_CONFIG.pointerAberration` en `src/config/site-optics.ts`.
+- **Estado**: 🟢 Estable (`36 page(s) built in 2.03s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
 
 ---
 

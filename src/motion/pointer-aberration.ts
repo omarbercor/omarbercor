@@ -3,7 +3,10 @@ import { SITE_OPTICS_CONFIG } from '@/config/site-optics';
 
 export interface PointerAberrationOptions {
   radius?: number;
-  strength?: number;
+  minStrength?: number;
+  maxStrength?: number;
+  velocitySensitivity?: number;
+  velocityDecay?: number;
   smoothing?: number;
   enabled?: boolean;
   targetElement?: HTMLElement | Window;
@@ -15,7 +18,7 @@ export interface PointerAberrationOptions {
  */
 export const POINTER_ABERRATION_GLSL = /* glsl */ `
   vec3 applyPointerAberration(sampler2D tex, vec2 uv, vec2 screenCoord, vec2 resolution, vec2 mouse, float radius, float strength, float enabled) {
-    if (enabled <= 0.0 || strength <= 0.0) {
+    if (enabled <= 0.0 || strength <= 0.0001) {
       return texture2D(tex, uv).rgb;
     }
     vec2 screenUv = screenCoord / resolution;
@@ -44,7 +47,7 @@ export function createPointerAberrationUniforms(overrides?: Partial<typeof SITE_
     uMouse: { value: new THREE.Vector2(0.5, 0.5) },
     uResolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
     uPointerRadius: { value: cfg.radius },
-    uPointerStrength: { value: cfg.strength },
+    uPointerStrength: { value: cfg.minStrength },
     uPointerEnabled: { value: cfg.enabled ? 1.0 : 0.0 },
   };
 }
@@ -53,18 +56,30 @@ export class PointerAberrationController {
   private materials = new Set<THREE.ShaderMaterial>();
   private targetMouse = new THREE.Vector2(0.5, 0.5);
   private currentMouse = new THREE.Vector2(0.5, 0.5);
-  private smoothing: number;
-  private radius: number;
-  private strength: number;
-  private enabled: boolean;
+  private lastClientPos = { x: 0, y: 0 };
+  private currentStrength: number;
+  private targetStrength: number;
+
+  public smoothing: number;
+  public radius: number;
+  public minStrength: number;
+  public maxStrength: number;
+  public velocitySensitivity: number;
+  public velocityDecay: number;
+  public enabled: boolean;
   private targetElement: HTMLElement | Window;
 
   constructor(options?: PointerAberrationOptions) {
     const config = { ...SITE_OPTICS_CONFIG.pointerAberration, ...options };
     this.smoothing = config.smoothing ?? 0.12;
     this.radius = config.radius;
-    this.strength = config.strength;
+    this.minStrength = config.minStrength;
+    this.maxStrength = config.maxStrength;
+    this.velocitySensitivity = config.velocitySensitivity;
+    this.velocityDecay = config.velocityDecay;
     this.enabled = config.enabled;
+    this.currentStrength = config.minStrength;
+    this.targetStrength = config.minStrength;
     this.targetElement = options?.targetElement ?? window;
 
     this.bindEvents();
@@ -80,6 +95,19 @@ export class PointerAberrationController {
       clientX = e.clientX;
       clientY = e.clientY;
     }
+
+    // Cálculo de velocidad instantánea en píxeles normalizados respecto a la pantalla
+    const dx = (clientX - this.lastClientPos.x) / window.innerWidth;
+    const dy = (clientY - this.lastClientPos.y) / window.innerHeight;
+    const speed = Math.hypot(dx, dy);
+
+    this.lastClientPos.x = clientX;
+    this.lastClientPos.y = clientY;
+
+    // Aceleración de la aberración proporcional a la velocidad
+    const dynamicBoost = speed * this.velocitySensitivity;
+    this.targetStrength = Math.min(this.maxStrength, this.targetStrength + dynamicBoost);
+
     this.targetMouse.x = clientX / window.innerWidth;
     this.targetMouse.y = 1.0 - (clientY / window.innerHeight);
   };
@@ -98,20 +126,6 @@ export class PointerAberrationController {
     this.materials.delete(material);
   }
 
-  setStrength(strength: number) {
-    this.strength = strength;
-    this.materials.forEach((m) => {
-      if (m.uniforms.uPointerStrength) m.uniforms.uPointerStrength.value = strength;
-    });
-  }
-
-  setRadius(radius: number) {
-    this.radius = radius;
-    this.materials.forEach((m) => {
-      if (m.uniforms.uPointerRadius) m.uniforms.uPointerRadius.value = radius;
-    });
-  }
-
   setEnabled(enabled: boolean) {
     this.enabled = enabled;
     this.materials.forEach((m) => {
@@ -121,17 +135,25 @@ export class PointerAberrationController {
 
   private syncMaterialUniforms(m: THREE.ShaderMaterial) {
     if (m.uniforms.uPointerRadius) m.uniforms.uPointerRadius.value = this.radius;
-    if (m.uniforms.uPointerStrength) m.uniforms.uPointerStrength.value = this.strength;
+    if (m.uniforms.uPointerStrength) m.uniforms.uPointerStrength.value = this.currentStrength;
     if (m.uniforms.uPointerEnabled) m.uniforms.uPointerEnabled.value = this.enabled ? 1.0 : 0.0;
   }
 
   update(resWidth = window.innerWidth, resHeight = window.innerHeight) {
+    // 1. Amortiguación LERP de posición del ratón
     this.currentMouse.x += (this.targetMouse.x - this.currentMouse.x) * this.smoothing;
     this.currentMouse.y += (this.targetMouse.y - this.currentMouse.y) * this.smoothing;
 
+    // 2. Fricción y retorno al valor mínimo (0% o minStrength) si el cursor se detiene
+    this.targetStrength += (this.minStrength - this.targetStrength) * this.velocityDecay;
+    this.currentStrength += (this.targetStrength - this.currentStrength) * 0.15;
+
+    // 3. Sincronización en materiales
     this.materials.forEach((mat) => {
       if (mat.uniforms.uMouse) mat.uniforms.uMouse.value.copy(this.currentMouse);
       if (mat.uniforms.uResolution) mat.uniforms.uResolution.value.set(resWidth, resHeight);
+      if (mat.uniforms.uPointerRadius) mat.uniforms.uPointerRadius.value = this.radius;
+      if (mat.uniforms.uPointerStrength) mat.uniforms.uPointerStrength.value = this.currentStrength;
     });
   }
 
