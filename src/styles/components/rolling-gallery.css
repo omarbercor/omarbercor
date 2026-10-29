@@ -1,0 +1,145 @@
+/* ==========================================================================
+   ROLLING PROJECTS GALLERY (Codrops Demo 8 inspired)
+   Sección contenida con 100dvh, marquesina sobre las fotos y visibilidad aislada
+   ========================================================================== */
+
+.rolling-gallery-section {
+  position: relative;
+  width: 100vw;
+  min-height: 100dvh;
+  background-color: #0d0d0f;
+  color: #FAF7F3;
+  overflow: clip;
+  padding: 8dvh 0 16dvh 0;
+  z-index: 10;
+}
+
+/* Lienzo WebGL fijado a la ventana pero controlado por visibilidad de la sección */
+.webgl-rolling {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100dvh;
+  pointer-events: none;
+  z-index: 12;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.webgl-rolling.is-active {
+  opacity: 1;
+}
+
+/* Marquesina tipográfica monumental SOBRE LAS FOTOS (z-index superior y blend mode) */
+.rolling-marquee {
+  position: fixed;
+  top: 50%;
+  left: 0;
+  width: 100vw;
+  transform: translateY(-50%);
+  z-index: 20; /* Superior a las fotos (z-index 12) */
+  pointer-events: none;
+  overflow: hidden;
+  mix-blend-mode: difference; /* Se proyecta nítida sobre las fotos y el fondo */
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.rolling-marquee.is-active {
+  opacity: 0.95;
+}
+
+.rolling-marquee__inner {
+  display: flex;
+  align-items: center;
+  gap: 3.5rem;
+  width: max-content;
+  white-space: nowrap;
+  will-change: transform;
+}
+
+.rolling-marquee__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 3.5rem;
+  font-family: 'Gloock', serif;
+  font-size: clamp(3.5rem, 13vw, 10rem);
+  text-transform: uppercase;
+  color: #FAF7F3;
+  text-decoration: none;
+  pointer-events: auto;
+  cursor: pointer;
+  transition: color 0.25s ease, opacity 0.25s ease;
+}
+
+.rolling-marquee__item:hover {
+  color: #F15D49;
+}
+
+.rolling-marquee__divider {
+  font-family: sans-serif;
+  font-weight: 200;
+  opacity: 0.4;
+}
+
+/* Contenedor DOM para la física y dimensiones de cada proyecto */
+.rolling-items-container {
+  position: relative;
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24dvh;
+}
+
+/* Cada tarjeta DOM actúa como hitbox interactivo clicleable */
+.rolling-item {
+  position: relative;
+  display: block;
+  width: clamp(300px, 46vw, 620px);
+  aspect-ratio: 14 / 9;
+  text-decoration: none;
+  cursor: pointer;
+  background-size: cover;
+  background-position: center;
+  border-radius: 8px;
+  will-change: transform;
+  outline: none;
+}
+
+.rolling-item:focus-visible {
+  outline: 2px solid #F15D49;
+  outline-offset: 4px;
+}
+
+/* En modo WebGL, la imagen DOM original se mantiene invisible para proyectar el shader 3D */
+.rolling-gallery-section.is-webgl .rolling-item {
+  visibility: hidden;
+}
+
+/* Metadatos de cliente debajo de cada foto */
+.rolling-item-meta {
+  position: absolute;
+  bottom: -2.8rem;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: #A1A1AA;
+  pointer-events: none;
+  visibility: visible !important;
+}
+
+.rolling-item-client {
+  color: #FAF7F3;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.rolling-item-year {
+  color: #71717A;
+}

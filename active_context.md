@@ -1,4 +1,4 @@
-> Last Updated: 2026-10-29 | Version: 2.3 | Fase: Estela de Inercia Confinada Estrictamente al 10% Exterior
+> Last Updated: 2026-10-29 | Version: 2.6 | Fase: Marquesina Superpuesta & Aislamiento Estricto de Bloque
 
 # Active Context — RAM y Memoria Persistente del Proyecto
 
@@ -12,10 +12,10 @@
 ## 🗓️ Última Actualización
 
 - **Fecha**: 2026-10-29
-- **Sesión**: Confinamiento estricto de la estela cinética en [`/homev2`](file:///o:/Desarrollo/omarbercor/src/pages/homev2.astro):
-  1. **Estela enmascarada al 10%**: `scrollLag = uScrollVelocity * 0.035 * edgeFactor`. El 80% central tiene `edgeFactor = 0.0`, por lo que permanece 100% libre de desfase y distorsión.
-  2. **Comportamiento óptico realista**: Solo las zonas periféricas del cristal sufren estela durante el desplazamiento.
-- **Estado**: 🟢 Estable (`36 page(s) built in 2.07s`, 0 errores, repositorio creado y sincronizado en GitHub: [`omarbercor/omarbercor`](https://github.com/omarbercor/omarbercor) con tag `v2.0.0`).
+- **Sesión**: Corrección de capas y contención de sección en [`/homev2`](file:///o:/Desarrollo/omarbercor/src/pages/homev2.astro):
+  1. **Marquesina superpuesta sobre las fotos**: Capa fija con `z-index: 20` (sobre el WebGL de las fotos en `z-index: 12`) con `mix-blend-mode: difference` para cruzar las fotos con alto contraste estético.
+  2. **Aislamiento estricto de bloque**: Control de visibilidad con `ScrollTrigger` sobre `#rolling-projects-section`. Tanto el canvas 3D como la marquesina se desvanecen limpiamente cuando la sección sale del viewport, evitando solapamientos con el Hero de arriba o con la sección de Óptica de Lente de abajo.
+- **Estado**: 🟢 Estable (`36 page(s) built in 1.97s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
 
 ---
 

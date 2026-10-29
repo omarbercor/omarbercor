@@ -1,0 +1,108 @@
+---
+/**
+ * RollingProjectsGallery.astro
+ * Galería de proyectos con efecto de enrollado 3D al scroll (Codrops Demo 8).
+ * Marquesina tipográfica monumental sincronizada y enlaces 100% interactivos en fotos y textos.
+ * Estructura móvil nativa calculada en 100dvh con fotos editoriales de Unsplash.
+ */
+import '@/styles/components/rolling-gallery.css';
+import { getCollection } from 'astro:content';
+
+const rawProjects = await getCollection('work');
+
+// Mapeo ordenado de nombres limpios y concisos de proyectos
+const projects = [
+  {
+    slug: 'vivir-mejor-walmart-gcp',
+    shortTitle: 'VIVIR MEJOR',
+    client: 'Walmart',
+    image: '/images/unsplash/col1.jpg',
+  },
+  {
+    slug: 'vive-latino-youtube-masthead',
+    shortTitle: 'VIVE LATINO',
+    client: 'Coca-Cola',
+    image: '/images/unsplash/col2.jpg',
+  },
+  {
+    slug: 'ford-fiesta-wrc-team',
+    shortTitle: 'FORD FIESTA WRC',
+    client: 'Ford Motorsport',
+    image: '/images/unsplash/col3.jpg',
+  },
+  {
+    slug: 'guitar-hero-sprite-richmedia',
+    shortTitle: 'GUITAR HERO SPRITE',
+    client: 'Sprite',
+    image: '/images/unsplash/col4.jpg',
+  },
+  {
+    slug: 'corona-capital-2011',
+    shortTitle: 'CORONA CAPITAL',
+    client: 'Corona',
+    image: '/images/unsplash/col5.jpg',
+  },
+];
+---
+
+<section class="rolling-gallery-section is-webgl" id="rolling-projects-section">
+  <!-- Canvas WebGL fijado a 100dvh para renderizar las superficies de papel enrollables -->
+  <canvas class="webgl-rolling" aria-hidden="true"></canvas>
+
+  <!-- Marquesina fija de títulos con clics directos hacia cada caso de estudio -->
+  <div class="rolling-marquee" aria-hidden="false">
+    <div class="rolling-marquee__inner">
+      {projects.map((project) => (
+        <a href={`/work/${project.slug}`} class="rolling-marquee__item" title={`Ver proyecto: ${project.shortTitle}`}>
+          <span>{project.shortTitle}</span>
+          <span class="rolling-marquee__divider">/</span>
+        </a>
+      ))}
+      {projects.map((project) => (
+        <a href={`/work/${project.slug}`} class="rolling-marquee__item" aria-hidden="true" tabindex="-1">
+          <span>{project.shortTitle}</span>
+          <span class="rolling-marquee__divider">/</span>
+        </a>
+      ))}
+    </div>
+  </div>
+
+  <!-- Elementos DOM para posicionamiento, hitboxes y accesibilidad -->
+  <div class="rolling-items-container">
+    {projects.map((project) => (
+      <a
+        href={`/work/${project.slug}`}
+        class="rolling-item"
+        data-image={project.image}
+        data-slug={project.slug}
+        title={`Abrir caso de estudio: ${project.shortTitle}`}
+      >
+        <span class="sr-only">{project.shortTitle} — {project.client}</span>
+        <div class="rolling-item-meta">
+          <span class="rolling-item-client">{project.shortTitle}</span>
+          <span class="rolling-item-year">{project.client}</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<script>
+  import { initRollingProjectsGallery } from '@/motion/rolling-gallery';
+
+  let galleryInstance: { destroy: () => void } | null = null;
+
+  function mountGallery() {
+    galleryInstance = initRollingProjectsGallery('#rolling-projects-section');
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', mountGallery);
+  } else {
+    mountGallery();
+  }
+
+  window.addEventListener('beforeunload', () => {
+    galleryInstance?.destroy();
+  });
+</script>

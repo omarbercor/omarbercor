@@ -1,12 +1,16 @@
 ---
 /**
  * Page: /homev2
- * Bloque de Usabilidad 02: Óptica de Lente (10% periférico), Unsplash, Grano 6% y Estela por Scroll.
- * Gobernado globalmente por SITE_OPTICS_CONFIG.
+ * Bloques Modulares V2:
+ * 1. Grano analógico continuo (Film Grain 35mm al 6%)
+ * 2. Bloque Hero reservado en blanco (90dvh)
+ * 3. Galería de Proyectos Enrollables 3D al Scroll (Codrops Demo 8) con Marquesina interactiva (100dvh)
+ * 4. Bloque Óptico de Lente (10% periférico con estela de inercia)
  */
 import '@/styles/fonts.css';
 import '@/styles/homev2.css';
 import FilmGrainOverlay from '@/components/ui/FilmGrainOverlay.astro';
+import RollingProjectsGallery from '@/components/home/RollingProjectsGallery.astro';
 import { SITE_OPTICS_CONFIG } from '@/config/site-optics';
 
 const unsplashImages = [
@@ -21,15 +25,15 @@ const unsplashImages = [
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Laboratorio V2: Lente 10%, Estela Scroll & Grano 6% — Omar Bermúdez</title>
+    <title>Laboratorio V2: Rolling Projects 3D, Lente 10% & Grano 6% — Omar Bermúdez</title>
     <link rel="preload" href="/fonts/gloock-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
   </head>
   <body>
-    <!-- Componente global reutilizable de Grano analógico -->
+    <!-- Grano analógico continuo global -->
     <FilmGrainOverlay />
 
     <header class="v2-top-bar">
-      <span class="v2-badge">Laboratorio V2 • Bloques Modulares</span>
+      <span class="v2-badge">Laboratorio V2 • Bloque Funcional Rolling Projects</span>
       <a href="/" class="v2-back-link">← Volver al Home Principal</a>
     </header>
 
@@ -39,32 +43,33 @@ const unsplashImages = [
         <span class="v2-hero-tag">Bloque 01: Hero Reservado (90dvh)</span>
         <h1 class="v2-hero-title">Espacio para Hero</h1>
         <p class="v2-hero-desc">
-          Área reservada para ensamblar la propuesta principal. Haz scroll hacia abajo para poner a prueba el 
-          <strong>Bloque 02: Óptica de Lente (10%) & Estela de Inercia por Scroll</strong>.
+          Área reservada para la propuesta principal. Haz scroll hacia abajo para interactuar con el 
+          <strong>Bloque 02: Galería de Proyectos Enrollables (Codrops Demo 8 en 100dvh)</strong>.
         </p>
       </div>
       <div class="v2-scroll-hint">
-        <span>Scroll al Bloque 02</span>
+        <span>Scroll a Proyectos 3D</span>
         <div class="v2-scroll-indicator"></div>
       </div>
     </section>
 
-    <!-- BLOQUE 2: GALERÍA 3 COLUMNAS FULL-WIDTH CON ABERRACIÓN Y ESTELA -->
+    <!-- BLOQUE FUNCIONAL: GALERÍA DE PROYECTOS ENROLLABLES 3D & MARQUESINA -->
+    <RollingProjectsGallery />
+
+    <!-- BLOQUE 3: LABORATORIO ÓPTICO DE LENTE (10% PERIFÉRICO) -->
     <section class="v2-gallery-section" id="gallery-block">
       <header class="v2-gallery-header">
         <h2 class="v2-gallery-title">Óptica de Lente & Estela por Scroll</h2>
         <p class="v2-gallery-subtitle">
-          Distorsión periférica al 10% combinada con un desfase cinético suave en la refracción al scrollear. 
-          Al detenerse el scroll, los canales RGB retornan orgánicamente a su posición mediante física LERP.
+          Distorsión periférica al 10% combinada con estela cinemática en bordes. 
+          Gobernado globalmente por <code>site-optics.ts</code>.
         </p>
       </header>
 
-      <!-- Lienzo WebGL con 3 columnas de Unsplash -->
       <div class="v2-canvas-wrapper">
         <canvas id="lens-gallery-canvas"></canvas>
       </div>
 
-      <!-- Controles interactivos de prueba -->
       <div class="v2-controls-bar">
         <div class="v2-controls-group">
           <div class="v2-control-item">
