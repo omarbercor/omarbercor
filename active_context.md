@@ -1,4 +1,4 @@
-> Last Updated: 2026-10-29 | Version: 2.7 | Fase: Scroll Horizontal Pinned (100dvh) en Galería V2
+> Last Updated: 2026-10-29 | Version: 2.8 | Fase: Pin Stage Vertical Scroll (Fotos en Y + Marquesina en X)
 
 # Active Context — RAM y Memoria Persistente del Proyecto
 
@@ -12,12 +12,12 @@
 ## 🗓️ Última Actualización
 
 - **Fecha**: 2026-10-29
-- **Sesión**: Corrección estructural del carrusel/slider de proyectos en [`/homev2`](file:///o:/Desarrollo/omarbercor/src/pages/homev2.astro):
-  1. **Pinning Real (`pin: pinStage`)**: Al llegar al bloque de proyectos, la pantalla se clava (`100dvh`).
-  2. **Recorrido horizontal completo**: Todo el scroll vertical del usuario se traduce en navegación horizontal (`.rolling-horizontal-track` y marquesina con `mix-blend-mode: difference`).
-  3. **Continuidad natural**: Al terminar de scrolearse todos los proyectos de forma horizontal, se libera la pantalla para continuar al bloque inferior (y en sentido inverso hacia el Hero sin pisar contenidos).
-  4. **Física Three.js 3D sincronizada**: El shader de papel enrollado reacciona en tiempo real a la posición horizontal de cada foto respecto al centro del viewport.
-- **Estado**: 🟢 Estable (`36 page(s) built in 1.98s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
+- **Sesión**: Implementación exacta de la mecánica de anclaje solicitada por Omar para la galería en [`/homev2`](file:///o:/Desarrollo/omarbercor/src/pages/homev2.astro):
+  1. **Entrada natural y anclaje al borde**: El contenedor entra con scroll vertical. Al llegar su parte superior a `top: 0`, se ancla (`pin`) a pantalla completa (`100dvh`).
+  2. **Scroll vertical de imágenes**: Dentro del contenedor anclado, las imágenes se desplazan verticalmente hacia arriba a través de la pantalla con la física 3D de papel enrollado (ondulan sutilmente en X, entran enrolladas desde abajo, se desenrollan planas en el centro y se enrollan al salir por arriba).
+  3. **Marquesina horizontal sobre las fotos**: La marquesina tipográfica monumental se desplaza en X de forma horizontal sobre las fotos con `mix-blend-mode: difference`.
+  4. **Desanclaje al finalizar**: Al terminar de aparecer y pasar el último proyecto, el contenedor se desancla automáticamente y el scroll vertical continúa sin interrupciones ni superposiciones hacia el siguiente bloque (y de forma reversa al subir).
+- **Estado**: 🟢 Estable (`36 page(s) built in 2.03s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
 
 ---
 
