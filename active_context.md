@@ -15,7 +15,7 @@
 - **Sesión**: Confinamiento estricto de la estela cinética en [`/homev2`](file:///o:/Desarrollo/omarbercor/src/pages/homev2.astro):
   1. **Estela enmascarada al 10%**: `scrollLag = uScrollVelocity * 0.035 * edgeFactor`. El 80% central tiene `edgeFactor = 0.0`, por lo que permanece 100% libre de desfase y distorsión.
   2. **Comportamiento óptico realista**: Solo las zonas periféricas del cristal sufren estela durante el desplazamiento.
-- **Estado**: 🟢 Estable (`36 page(s) built in 2.07s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
+- **Estado**: 🟢 Estable (`36 page(s) built in 2.07s`, 0 errores, repositorio creado y sincronizado en GitHub: [`omarbercor/omarbercor`](https://github.com/omarbercor/omarbercor) con tag `v2.0.0`).
 
 ---
 
