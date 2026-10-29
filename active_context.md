@@ -1,4 +1,4 @@
-> Last Updated: 2026-10-29 | Version: 3.2 | Fase: Transición de Página en Círculo Expansivo (Interlude Style)
+> Last Updated: 2026-10-29 | Version: 3.3 | Fase: Fotografías Temáticas Reales en Carrusel V2
 
 # Active Context — RAM y Memoria Persistente del Proyecto
 
@@ -12,12 +12,13 @@
 ## 🗓️ Última Actualización
 
 - **Fecha**: 2026-10-29
-- **Sesión**: Implementación de la transición de página en círculo expansivo (estilo *Interlude* de Codrops):
-  1. **URLs reales y distintas sin recarga dura**: Habilitado Astro `<ClientRouter />` en layouts y vistas para mantener navegación fluida e instantánea entre `/homev2` y las páginas individuales `/work/[slug]`.
-  2. **Expansión concéntrica desde el punto de clic**: `src/motion/circle-transition.ts` calcula las coordenadas exactas `(clientX, clientY)` al hacer clic sobre cualquier foto del carrusel y expande un overlay circular (`clip-path: circle(...)`) hacia la esquina más lejana (`farthestCorner`).
-  3. **Apertura de orificio al llegar**: Al cargar la página destino, se abre un agujero mediante CSS mask concéntrico (`radial-gradient`) que revela el caso de estudio con suavidad sin saltos en blanco.
-  4. **Capa persistente**: `<CircleTransitionOverlay />` vive con `transition:persist="circle-transition"` para garantizar continuidad entre rutas.
-- **Estado**: 🟢 Estable (`36 page(s) built in 2.36s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
+- **Sesión**: Sustitución de fotografías genéricas por temáticas contextuales al proyecto:
+  1. **Vivir Mejor**: Madre jugando y riendo al aire libre con sus hijos.
+  2. **Vive Latino**: Concierto masivo de rock con multitud e iluminación escénica.
+  3. **Ford Fiesta WRC**: Coche de rally Ford Fiesta RS WRC Motorsport real en acción.
+  4. **Guitar Hero Sprite**: Lata de Sprite con gotas de condensación fría y estética verde característica.
+  5. **Corona Capital**: Festival indie nocturno con iluminación y atmósfera festivalera.
+- **Estado**: 🟢 Estable (`36 page(s) built in 2.02s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
 
 ---
 
