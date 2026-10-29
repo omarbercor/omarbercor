@@ -10,14 +10,17 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
   destroy: () => void;
 } {
   const container = document.querySelector(containerSelector) as HTMLElement | null;
+  const pinStage = container?.querySelector('.rolling-pin-stage') as HTMLElement | null;
   const canvas = container?.querySelector('canvas.webgl-rolling') as HTMLCanvasElement | null;
-  const marquee = container?.querySelector('.rolling-marquee') as HTMLElement | null;
+  const track = container?.querySelector('.rolling-horizontal-track') as HTMLElement | null;
   const marqueeInner = container?.querySelector('.rolling-marquee__inner') as HTMLElement | null;
   const itemLinks = gsap.utils.toArray<HTMLElement>(`${containerSelector} .rolling-item`);
 
-  if (!container || !canvas || itemLinks.length === 0) return { destroy: () => {} };
+  if (!container || !pinStage || !canvas || !track || itemLinks.length === 0) {
+    return { destroy: () => {} };
+  }
 
-  const lenis = new Lenis({ duration: 1.2, smoothWheel: true });
+  const lenis = new Lenis({ duration: 1.1, smoothWheel: true });
   lenis.on('scroll', ScrollTrigger.update);
   const tickerHandler = (time: number) => lenis.raf(time * 1000);
   gsap.ticker.add(tickerHandler);
@@ -36,36 +39,21 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
   const triggers: ScrollTrigger[] = [];
 
   const viewport = { width: 0, height: 0 };
-  let needsRender = true;
-  let lastTop: number | null = null;
-  let isSectionVisible = false;
+  let isSectionActive = false;
 
   function resize() {
-    viewport.width = canvas!.clientWidth;
-    viewport.height = canvas!.clientHeight;
+    viewport.width = pinStage!.clientWidth;
+    viewport.height = pinStage!.clientHeight;
     renderer.setSize(viewport.width, viewport.height, false);
     camera.aspect = viewport.width / viewport.height;
     camera.fov = 2 * Math.atan(viewport.height / 2 / camera.position.z) * (180 / Math.PI);
     camera.updateProjectionMatrix();
-    positionItems();
-    needsRender = true;
-  }
-
-  function positionItems() {
-    const itemWidth = itemLinks[0]?.offsetWidth || 480;
-    const freeSpace = (window.innerWidth - itemWidth) / 2;
-    const amplitude = Math.min(window.innerWidth * 0.18, freeSpace);
-    itemLinks.forEach((item, i) => {
-      const angle = i * 0.85;
-      gsap.set(item, { x: Math.sin(angle) * amplitude });
-    });
   }
 
   itemLinks.forEach((item) => {
     const imgUrl = item.getAttribute('data-image') || '';
     const texture = textureLoader.load(imgUrl, () => {
       material.uniforms.uImageSize.value.set(texture.image.width, texture.image.height);
-      needsRender = true;
     });
 
     const material = new THREE.ShaderMaterial({
@@ -77,7 +65,7 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
         uImageSize: { value: new THREE.Vector2(1, 1) },
         uSize: { value: new THREE.Vector2() },
         uRoll: { value: 0 },
-        uAngle: { value: gsap.utils.random(-0.35, 0.35) },
+        uAngle: { value: gsap.utils.random(-0.25, 0.25) },
         uRadius: { value: 50 },
       },
     });
@@ -91,78 +79,67 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
   resize();
   window.addEventListener('resize', resize);
 
-  // Trigger que acota canvas y marquesina estrictamente a la sección de proyectos
-  const sectionBoundaryTrigger = ScrollTrigger.create({
-    trigger: container,
-    start: 'top 80%',
-    end: 'bottom 20%',
-    onEnter: () => setVisibility(true),
-    onLeave: () => setVisibility(false),
-    onEnterBack: () => setVisibility(true),
-    onLeaveBack: () => setVisibility(false),
-  });
-  triggers.push(sectionBoundaryTrigger);
+  // Distancia total de desplazamiento horizontal del carril
+  const totalTrackScroll = () => Math.max(track.scrollWidth - window.innerWidth, 500);
 
-  function setVisibility(active: boolean) {
-    isSectionVisible = active;
-    if (active) {
-      canvas?.classList.add('is-active');
-      marquee?.classList.add('is-active');
-      needsRender = true;
-    } else {
-      canvas?.classList.remove('is-active');
-      marquee?.classList.remove('is-active');
-    }
-  }
-
-  function holdAtMiddle(progress: number, hold = 0.2) {
-    const half = hold * 0.5;
-    if (progress < 0.5 - half) return gsap.utils.mapRange(0, 0.5 - half, 0, 0.5, progress);
-    if (progress > 0.5 + half) return gsap.utils.mapRange(0.5 + half, 1, 0.5, 1, progress);
-    return 0.5;
-  }
-
-  planes.forEach((plane, i) => {
-    const { uniforms } = plane.material;
-    const trigger = ScrollTrigger.create({
-      trigger: itemLinks[i],
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: true,
-      onUpdate(self) {
-        needsRender = true;
-        const t = holdAtMiddle(self.progress, 0.12);
-        uniforms.uRoll.value = Math.cos(t * Math.PI);
+  // Pin timeline maestro: clava el stage de 100dvh y traduce el scroll vertical a horizontal
+  const horizontalTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: container,
+      start: 'top top',
+      end: () => `+=${totalTrackScroll()}`,
+      pin: pinStage,
+      scrub: 1,
+      anticipatePin: 1,
+      invalidateOnRefresh: true,
+      onToggle: (self) => {
+        isSectionActive = self.isActive;
       },
-    });
-    triggers.push(trigger);
+    },
+  });
+
+  horizontalTl.to(track, {
+    x: () => -totalTrackScroll(),
+    ease: 'none',
   });
 
   if (marqueeInner) {
-    const marqueeTrigger = ScrollTrigger.create({
-      trigger: container,
-      start: 'top bottom',
-      end: 'bottom top',
-      scrub: 1.5,
-      onUpdate(self) {
-        gsap.set(marqueeInner, { xPercent: 5 - self.progress * 45 });
+    horizontalTl.to(
+      marqueeInner,
+      {
+        xPercent: -35,
+        ease: 'none',
       },
-    });
-    triggers.push(marqueeTrigger);
+      0
+    );
   }
 
+  triggers.push(horizontalTl.scrollTrigger!);
+
   function render() {
-    if (!isSectionVisible) return;
-    const top = itemLinks[0]?.getBoundingClientRect().top ?? 0;
-    if (!needsRender && top === lastTop) return;
-    needsRender = false;
-    lastTop = top;
+    if (!isSectionActive) return;
+
+    const stageRect = pinStage!.getBoundingClientRect();
 
     planes.forEach((plane, i) => {
       const rect = itemLinks[i].getBoundingClientRect();
-      plane.position.x = rect.left + rect.width / 2 - viewport.width / 2;
-      plane.position.y = viewport.height / 2 - rect.top - rect.height / 2;
+
+      // Posición relativa a la ventana / cámara WebGL
+      const cx = rect.left + rect.width / 2;
+      const cy = rect.top + rect.height / 2;
+
+      plane.position.x = cx - viewport.width / 2;
+      plane.position.y = viewport.height / 2 - cy;
       plane.material.uniforms.uSize.value.set(rect.width, rect.height);
+
+      // Física de curvado / enrollado de papel basada en posición horizontal respecto al centro de pantalla
+      const screenCenterX = viewport.width / 2;
+      const distFromCenter = (cx - screenCenterX) / (viewport.width * 0.55);
+      const clampedDist = Math.max(-1, Math.min(1, distFromCenter));
+
+      // Enrollado dinámico: plano y nítido en el centro, enrollado en los bordes
+      const rollAmount = Math.sign(clampedDist) * Math.pow(Math.abs(clampedDist), 1.25);
+      plane.material.uniforms.uRoll.value = rollAmount;
     });
 
     renderer.render(scene, camera);

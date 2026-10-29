@@ -1,4 +1,4 @@
-> Last Updated: 2026-10-29 | Version: 2.6 | Fase: Marquesina Superpuesta & Aislamiento Estricto de Bloque
+> Last Updated: 2026-10-29 | Version: 2.7 | Fase: Scroll Horizontal Pinned (100dvh) en Galería V2
 
 # Active Context — RAM y Memoria Persistente del Proyecto
 
@@ -12,10 +12,12 @@
 ## 🗓️ Última Actualización
 
 - **Fecha**: 2026-10-29
-- **Sesión**: Corrección de capas y contención de sección en [`/homev2`](file:///o:/Desarrollo/omarbercor/src/pages/homev2.astro):
-  1. **Marquesina superpuesta sobre las fotos**: Capa fija con `z-index: 20` (sobre el WebGL de las fotos en `z-index: 12`) con `mix-blend-mode: difference` para cruzar las fotos con alto contraste estético.
-  2. **Aislamiento estricto de bloque**: Control de visibilidad con `ScrollTrigger` sobre `#rolling-projects-section`. Tanto el canvas 3D como la marquesina se desvanecen limpiamente cuando la sección sale del viewport, evitando solapamientos con el Hero de arriba o con la sección de Óptica de Lente de abajo.
-- **Estado**: 🟢 Estable (`36 page(s) built in 1.97s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
+- **Sesión**: Corrección estructural del carrusel/slider de proyectos en [`/homev2`](file:///o:/Desarrollo/omarbercor/src/pages/homev2.astro):
+  1. **Pinning Real (`pin: pinStage`)**: Al llegar al bloque de proyectos, la pantalla se clava (`100dvh`).
+  2. **Recorrido horizontal completo**: Todo el scroll vertical del usuario se traduce en navegación horizontal (`.rolling-horizontal-track` y marquesina con `mix-blend-mode: difference`).
+  3. **Continuidad natural**: Al terminar de scrolearse todos los proyectos de forma horizontal, se libera la pantalla para continuar al bloque inferior (y en sentido inverso hacia el Hero sin pisar contenidos).
+  4. **Física Three.js 3D sincronizada**: El shader de papel enrollado reacciona en tiempo real a la posición horizontal de cada foto respecto al centro del viewport.
+- **Estado**: 🟢 Estable (`36 page(s) built in 1.98s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
 
 ---
 
