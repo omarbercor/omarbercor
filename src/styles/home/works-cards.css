@@ -1,0 +1,151 @@
+/* Contenido de la card */
+.work-card-content {
+  padding: 2.25rem 2.25rem 2.5rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+}
+
+.work-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.work-client {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent); /* #F15D49 */
+}
+
+.work-card-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2vw, 1.85rem);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin: 0 0 1rem 0;
+  transition: color 0.2s ease;
+}
+
+.work-card:hover .work-card-title {
+  color: var(--accent);
+}
+
+.work-card-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  color: var(--text-muted);
+  margin: 0 0 1.75rem 0;
+}
+
+/* Contenedor de tags de la card */
+.work-stack-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 2rem;
+}
+
+.work-footer-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+}
+
+/* Role text: gris y menos bold (regular/medium) */
+.work-role-text {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 400; /* Regular, no bold */
+  color: var(--text-subtle); /* Gris suave */
+}
+
+.work-explore-btn {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.work-card:hover .work-explore-btn {
+  transform: none; /* Sin movimiento de posición */
+}
+
+/* Banner final: Explorar Archivo Completo */
+.works-archive-banner {
+  margin-top: 5rem;
+  padding: 3.5rem 2.5rem;
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: none;
+  box-shadow: none;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+@media (min-width: 769px) {
+  .works-archive-banner {
+    flex-direction: row;
+    align-items: center;
+    padding: 4rem 3.5rem;
+  }
+}
+
+.archive-banner-left h3 {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+}
+
+.archive-banner-left p {
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 580px;
+}
+
+.archive-banner-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  background-color: var(--accent); /* #F15D49 */
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  padding: 1.1rem 2.2rem;
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  box-shadow: 0 4px 14px rgba(241, 93, 73, 0.2);
+  transition: opacity 0.2s ease, background-color 0.2s ease;
+  transform: none;
+}
+
+.archive-banner-btn:hover {
+  background-color: var(--accent-hover);
+  opacity: 0.95;
+  transform: none;
+}

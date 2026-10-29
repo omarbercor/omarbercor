@@ -1,0 +1,151 @@
+/* ============================================================================
+   CLASES UTILITARIAS DEL SISTEMA DE DISEÑO (REUTILIZABLES)
+   ============================================================================ */
+
+/* Textura Durazno Cremoso con Grano en Fondos (Divs, Cards, Secciones) */
+.surface-peach-grain {
+  background-color: var(--accent); /* #F15D49 idéntico */
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  color: #FFFFFF;
+}
+
+/* Textura Tinta Oscura con Grano en Fondos (Negro #121214) */
+.surface-dark-grain {
+  background-color: var(--text-primary); /* #121214 */
+  background-image: 
+    linear-gradient(rgba(18, 18, 20, 0.93), rgba(18, 18, 20, 0.93)),
+    var(--texture-grain-img);
+  background-size: auto, var(--grain-size);
+  background-repeat: repeat;
+  color: #FFFFFF;
+}
+
+/* Textura Rojo Bermejo / Durazno con Grano en Letras y Titulares */
+.text-peach-grain,
+.text-accent-grain {
+  background-color: var(--accent); /* #F15D49 idéntico */
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent);
+  display: inline-block;
+  padding-right: 0.08em;
+  padding-bottom: 0.04em;
+  margin-right: -0.08em;
+}
+
+/* Chip / Badge Universal (El contrato estándar) */
+.ui-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: var(--text-micro);
+  font-weight: 500;
+  line-height: var(--leading-micro);
+  letter-spacing: -0.01em;
+  padding: 0.35rem 0.7rem;
+  background-color: var(--bg-chip);
+  color: var(--text-muted);
+  border: none;
+  border-radius: var(--radius-chip);
+  white-space: nowrap;
+  user-select: none;
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.ui-chip.accent {
+  background-color: var(--accent-glow);
+  color: var(--accent);
+}
+
+/* Párrafo Estándar Universal */
+.ui-paragraph {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.ui-paragraph-lead {
+  font-family: var(--font-body);
+  font-size: var(--text-lead);
+  line-height: var(--leading-lead);
+  color: var(--text-muted);
+  margin: 0;
+}
+
+/* Título Monumental Universal */
+.ui-title-monument {
+  font-family: var(--font-display);
+  font-size: var(--text-monument);
+  font-weight: 900;
+  line-height: var(--leading-monument);
+  letter-spacing: var(--tracking-monument);
+  color: var(--text-primary);
+  margin: 0 0 1.5rem 0;
+  text-transform: uppercase;
+}
+
+/* Botón Universal */
+.ui-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  padding: 1.15rem 2.5rem;
+  border-radius: var(--radius-btn);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
+  transition: opacity 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  user-select: none;
+  transform: none; /* Cero movimiento de posición */
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  white-space: nowrap;
+}
+
+.ui-btn-primary {
+  background-color: var(--accent);
+  color: #FFFFFF;
+  box-shadow: 0 4px 14px rgba(241, 93, 73, 0.2);
+}
+
+.ui-btn-primary:hover {
+  background-color: var(--accent-hover);
+  opacity: 0.95;
+  transform: none;
+}
+
+.ui-btn-secondary {
+  background-color: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border-line);
+}
+
+.ui-btn-secondary:hover {
+  background-color: var(--bg-museum);
+  transform: none;
+}
+
+.ui-btn-outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-strong);
+}
+
+.ui-btn-outline:hover {
+  background-color: var(--bg-surface);
+  transform: none;
+}

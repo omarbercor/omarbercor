@@ -1,0 +1,76 @@
+{
+  "order": 1,
+  "title": "Interactive Lineup Reveal & Bespoke Band Micro-Environments",
+  "client": "Corona Capital",
+  "role": "Lead UX/UI Architect & Full-Cycle Web Developer",
+  "period": "2011",
+  "category": "High-Concurrency Event Platforms & Bespoke Interactive UI",
+  "tagline": "Conceptualización UX, diseño de sistemas visuales a medida y desarrollo en tiempo real para la plataforma oficial del festival Corona Capital 2011.",
+  "impactHighlight": "Plataforma interactiva a pantalla completa con 30+ entornos visuales únicos y revelación en tiempo real para 80K+ asistentes",
+  "heroImage": "/images/corona-capital-2011.jpg",
+  "metrics": [
+    {
+      "label": "Bespoke Band UIs (Cero plantillas genéricas; arquitectura visual única por artista)",
+      "value": "30+"
+    },
+    {
+      "label": "Hourly Lineup Drops (Despliegues progresivos en vivo durante el día de revelación)",
+      "value": "Real-Time"
+    },
+    {
+      "label": "Festival Audience Ecosystem (Plataforma central de información y conversión para 2011)",
+      "value": "80K+"
+    }
+  ],
+  "stack": [
+    "UX/UI Architecture",
+    "Full-Viewport Fluid Layout",
+    "HTML / CSS Avanzado",
+    "JavaScript / DOM Manipulation",
+    "Real-Time Rollout",
+    "Bespoke Art Direction"
+  ],
+  "overview": "Conceptualización creativa, arquitectura UX y desarrollo integral de la plataforma web inmersiva para el festival Corona Capital 2011. La plataforma rompió con las plantillas rígidas tradicionales al dotar a cada artista de un micro-entorno gráfico personalizado a pantalla completa, orquestando una campaña de develación en caliente que convirtió el sitio en un evento digital masivo en tiempo real.",
+  "problem": "Los sitios web de festivales musicales operaban bajo esquemas rígidos de plantillas repetitivas donde todas las bandas se mostraban en una ficha idéntica, diluyendo la personalidad visual de un cartel curado con artistas como The Strokes, Portishead, Moby y Editors. Adicionalmente, la estrategia de Corona Capital exigía un lanzamiento disruptivo: revelar el cartel de forma progresiva cada hora en tiempo real, lo que demandaba una arquitectura capaz de publicar secciones inéditas en caliente bajo picos extremos de tráfico concurrente, adaptándose a cualquier resolución de monitor en una época previa a los estándares modernos de diseño responsivo.",
+  "solution": "Diseño y desarrollo integral de una plataforma web inmersiva (Full-Viewport Experience) que rompió el paradigma de plantilla única. Se diseñó una arquitectura UX donde cada banda contaba con su propia dirección de arte, composición gráfica y jerarquía de contenido a pantalla completa. A nivel de ingeniería, se implementó un motor de escalado proporcional adaptable al viewport del navegador y un flujo de publicación continua en vivo para liberar progresivamente cada artista sin interrumpir la sesión de los miles de usuarios conectados esperando el siguiente anuncio.",
+  "challenges": [
+    "Escalado Full-Viewport Pre-Era Moderna (2011): Desarrollo de rutinas de redimensionamiento dinámico en JavaScript y CSS avanzado para lograr fondos fotográficos a pantalla completa y layouts adaptativos sin distorsión de aspecto, superando las limitaciones de los monitores de la época (desde 1024x768 hasta pantallas widescreen 1920x1080).",
+    "Orquestación de Despliegues en Caliente (Live Drops): Sincronización de actualizaciones de código y assets en tiempo real (cada hora) durante la jornada de revelación del lineup, garantizando integridad visual y evitando errores de caché en los navegadores de usuarios recurrentes.",
+    "Arquitectura Multi-Identidad Escalable: Estructuración semántica del marcado HTML/CSS para soportar más de 30 composiciones visuales radicalmente distintas entre sí, manteniendo una navegación global coherente y tiempos de carga óptimos pese al alto peso gráfico de los fondos a pantalla completa."
+  ],
+  "results": [
+    "Hito de Conversión y Afluencia: La plataforma sostuvo exitosamente la campaña digital que llevó a Corona Capital a duplicar su audiencia respecto a su edición debut, alcanzando los 80,000 asistentes.",
+    "Retención y Tráfico Recurrente: El mecanismo de revelación horaria transformó el sitio web en un evento en vivo por sí mismo, multiplicando las visitas repetidas por usuario a lo largo del día y posicionando la conversación en tendencias nacionales.",
+    "Referente de Diseño Interactivo: Sustitución exitosa del modelo estático de 'cartel informativo' por una experiencia editorial inmersiva que consolidó la identidad digital del festival."
+  ],
+  "architectureNotes": [
+    "Conceptualización creativa, arquitectura de información (UX) y dirección de arte individualizada por banda.",
+    "Sistema de layout fluido Full-Browser Viewport con adaptación automática a múltiples relaciones de aspecto.",
+    "Maquetación pixel-perfect, manipulación fotográfica de alto formato y optimización de peso para entrega rápida de assets.",
+    "Ejecución operativa del rollout en tiempo real durante la campaña de develación del cartel oficial."
+  ],
+  "businessValue": "Multiplicó la afluencia del festival hasta 80,000 asistentes y posicionó el lanzamiento como tendencia nacional mediante revelación de lineup en tiempo real.",
+  "keyArtifacts": [
+    "Full-Viewport Adaptive Layout Engine",
+    "Bespoke Band Environment Asset System",
+    "Live Hourly Drop Rollout Architecture"
+  ],
+  "gallery": [
+    {
+      "url": "/images/corona-05.jpg",
+      "caption": "Micro-entorno editorial inmersivo: Portishead"
+    },
+    {
+      "url": "/images/corona-07.jpg",
+      "caption": "Dirección de arte personalizada: The Strokes"
+    },
+    {
+      "url": "/images/corona-10.jpg",
+      "caption": "Entorno interactivo para Moby"
+    },
+    {
+      "url": "/images/corona-11.jpg",
+      "caption": "Navegación fluida y layout dinámico para Editors"
+    }
+  ]
+}

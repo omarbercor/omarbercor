@@ -1,0 +1,173 @@
+/* Imagen de fondo / atmósfera fotográfica */
+.article-hero-media {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.article-hero-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: brightness(0.65) contrast(1.1);
+  transform: scale(1.02);
+}
+
+.article-hero-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(18, 18, 20, 0.35) 0%,
+    rgba(18, 18, 20, 0.6) 40%,
+    rgba(18, 18, 20, 0.94) 100%
+  );
+  z-index: 2;
+}
+
+/* Grano transparente sutil sobre el hero */
+.article-hero-grain {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  opacity: 0.2;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+  z-index: 3;
+}
+
+/* Contenido dentro del Hero */
+.article-hero-content {
+  position: relative;
+  z-index: 5;
+  max-width: 900px;
+  color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* Metadatos superiores: Etiquetas, fecha y tiempo */
+.article-hero-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+.article-category-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.9rem;
+  border-radius: var(--radius-xs);
+  background-color: var(--accent);
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  color: #FFFFFF;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.article-meta-divider {
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.article-meta-text {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: 0.02em;
+}
+
+/* Título y Subtítulo dentro del Hero */
+.article-hero-title {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin: 0;
+  text-wrap: balance;
+}
+
+.article-hero-main-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4rem);
+  font-weight: 900;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+  color: #FFFFFF;
+  display: block;
+}
+
+.article-hero-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  font-weight: 400;
+  line-height: 1.45;
+  letter-spacing: -0.01em;
+  color: rgba(255, 255, 255, 0.85);
+  display: block;
+  max-width: 860px;
+}
+
+/* Metadatos y Extracto fuera del Hero */
+.article-lead-wrap {
+  width: 100%;
+  max-width: 820px;
+  margin: 3.5rem auto 0 auto;
+  padding: 0 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+@media (min-width: 769px) {
+  .article-lead-wrap {
+    margin: 4.5rem auto 0 auto;
+    padding: 0 2rem;
+  }
+}
+
+.article-lead-meta {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+}
+
+.article-meta-date,
+.article-meta-time {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  letter-spacing: 0.01em;
+}
+
+.article-lead-excerpt {
+  font-family: var(--font-body);
+  font-size: clamp(1.15rem, 2vw, 1.45rem);
+  font-style: italic;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-muted);
+  margin: 0;
+  padding-bottom: 0;
+  border-bottom: none;
+}

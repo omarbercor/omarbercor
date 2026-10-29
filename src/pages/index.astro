@@ -1,0 +1,48 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getSortedProjects, getSortedArticles } from '@/lib/collections';
+import HeroStage from '@/components/home/HeroStage.astro';
+import AboutTriptych from '@/components/home/AboutTriptych.astro';
+import ManifestoStage from '@/components/home/ManifestoStage.astro';
+import SkillsTapeStage from '@/components/home/SkillsTapeStage.astro';
+import ServicesSplitStage from '@/components/home/ServicesSplitStage.astro';
+import SelectedWorkGrid from '@/components/home/SelectedWorkGrid.astro';
+import ExperienceStage from '@/components/home/ExperienceStage.astro';
+import WritingPreviewStage from '@/components/home/WritingPreviewStage.astro';
+
+const projects = await getSortedProjects();
+const articles = await getSortedArticles();
+---
+
+<BaseLayout
+  title="Omar Bermúdez — Front-End Development Lead & Creative Technologist"
+  description="Portafolio técnico de Omar Bermúdez Corona. Front-End Development Lead y Creative Technologist con más de 15 años conectando dirección de arte digital con arquitectura web de alto rendimiento y marcas de escala global."
+  ogImage="/images/omar-profile.jpg"
+>
+  <HeroStage />
+  <AboutTriptych />
+  <ManifestoStage />
+  <SkillsTapeStage />
+  <ServicesSplitStage />
+  <SelectedWorkGrid projects={projects} />
+  <ExperienceStage />
+  <WritingPreviewStage articles={articles} />
+
+  <script>
+    import gsap from 'gsap';
+    import { ScrollTrigger } from 'gsap/ScrollTrigger';
+    import { initHeroEntrance, initHeroPhotoMorph, initAboutReveal } from '@/motion/hero-morph';
+    import { initManifestoReveal, initSkillsTapePin } from '@/motion/home-scroll';
+    import { initServicesTabs, initExperienceAccordion } from '@/motion/home-ui';
+
+    gsap.registerPlugin(ScrollTrigger);
+
+    initHeroEntrance();
+    initHeroPhotoMorph();
+    initAboutReveal();
+    initManifestoReveal();
+    initSkillsTapePin();
+    initServicesTabs();
+    initExperienceAccordion();
+  </script>
+</BaseLayout>

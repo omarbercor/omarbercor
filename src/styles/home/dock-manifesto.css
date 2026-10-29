@@ -1,0 +1,134 @@
+/* ==========================================================================
+   FLOATING FROSTED BOTTOM DOCK
+   ========================================================================== */
+.museum-dock-wrap {
+  position: fixed;
+  bottom: 1.25rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  width: auto;
+  max-width: calc(100vw - 1.5rem);
+}
+
+@media (min-width: 769px) {
+  .museum-dock-wrap {
+    bottom: 2rem;
+  }
+}
+
+.museum-dock {
+  display: flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.35rem 0.5rem;
+  background: var(--dock-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--dock-border);
+  border-radius: var(--radius-full);
+  box-shadow: var(--dock-shadow);
+}
+
+@media (min-width: 769px) {
+  .museum-dock {
+    gap: 0.35rem;
+    padding: 0.4rem 0.65rem;
+  }
+}
+
+.dock-action {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.45rem 0.75rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+@media (min-width: 769px) {
+  .dock-action {
+    padding: 0.5rem 1rem;
+    font-size: 0.84rem;
+  }
+}
+
+.dock-action:hover {
+  color: var(--text-primary);
+  background: rgba(18, 18, 20, 0.05);
+}
+
+.dock-action.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.dock-action.cta {
+  background: var(--text-primary);
+  color: var(--bg-museum);
+}
+
+.dock-action.cta:hover {
+  background: var(--accent);
+  color: #FFFFFF;
+}
+
+.dock-sep {
+  width: 1px;
+  height: 1.25rem;
+  background: var(--border-subtle);
+  margin: 0 0.15rem;
+}
+
+/* ==========================================================================
+   BLOCK 03: MANIFESTO STATEMENT (PINNED WORD-BY-WORD SCROLL REVEAL)
+   ========================================================================== */
+.manifesto-section {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6rem 1.5rem;
+  background-color: var(--bg-museum);
+  position: relative;
+}
+
+@media (min-width: 769px) {
+  .manifesto-section {
+    padding: 8rem 3rem;
+  }
+}
+
+.manifesto-container {
+  max-width: 960px;
+  margin: 0 auto;
+  width: 100%;
+  text-align: center;
+}
+
+.manifesto-text {
+  font-family: var(--font-body);
+  font-size: clamp(1.95rem, 5.2vw, 2.25rem); /* ~2rem sólido en mobile */
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: #B8B3A8; /* Tono base gris claro inicial */
+  word-spacing: 0.04em;
+  margin: 0;
+}
+
+.manifesto-word {
+  display: inline-block;
+  color: #C2BDAF; /* Gris claro sutil */
+  transition: color 0.1s linear, transform 0.1s ease;
+  will-change: color, opacity;
+}
+
+.manifesto-word.is-active {
+  color: var(--text-primary); /* Negro / grafito oscuro (#121214) */
+}

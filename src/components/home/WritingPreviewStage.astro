@@ -1,0 +1,56 @@
+---
+/**
+ * WritingPreviewStage — Bloque 08: Avance de las 5 notas más recientes de la Bitácora
+ */
+import type { ArticleItem } from '@/lib/collections';
+import Button from '@/components/ui/Button.astro';
+
+interface Props {
+  articles: ArticleItem[];
+}
+
+const { articles } = Astro.props;
+---
+
+<section class="writing-section" id="writing" aria-labelledby="writing-title">
+  <div class="writing-container">
+    <header class="writing-header">
+      <h2 class="writing-title" id="writing-title">
+        <span class="writing-title-red text-accent-grain">BITACORA</span>
+      </h2>
+      <p class="writing-subtitle">
+        Reflexiones sobre arquitectura de software, lecciones de rendimiento web a gran escala y la intersección entre diseño visual y sistemas automatizados.
+      </p>
+    </header>
+
+    <div class="writing-list">
+      {articles.slice(0, 5).map((article) => (
+        <a href={`/writing/${article.slug}`} class="writing-row" data-magnetic>
+          <div class="writing-meta">
+            <span class="writing-category">{article.category}</span>
+            <span class="writing-time">{article.readTime}</span>
+          </div>
+
+          <div class="writing-body">
+            <h3 class="writing-item-title">
+              <span class="writing-title-main">{article.title}</span>
+              {article.subtitle && (
+                <span class="writing-title-sub">{article.subtitle}</span>
+              )}
+            </h3>
+            <p class="writing-item-excerpt">{article.excerpt}</p>
+          </div>
+
+          <div class="writing-arrow" aria-hidden="true">↗</div>
+        </a>
+      ))}
+    </div>
+
+    <div class="writing-archive-banner">
+      <Button href="/writing" variant="primary" data-magnetic>
+        Ver todos los artículos y notas
+      </Button>
+    </div>
+  </div>
+</section>
+

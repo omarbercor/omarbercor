@@ -1,0 +1,52 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getSortedProjects } from '@/lib/collections';
+import Chip from '@/components/ui/Chip.astro';
+
+const projects = await getSortedProjects();
+---
+
+<BaseLayout
+  title="Casos de Estudio & Proyectos — Omar Bermúdez"
+  description="Archivo de casos de estudio en arquitectura frontend, ingeniería de rendimiento y plataformas digitales para marcas líderes y proyectos de alta escala."
+  bodyClass="writing-archive-page"
+  showTopbar={true}
+  backHref="/"
+  backLabel="← Inicio"
+>
+  <main class="writing-archive-container">
+    <header class="writing-header">
+      <h1 class="writing-title">
+        <span class="writing-title-red text-accent-grain">PROYECTOS</span>
+      </h1>
+      <p class="writing-subtitle">
+        Muestra de algunos desarrollos recientes, plataformas web, piezas creativas y soluciones técnicas implementadas a lo largo de los años.
+      </p>
+    </header>
+
+    <section class="writing-list" aria-label="Archivo completo de proyectos y casos de estudio">
+      {projects.map((project) => (
+        <article>
+          <a href={`/work/${project.slug}`} class="writing-row" data-magnetic>
+            <div class="writing-meta">
+              <span class="writing-category">{project.client}</span>
+              <span class="writing-time">{project.period}</span>
+            </div>
+
+            <div class="writing-body">
+              <h2 class="writing-item-title">{project.title}</h2>
+              <p class="writing-item-excerpt">{project.tagline}</p>
+              <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.25rem;">
+                {project.stack.map((tech) => (
+                  <Chip label={`#${tech}`} />
+                ))}
+              </div>
+            </div>
+
+            <div class="writing-arrow" aria-hidden="true">↗</div>
+          </a>
+        </article>
+      ))}
+    </section>
+  </main>
+</BaseLayout>

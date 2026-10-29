@@ -1,0 +1,73 @@
+---
+/**
+ * BaseLayout — Shell HTML unificado para todas las vistas de producción
+ */
+import '@/styles/main.css';
+import { resolveLocalImage } from '@/lib/images';
+import CustomCursor from '@/components/layout/CustomCursor.astro';
+import EditorialTopbar from '@/components/layout/EditorialTopbar.astro';
+import ContactFooter from '@/components/layout/ContactFooter.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  ogImage?: string;
+  ogType?: 'website' | 'article';
+  bodyClass?: string;
+  showTopbar?: boolean;
+  backHref?: string;
+  backLabel?: string;
+  showFooter?: boolean;
+}
+
+const {
+  title,
+  description,
+  ogImage = '/images/omar-profile.jpg',
+  ogType = 'website',
+  bodyClass,
+  showTopbar = false,
+  backHref = '/',
+  backLabel = '← Inicio',
+  showFooter = true,
+} = Astro.props;
+
+const resolvedOgImage = resolveLocalImage(ogImage)?.src ?? ogImage;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="preload"
+      href="/fonts/inter-tight-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="/fonts/inter-latin-wght-normal.woff2"
+      as="font"
+      type="font/woff2"
+      crossorigin
+    />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <slot name="head" />
+  </head>
+  <body class={bodyClass}>
+    <CustomCursor />
+    {showTopbar && <EditorialTopbar backHref={backHref} backLabel={backLabel} />}
+    <slot />
+    {showFooter && <ContactFooter />}
+  </body>
+</html>
+

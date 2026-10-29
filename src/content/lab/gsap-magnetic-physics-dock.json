@@ -1,0 +1,20 @@
+{
+  "order": 6,
+  "title": "Magnetic Micro-Interactions & Spring Dock",
+  "tagline": "Exploring organic cursor magnetism, spring-damper physics, and tactile UI feedback.",
+  "category": "creative-ui",
+  "categoryLabel": "Creative UI",
+  "status": "Live Interactive",
+  "techStack": [
+    "GSAP QuickTo",
+    "Custom Spring Physics",
+    "Vanilla CSS",
+    "Pointer Events"
+  ],
+  "description": "A modular interaction kit demonstrating physics-based magnetic attraction. Elements calculate distance vectors from the pointer and smoothly pull toward the cursor with natural mass and momentum before springing back to their resting origins.",
+  "interactiveDetails": "Interactive playground with adjustable tension, friction, and magnetic radius sliders.",
+  "highlightMetricOrFeature": "High-performance GSAP quickSetter running at native display refresh rates (120Hz ready)",
+  "githubUrl": "https://github.com/omarbercor",
+  "liveDemoUrl": "#demo-dock",
+  "date": "2024"
+}

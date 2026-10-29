@@ -1,0 +1,57 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getSortedArticles } from '@/lib/collections';
+import Chip from '@/components/ui/Chip.astro';
+
+const articles = await getSortedArticles();
+---
+
+<BaseLayout
+  title="Bitácora — Omar Bermúdez"
+  description="Reflexiones sobre arquitectura de software, lecciones de rendimiento web a gran escala y la intersección entre diseño visual y sistemas automatizados."
+  bodyClass="writing-archive-page"
+  showTopbar={true}
+  backHref="/"
+  backLabel="← Inicio"
+>
+  <main class="writing-archive-container">
+    <header class="writing-header">
+      <h1 class="writing-title">
+        <span class="writing-title-red text-accent-grain">BITACORA</span>
+      </h1>
+      <p class="writing-subtitle">
+        Notas y apuntes sobre desarrollo de software, experimentación con IA, automatizaciones, herramientas del día a día y la intersección entre tecnología y creatividad.
+      </p>
+    </header>
+
+    <section class="writing-list" aria-label="Archivo completo de notas y ensayos">
+      {articles.map((article) => (
+        <article>
+          <a href={`/writing/${article.slug}`} class="writing-row" data-magnetic>
+            <div class="writing-meta">
+              <span class="writing-category">{article.category}</span>
+              <span class="writing-time">{article.readTime}</span>
+            </div>
+
+            <div class="writing-body">
+              <h2 class="writing-item-title">
+                <span class="writing-title-main">{article.title}</span>
+                {article.subtitle && (
+                  <span class="writing-title-sub">{article.subtitle}</span>
+                )}
+              </h2>
+              <p class="writing-item-excerpt">{article.excerpt}</p>
+              <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.25rem;">
+                {article.tags.map((tag) => (
+                  <Chip label={`#${tag}`} />
+                ))}
+              </div>
+            </div>
+
+            <div class="writing-arrow" aria-hidden="true">↗</div>
+          </a>
+        </article>
+      ))}
+    </section>
+  </main>
+</BaseLayout>

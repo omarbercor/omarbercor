@@ -1,0 +1,72 @@
+{
+  "order": 4,
+  "title": "Vive Latino YouTube Masthead — Multi-Stream Live Console & Audio-Ducking Engine",
+  "client": "Vive Latino / Coca-Cola",
+  "role": "Lead Rich Media Developer & Creative Technologist",
+  "period": "2016",
+  "category": "High-Concurrency YouTube Mastheads & Live Media Orchestration",
+  "tagline": "Arquitectura y desarrollo de un YouTube Masthead interactivo de dos fases: explorador de cartel con mezcla inteligente de audio en vivo (Coca-Cola FM) y consola de transmisión multicámara + 360° en tiempo real durante el festival.",
+  "impactHighlight": "Masthead interactivo de doble fase en portada de YouTube con 4 streams en vivo simultáneos y audio-ducking inteligente",
+  "heroImage": "/images/vl-hero.jpg",
+  "youtubeUrl": "https://www.youtube.com/embed/gSahZcxRZRs",
+  "metrics": [
+    {
+      "label": "Initial Payload Budget (Carga inicial ultrarrápida bajo estándares de portada de YouTube)",
+      "value": "< 200 KB"
+    },
+    {
+      "label": "4 Live Feeds — 3x HD + 1x 360° Video (Conmutación de señales en vivo integradas en el Masthead)",
+      "value": "4 Feeds"
+    },
+    {
+      "label": "Live Hot-Swap QA (Re-ingeniería y validación exprés con Google en pleno evento)",
+      "value": "Zero-Downtime"
+    }
+  ],
+  "stack": [
+    "YouTube Masthead",
+    "Google Web Designer / Studio",
+    "JavaScript Audio Controller",
+    "Multi-Stream & 360° Video",
+    "Sub-200KB Polite Load",
+    "Live Crisis Deployment"
+  ],
+  "overview": "Arquitectura y desarrollo integral del YouTube Masthead oficial para el festival Vive Latino en alianza con Coca-Cola. La pieza operó en dos etapas estratégicas: una fase previa de descubrimiento con reproductor interactivo de bandas y stream continuo de Coca-Cola Radio con sistema de audio-ducking, y una fase en vivo durante el festival como centro neurálgico de transmisión con cuatro señales simultáneas en alta definición y video 360°.",
+  "problem": "El festival Vive Latino, en conjunto con Coca-Cola, requería dominar la portada de YouTube México mediante un Masthead interactivo que acompañara al usuario en dos momentos críticos: los días previos al festival y la transmisión en vivo del evento. El desafío técnico radicaba en empaquetar una aplicación multimedia completa dentro de las severas restricciones de peso (menos de 200 KB de carga inicial) y consumo de memoria exigidas por YouTube. En la fase previa, el reto era integrar la transmisión continua de Coca-Cola Radio en vivo sin que colisionara con los loops musicales de cada banda al explorar sus biografías; durante el festival, la pieza debía transformarse en un hub de transmisión con cuatro señales simultáneas (tres escenarios HD y una señal inmersiva en 360°) capaz de reaccionar a cambios operativos de último minuto en plena transmisión.",
+  "solution": "Desarrollo de una arquitectura Rich Media modular de doble estado con carga diferida (Polite Loading) de recursos. Para la Fase 1 (Pre-Evento), se construyó un navegador interactivo de lineup y horarios equipado con un controlador de estados de audio (Audio Mutex Controller) que gestionaba automáticamente la prioridad entre el stream en vivo de Coca-Cola Radio y los loops locales de cada artista. Para la Fase 2 (Live Festival), la interfaz conmutaba a un reproductor multicámara conectado a las señales en vivo de YouTube, incluyendo soporte para video esférico 360° e intervención en caliente coordinada directamente con el equipo técnico de Google.",
+  "challenges": [
+    "Controlador de Prioridad de Audio (Smart Audio Ducking & Pause): Programación de una máquina de estados de audio en JavaScript para evitar la superposición sonora. Al navegar por el lineup, el usuario escuchaba el stream en vivo de Coca-Cola Radio; en el instante en que abría la ficha biográfica de una banda, el motor pausaba limpiamente el buffer de la radio, reproducía el loop musical del artista y restauraba la señal de radio en vivo al cerrar la biografía.",
+    "Ingeniería de Peso para YouTube Masthead (Initial + Polite Load): Estructuración milimétrica de código y compresión de assets para cumplir con el presupuesto estricto de carga inicial de YouTube, delegando la descarga de biografías, audios y módulos del reproductor en segundo plano sin bloquear el hilo principal de la página de inicio de YouTube.",
+    "Hot-Fix en Tiempo Real y Validación Exprés con Google: Durante la transmisión en vivo del festival, un cambio operativo de última hora obligó a retirar una de las señales de video activas. Se ejecutó una modificación quirúrgica de la interfaz y de la matriz de reproductores en producción, coordinando un flujo de auditoría y QA de emergencia con los ingenieros de Google para republicar la pieza casi al vuelo sin perder impresiones ni interrumpir el streaming de los demás escenarios."
+  ],
+  "results": [
+    "Dominio de Alcance Masivo Nacional: Exposición en el espacio digital de mayor tráfico de México (Home de YouTube), transformando un impacto publicitario en una plataforma funcional de consulta de horarios y consumo de música en vivo.",
+    "Continuidad Operativa en Crisis (Live Event Resilience): La capacidad de modificar, auditar y desplegar una nueva versión del Masthead en cuestión de minutos junto a Google evitó mostrar señales caídas (pantallas negras) ante cientos de miles de espectadores simultáneos.",
+    "Maximización del Tiempo de Retención: La combinación de radio en vivo, descubrimiento musical por artista y streaming multicámara (incluyendo tecnología 360°) mantuvo tasas de permanencia e interacción muy por encima de los Mastheads de video lineal tradicionales."
+  ],
+  "architectureNotes": [
+    "Arquitectura y desarrollo integral del YouTube Masthead en sus dos etapas operativas (Pre-Festival y Transmisión en Vivo).",
+    "Módulo interactivo de lineup, horarios y biografías con sistema automatizado de conmutación de audio (Live Radio Stream vs. Artist Audio Loops).",
+    "Integración de reproductor multicámara de YouTube (3 señales estándar + 1 señal 360°) y soporte técnico en vivo (Real-Time Hot-Deployment) durante los días del festival."
+  ],
+  "businessValue": "Presencia masiva en la portada de YouTube con cero caídas de servicio ante contingencias operativas en vivo.",
+  "keyArtifacts": [
+    "Dual-Phase YouTube Masthead Architecture",
+    "Audio Mutex & Stream Ducking Engine",
+    "Multi-Camera 360° Video Integration Matrix"
+  ],
+  "gallery": [
+    {
+      "url": "/images/vl-03.jpg",
+      "caption": "Fase 1: Módulo interactivo de lineup con stream de Coca-Cola FM y biografías"
+    },
+    {
+      "url": "/images/vl-04.jpg",
+      "caption": "Fase 1: Desglose por horarios de escenarios y preview de audio"
+    },
+    {
+      "url": "/images/vl-stream.png",
+      "caption": "Fase 2: Consola multicámara expandida con 4 señales de streaming y video 360°"
+    }
+  ]
+}

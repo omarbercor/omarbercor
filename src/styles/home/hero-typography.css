@@ -1,0 +1,88 @@
+/* Name Typography */
+.name-line {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-weight: 900;
+  line-height: 0.80;
+  letter-spacing: -0.045em;
+  text-transform: uppercase;
+  font-size: clamp(3rem, 15vw, 13.5rem);
+  white-space: nowrap;
+  position: relative;
+  
+  /* Anti-Clipping Buffer for glyph boundaries */
+  padding-left: 0.04em;
+  padding-right: 0.12em;
+  margin-right: -0.08em;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+/* Subtle Cardboard Grain Texture Applied Directly to Letterforms */
+.name-line-1 {
+  background-color: #121214;
+  background-image: 
+    linear-gradient(rgba(18, 18, 20, 0.93), rgba(18, 18, 20, 0.93)),
+    url('/assets/grain_transparent.png');
+  background-size: auto, 400px 400px;
+  background-repeat: repeat;
+  background-blend-mode: multiply;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #121214;
+}
+
+.name-line-2 {
+  background-color: var(--accent);
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent);
+}
+
+/* Positioning Statement */
+.hero-statement {
+  max-width: 520px;
+  text-align: center;
+  font-size: clamp(0.92rem, 2.2vw, 1.15rem);
+  line-height: 1.6;
+  color: var(--text-muted);
+  padding: 0 1rem;
+}
+
+.hero-statement strong {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+/* Scroll hint */
+.scroll-hint {
+  margin-top: 2.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-subtle);
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.scroll-indicator-line {
+  width: 1px;
+  height: 28px;
+  background: linear-gradient(to bottom, var(--text-subtle), transparent);
+  animation: pulse-scroll 2s infinite ease-in-out;
+}
+
+@keyframes pulse-scroll {
+  0% { transform: scaleY(0.4); opacity: 0.4; }
+  50% { transform: scaleY(1); opacity: 1; }
+  100% { transform: scaleY(0.4); opacity: 0.4; }
+}

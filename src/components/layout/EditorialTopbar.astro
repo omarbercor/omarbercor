@@ -1,0 +1,27 @@
+---
+/**
+ * EditorialTopbar — Barra superior persistente con logo bicromático para vistas internas
+ */
+interface Props {
+  backHref?: string;
+  backLabel?: string;
+}
+
+const { backHref = '/', backLabel = '← Inicio' } = Astro.props;
+---
+
+<header class="editorial-topbar" id="editorial-topbar">
+  <div class="editorial-topbar-inner">
+    <a href="/" class="editorial-logo" title="Volver al Inicio">
+      <span class="editorial-logo-first">OMAR</span>
+      <span class="editorial-logo-last">BERMÚDEZ</span>
+    </a>
+
+    <div class="editorial-topbar-actions">
+      <a href={backHref} class="editorial-back-link">
+        <span>{backLabel}</span>
+      </a>
+    </div>
+  </div>
+</header>
+

@@ -1,0 +1,21 @@
+{
+  "order": 4,
+  "title": "Proxmox Cluster Live Telemetry Dashboard",
+  "tagline": "Micro-dashboard streaming CPU, memory, and container health from private homelab nodes.",
+  "category": "systems-infra",
+  "categoryLabel": "Systems & Infra",
+  "status": "Prototype",
+  "techStack": [
+    "Proxmox VE API",
+    "LXC Containers",
+    "Docker",
+    "Tailscale Mesh",
+    "Server-Sent Events"
+  ],
+  "description": "A minimalist, dark-mode terminal-inspired telemetry interface connected via secure Tailscale tunnels to personal Proxmox hypervisor nodes. Displays real-time IOPS, thermals, and container states with zero external analytics tracking.",
+  "interactiveDetails": "Live websocket data ticker, CPU temperature gauge, and interactive container reboot simulator.",
+  "highlightMetricOrFeature": "Zero-latency local SSE stream across private WireGuard mesh",
+  "githubUrl": "https://github.com/omarbercor",
+  "liveDemoUrl": "#demo-proxmox",
+  "date": "2024"
+}

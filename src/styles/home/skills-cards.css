@@ -1,0 +1,100 @@
+/* Item de tecnología: VERTICAL y SIN CAJA (logo arriba, categoría al medio, nombre abajo) */
+.tape-card {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  justify-content: center !important;
+  gap: 0.35rem !important;
+  background: transparent !important;
+  border: none !important;
+  padding: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+  white-space: nowrap !important;
+}
+
+.tape-card:hover {
+  transform: none !important;
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
+/* Contenedor de info también estrictamente vertical */
+.card-info {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: flex-start !important;
+  gap: 0.25rem !important;
+  width: 100% !important;
+}
+
+/* 1. Logo (SVG / Brand a color arriba) */
+.card-icon {
+  display: block !important;
+  width: auto;
+  height: auto;
+  background: transparent;
+  border-radius: 0;
+  color: #FFFFFF;
+  margin-bottom: 0.25rem;
+}
+
+.card-icon svg,
+.card-icon img {
+  display: block;
+  width: 36px;
+  height: 36px;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
+}
+
+@media (min-width: 769px) {
+  .card-icon svg,
+  .card-icon img {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+/* 2. Categoría (en medio) */
+.card-tag {
+  display: block !important;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.2;
+  margin: 0;
+}
+
+/* 3. Nombre (abajo, en blanco semibold) */
+.card-name {
+  display: block !important;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  font-weight: 800;
+  color: #FFFFFF;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0;
+}
+
+.card-desc {
+  display: block !important;
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.82);
+  letter-spacing: -0.01em;
+  line-height: 1.35;
+  margin-top: 0.1rem;
+}
+
+@media (min-width: 769px) {
+  .card-name {
+    font-size: 1.4rem;
+  }
+}

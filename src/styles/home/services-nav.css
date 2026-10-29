@@ -1,0 +1,179 @@
+/* ==========================================================================
+   BLOCK 05: SERVICES & CAPABILITIES (SPLIT STAGE WITH MONUMENTAL DISPLAY)
+   ========================================================================== */
+.services-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-museum);
+  padding: 8rem 1.5rem 10rem 1.5rem;
+  border-top: none;
+}
+
+@media (min-width: 769px) {
+  .services-section {
+    padding: 11rem 3rem 13rem 3rem;
+  }
+}
+
+.services-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* Header con título monumental de gran formato */
+.services-header {
+  margin-bottom: 5rem;
+}
+
+@media (min-width: 769px) {
+  .services-header {
+    margin-bottom: 7rem;
+  }
+}
+
+.services-tag {
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.services-tag::before {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: var(--accent);
+  border-radius: 50%;
+}
+
+.services-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 10vw, 8.5rem);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  background-color: var(--accent);
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent);
+  margin: 0 0 1.5rem 0;
+  text-transform: uppercase;
+}
+
+.services-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0;
+}
+
+/* Split Stage Layout */
+.services-split-stage {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 3.5rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .services-split-stage {
+    grid-template-columns: 1.1fr 1fr;
+    gap: 5rem;
+  }
+}
+
+/* Columna Izquierda: Selector Interactivo de Servicios */
+.services-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.service-nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 1.8rem 1.5rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  border-radius: var(--radius-md);
+}
+
+/* Hover y Selected con fondo blanco limpio (sin borde negro) */
+.service-nav-btn:hover {
+  background: #FFFFFF;
+}
+
+.service-nav-btn.is-active {
+  background: #FFFFFF;
+  border: none;
+}
+
+.service-btn-left {
+  display: flex;
+  align-items: baseline;
+  gap: 1.25rem;
+}
+
+/* 01, 02 del mismo tamaño y fuente que el título del botón */
+.service-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-subtle);
+  transition: color 0.2s ease;
+}
+
+.service-nav-btn:hover .service-num,
+.service-nav-btn.is-active .service-num {
+  color: var(--accent);
+}
+
+.service-btn-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.35rem, 2.2vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+  line-height: 1.15;
+  transition: color 0.2s ease;
+}
+
+.service-nav-btn:hover .service-btn-title,
+.service-nav-btn.is-active .service-btn-title {
+  color: var(--accent);
+}
+
+.service-arrow {
+  font-family: var(--font-body);
+  font-size: 1.35rem;
+  color: var(--text-subtle);
+  opacity: 0.3;
+  transition: all 0.25s ease;
+}
+
+.service-nav-btn:hover .service-arrow,
+.service-nav-btn.is-active .service-arrow {
+  opacity: 1;
+  color: var(--accent);
+  transform: translateX(4px);
+}

@@ -1,0 +1,21 @@
+{
+  "order": 1,
+  "title": "Lego 3D Interactive Builder",
+  "tagline": "Parametric brick assembly with grid-snapping physics and procedural shaders.",
+  "category": "3d-webgl",
+  "categoryLabel": "3D & WebGL",
+  "status": "Live Interactive",
+  "techStack": [
+    "Three.js",
+    "WebGL",
+    "TypeScript",
+    "Cannon-es Physics",
+    "GSAP Camera Tweening"
+  ],
+  "description": "An interactive browser-based 3D workspace where users can assemble, snap, rotate, and color parametric Lego bricks in real time. Features accurate stud-to-tube collision meshes, instanced rendering for high brick counts, and studio HDRI lighting.",
+  "interactiveDetails": "Raycasting cursor plane snapping, dynamic color picker palette, orbital camera controls with damping, and one-click physics collapse mode.",
+  "highlightMetricOrFeature": "Instanced Mesh Rendering (> 5,000 bricks at steady 60 FPS)",
+  "githubUrl": "https://github.com/omarbercor",
+  "liveDemoUrl": "https://github.com/omarbercor",
+  "date": "2024"
+}

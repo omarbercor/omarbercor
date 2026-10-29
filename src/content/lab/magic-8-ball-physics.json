@@ -1,0 +1,22 @@
+{
+  "order": 2,
+  "title": "Magic 8-Ball Inertia & Gyroscope",
+  "tagline": "Realistic fluid-buoyancy simulation inside a tactile 3D sphere.",
+  "category": "3d-webgl",
+  "categoryLabel": "3D & WebGL",
+  "status": "Live Interactive",
+  "techStack": [
+    "Three.js",
+    "DeviceMotion API",
+    "Web Audio API",
+    "PBR Shading",
+    "GSAP"
+  ],
+  "description": "A digital homage to the classic novelty toy. Simulates realistic viscous fluid drag on the internal icosahedron die floating in blue dye. Supports both drag-and-shake mouse velocity on desktop and native DeviceOrientation/DeviceMotion on smartphones.",
+  "interactiveDetails": "Tactile haptic feedback (on supported mobile devices), spatial audio slosh sounds via Web Audio API, and dynamic text reveal on the floating die surface.",
+  "highlightMetricOrFeature": "Dual Input: Mouse Velocity Inertia (Desktop) + Accelerometer Gyro (Mobile)",
+  "githubUrl": "https://github.com/omarbercor",
+  "liveDemoUrl": "https://omarbercor.com/lab/magicball/",
+  "embedUrl": "https://omarbercor.com/lab/magicball/",
+  "date": "2024"
+}

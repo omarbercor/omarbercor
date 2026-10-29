@@ -1,0 +1,156 @@
+/* Showcase Visual / Diagrama / Imagen Editorial (Limpio, sin caja, bordes rectos) */
+.case-study-main-photo-wrap {
+  width: 100%;
+  margin: 2.5rem 0 3.5rem 0;
+  background-color: transparent;
+  border-radius: 0;
+  overflow: visible;
+  border: none;
+  box-shadow: none;
+}
+
+.case-study-main-photo {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;
+  filter: contrast(102%) brightness(98%);
+  transition: none;
+  transform: none;
+}
+
+.case-study-main-photo-wrap:hover .case-study-main-photo {
+  transform: none;
+}
+
+.case-study-visual-showcase {
+  width: 100%;
+  margin: 1rem 0 2.5rem 0;
+  border: none;
+  background: transparent;
+  box-shadow: none;
+}
+
+.case-study-visual-viewport {
+  position: relative;
+  min-height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1.5rem 1rem 2rem 1rem;
+  background: transparent;
+  text-align: center;
+}
+
+/* Brand Intro (Logo arriba del extracto introductorio) */
+.case-study-brand-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  margin-top: 0.5rem;
+}
+
+.case-study-brand-intro .case-study-visual-logo {
+  height: clamp(38px, 5vw, 48px);
+  width: auto;
+  max-width: 220px;
+  margin-bottom: 0.25rem;
+  opacity: 0.9;
+  filter: grayscale(1) brightness(0.2);
+  transition: opacity 0.2s ease, filter 0.2s ease;
+}
+
+:root[data-theme="dark"] .case-study-brand-intro .case-study-visual-logo {
+  filter: brightness(0) invert(1);
+}
+
+.case-study-brand-intro .case-study-visual-logo:hover {
+  opacity: 1;
+  filter: none;
+}
+
+/* Barra de Enlaces / Demo en vivo / Repositorio */
+.case-study-links-bar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  margin: 2rem 0;
+  padding: 1.25rem 0;
+  border-top: 1px solid var(--border-line);
+  border-bottom: 1px solid var(--border-line);
+}
+
+.case-study-ext-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-decoration: none;
+  transition: opacity 0.15s ease;
+}
+
+.case-study-ext-link:hover {
+  opacity: 0.8;
+}
+
+/* Figuras Intercaladas en Bloques de Contenido (Diseño Editorial Inmersivo, Bordes Rectos, Sin Recorte) */
+.case-study-interleaved-figure {
+  margin: 3rem 0 3.5rem 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.case-study-interleaved-media {
+  max-width: 100%;
+  width: fit-content;
+  margin: 0 auto;
+  border-radius: 0;
+  overflow: visible;
+  background-color: transparent;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  display: flex;
+  justify-content: center;
+}
+
+.case-study-interleaved-media img {
+  width: auto;
+  max-width: 100%;
+  max-height: 900px;
+  height: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  border-radius: 0;
+  transition: none;
+  transform: none;
+}
+
+.case-study-interleaved-figure:hover .case-study-interleaved-media img {
+  transform: none;
+}
+
+/* Embed de Video Responsivo (YouTube) */
+.case-study-video-wrap {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin: 3rem 0 3.5rem 0;
+  background-color: #000;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.18);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+}
+
+.case-study-video-wrap iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}

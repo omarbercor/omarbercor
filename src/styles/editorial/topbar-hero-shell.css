@@ -1,0 +1,134 @@
+/* ==========================================================================
+   BLOCK 10: BLOG EDITORIAL TEMPLATE & TOPBAR (ARTICLE PAGE)
+   ========================================================================== */
+
+/* Topbar Editorial Flotante / Sticky con Logo en Dos Colores */
+.editorial-topbar {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  background-color: rgba(250, 247, 243, 0.92);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-subtle);
+  z-index: 100;
+  padding: 1.15rem 1.5rem;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+@media (min-width: 769px) {
+  .editorial-topbar {
+    padding: 1.25rem 3rem;
+  }
+}
+
+.editorial-topbar-inner {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1.5rem;
+}
+
+/* Logo: Omar Bermúdez con estilo bicromático igual al Hero */
+.editorial-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.8vw, 1.45rem);
+  font-weight: 900;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  line-height: 1;
+  user-select: none;
+}
+
+.editorial-logo-first {
+  background-color: #121214;
+  background-image: 
+    linear-gradient(rgba(18, 18, 20, 0.93), rgba(18, 18, 20, 0.93)),
+    var(--texture-grain-img);
+  background-size: auto, var(--grain-size);
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: #121214;
+}
+
+.editorial-logo-last {
+  background-color: var(--accent);
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent);
+}
+
+.editorial-topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.editorial-back-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius-sm);
+  background: rgba(18, 18, 20, 0.04);
+  transition: color 0.15s ease, background-color 0.15s ease;
+}
+
+.editorial-back-link:hover {
+  color: var(--text-primary);
+  background: rgba(18, 18, 20, 0.08);
+}
+
+/* Hero Editorial del Artículo: Gran contenedor de imagen con overlay y tipografía dentro */
+.article-hero-wrap {
+  position: relative;
+  width: 100%;
+  max-width: 1200px;
+  margin: 2.5rem auto 0 auto;
+  padding: 0 1.25rem;
+}
+
+@media (min-width: 769px) {
+  .article-hero-wrap {
+    margin: 3.5rem auto 0 auto;
+    padding: 0 2rem;
+  }
+}
+
+.article-hero-card {
+  position: relative;
+  width: 100%;
+  min-height: clamp(480px, 68vh, 660px);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 2.5rem 1.75rem;
+  background-color: #121214;
+  box-shadow: 0 24px 60px -15px rgba(18, 18, 20, 0.25);
+}
+
+@media (min-width: 769px) {
+  .article-hero-card {
+    padding: 4.5rem 3.5rem;
+  }
+}

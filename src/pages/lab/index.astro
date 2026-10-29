@@ -1,0 +1,52 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getSortedExperiments } from '@/lib/collections';
+import Chip from '@/components/ui/Chip.astro';
+
+const experiments = await getSortedExperiments();
+---
+
+<BaseLayout
+  title="Lab — Experimentos & Prototipos Técnicos — Omar Bermúdez"
+  description="Laboratorio de prototipos interactivos, experimentos en WebGL/Three.js, simulaciones físicas, flujos autónomos con n8n e infraestructura autohospedada."
+  bodyClass="writing-archive-page"
+  showTopbar={true}
+  backHref="/"
+  backLabel="← Inicio"
+>
+  <main class="writing-archive-container">
+    <header class="writing-header">
+      <h1 class="writing-title">
+        <span class="writing-title-red text-accent-grain">LAB</span>
+      </h1>
+      <p class="writing-subtitle">
+        Prototipos de fin de semana, simulaciones físicas en WebGL/Three.js, automatización autónoma con n8n e infraestructura autohospedada. Código vivo y exploración técnica sin filtros corporativos.
+      </p>
+    </header>
+
+    <section class="writing-list" aria-label="Archivo completo de experimentos de laboratorio">
+      {experiments.map((exp) => (
+        <article>
+          <a href={`/lab/${exp.slug}`} class="writing-row" data-magnetic>
+            <div class="writing-meta">
+              <span class="writing-category">{exp.categoryLabel}</span>
+              <span class="writing-time">{exp.date} • {exp.status}</span>
+            </div>
+
+            <div class="writing-body">
+              <h2 class="writing-item-title">{exp.title}</h2>
+              <p class="writing-item-excerpt">{exp.tagline}</p>
+              <div style="display: flex; gap: 0.4rem; flex-wrap: wrap; margin-top: 0.25rem;">
+                {exp.techStack.map((tech) => (
+                  <Chip label={`#${tech}`} />
+                ))}
+              </div>
+            </div>
+
+            <div class="writing-arrow" aria-hidden="true">↗</div>
+          </a>
+        </article>
+      ))}
+    </section>
+  </main>
+</BaseLayout>

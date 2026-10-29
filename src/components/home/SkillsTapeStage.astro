@@ -1,0 +1,59 @@
+---
+/**
+ * SkillsTapeStage — Bloque 04: Cinta inclinada de dominios técnicos sobre titular monumental
+ */
+import { skills } from '@/data/skills';
+---
+
+<section class="skills-stage" id="skills-section">
+  <div class="skills-monument-wrap">
+    <h2 class="skills-monument-title" id="skills-monument-title">
+      {['S', 'K', 'I', 'L', 'L', 'S'].map((letter) => (
+        <span class="letter">{letter}</span>
+      ))}
+    </h2>
+  </div>
+
+  <div class="caution-tape-strip" id="caution-tape">
+    <div class="tape-track" id="tape-track">
+      <div class="tape-group" id="tape-group-single">
+        {skills.map((skill) => (
+          <div class="tape-card">
+            <div class="card-icon">
+              {skill.inlineIcon === 'metrics' ? (
+                <svg
+                  viewBox="0 0 24 24"
+                  width="42"
+                  height="42"
+                  fill="none"
+                  stroke="#4ade80"
+                  stroke-width="2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                >
+                  <path d="M3 3v18h18" />
+                  <path d="m19 9-5 5-4-4-3 3" />
+                </svg>
+              ) : (
+                <img
+                  src={skill.iconSrc}
+                  alt={skill.iconAlt || skill.name}
+                  width="42"
+                  height="42"
+                  loading="lazy"
+                  decoding="async"
+                />
+              )}
+            </div>
+            <div class="card-info">
+              <span class="card-tag">{skill.tag}</span>
+              <span class="card-name">{skill.name}</span>
+              <span class="card-desc">{skill.description}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+

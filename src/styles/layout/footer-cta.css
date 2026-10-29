@@ -1,0 +1,121 @@
+/* ==========================================================================
+   BLOCK 09: FOOTER / CONTACTO EN COLOR DE REALCE (ROJO / BERMELLÓN #F15D49)
+   ========================================================================== */
+.contact-footer {
+  position: relative;
+  width: 100%;
+  background-color: var(--accent); /* #F15D49 Fondo de Realce */
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  color: #FFFFFF;
+  padding: 8rem 1.5rem 10rem 1.5rem;
+  overflow: hidden;
+}
+
+@media (min-width: 769px) {
+  .contact-footer {
+    padding: 11rem 3rem 13rem 3rem;
+  }
+}
+
+.footer-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5rem;
+}
+
+@media (min-width: 769px) {
+  .footer-container {
+    gap: 7rem;
+  }
+}
+
+/* Encabezado / Título Monumental */
+.footer-main-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 2rem;
+}
+
+.footer-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.95);
+  background-color: rgba(0, 0, 0, 0.15);
+  padding: 0.5rem 1.15rem;
+  border-radius: var(--radius-full);
+}
+
+.footer-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: #22C55E; /* Verde vivo activo */
+  box-shadow: 0 0 10px #22C55E;
+}
+
+.footer-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 10vw, 8.5rem);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  color: #FFFFFF;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+.footer-lead {
+  font-family: var(--font-body);
+  font-size: clamp(1.15rem, 2.2vw, 1.5rem);
+  font-weight: 400;
+  line-height: 1.45;
+  color: rgba(255, 255, 255, 0.88);
+  max-width: 720px;
+  margin: 0;
+}
+
+/* CTA Principal: Email en Gran Formato */
+.footer-email-block {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+}
+
+.footer-email-label {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.footer-email-link {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.5vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.035em;
+  color: #FFFFFF;
+  text-decoration: none;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.4);
+  padding-bottom: 0.4rem;
+  transition: border-color 0.2s ease, opacity 0.2s ease;
+  word-break: break-all;
+}
+
+.footer-email-link:hover {
+  border-color: #FFFFFF;
+  opacity: 0.95;
+}

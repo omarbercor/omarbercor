@@ -1,0 +1,102 @@
+---
+import { render } from 'astro:content';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getSortedArticles } from '@/lib/collections';
+import Chip from '@/components/ui/Chip.astro';
+import OptimizedMedia from '@/components/ui/OptimizedMedia.astro';
+
+export async function getStaticPaths() {
+  const articles = await getSortedArticles();
+  return articles.map((article, idx) => ({
+    params: { slug: article.slug },
+    props: {
+      article,
+      nextArticle: articles[(idx + 1) % articles.length],
+    },
+  }));
+}
+
+const { article, nextArticle } = Astro.props;
+const { Content } = await render(article.entry);
+---
+
+<BaseLayout
+  title={`${article.title}${article.subtitle ? `: ${article.subtitle}` : ''} — Omar Bermúdez`}
+  description={article.excerpt}
+  ogImage={article.coverImage || '/images/omar-profile.jpg'}
+  ogType="article"
+  showTopbar={true}
+  backHref="/writing"
+  backLabel="← Todas las notas"
+>
+  <main>
+    <section class="article-hero-wrap" aria-labelledby="article-title">
+      <div class="article-hero-card">
+        <div class="article-hero-media">
+          <OptimizedMedia
+            src={article.coverImage || '/images/omar-profile.jpg'}
+            alt={article.title}
+            widths={[640, 1200, 1600]}
+            sizes="(max-width: 1440px) 100vw, 1380px"
+            priority={true}
+          />
+        </div>
+        <div class="article-hero-overlay"></div>
+        <div class="article-hero-grain"></div>
+
+        <div class="article-hero-content">
+          <h1 class="article-hero-title" id="article-title">
+            <span class="article-hero-main-title">{article.title}</span>
+            {article.subtitle && (
+              <span class="article-hero-subtitle">{article.subtitle}</span>
+            )}
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <div class="article-lead-wrap">
+      <div class="article-lead-meta">
+        <Chip label={article.category} />
+        <span class="article-meta-date">{article.date}</span>
+        <span class="article-meta-time">{article.readTime}</span>
+      </div>
+
+      <p class="article-lead-excerpt">{article.excerpt}</p>
+    </div>
+
+    <article class="article-reading-container">
+      <div class="article-prose">
+        <Content />
+      </div>
+    </article>
+
+    <div class="article-footer-tags-wrap">
+      <div class="article-tags-header">Temas & Especialidades</div>
+      <div class="article-tags-cloud">
+        {article.tags.map((t) => (
+          <Chip label={`#${t}`} />
+        ))}
+      </div>
+    </div>
+
+    <section class="article-pagination-wrap" aria-label="Navegación entre notas">
+      <a href={`/writing/${nextArticle.slug}`} class="next-article-row" data-magnetic>
+        <div class="next-article-meta">
+          <span class="next-article-label">SIGUIENTE NOTA</span>
+          <span class="next-article-category">{nextArticle.category}</span>
+        </div>
+
+        <div class="next-article-body">
+          <h3 class="next-article-title">
+            <span class="next-title-main">{nextArticle.title}</span>
+            {nextArticle.subtitle && (
+              <span class="next-title-sub">{nextArticle.subtitle}</span>
+            )}
+          </h3>
+          <p class="next-article-excerpt">{nextArticle.excerpt}</p>
+        </div>
+      </a>
+    </section>
+  </main>
+</BaseLayout>

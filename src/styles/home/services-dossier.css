@@ -1,0 +1,104 @@
+/* Columna Derecha: Dossier Técnico Detallado (Sin borde gris) */
+.service-dossier-wrap {
+  position: relative;
+}
+
+@media (min-width: 1024px) {
+  .service-dossier-wrap {
+    position: sticky;
+    top: 6rem;
+  }
+}
+
+.service-dossier-card {
+  display: none;
+  background: #FFFFFF;
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: 3rem 2.5rem;
+  box-shadow: none;
+  position: relative;
+}
+
+.service-dossier-card.is-active {
+  display: block;
+  animation: dossierFadeIn 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes dossierFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dossier-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.6rem, 2.4vw, 2.2rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.03em;
+  color: var(--accent); /* #F15D49 */
+  margin: 0 0 1.25rem 0;
+}
+
+/* Tipografía consistente con el resto del sitio */
+.dossier-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  color: var(--text-muted);
+  margin: 0 0 2rem 0;
+}
+
+/* Bloque de Entregables */
+.dossier-deliverables {
+  margin-bottom: 2.25rem;
+}
+
+.dossier-section-title {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  margin: 0 0 0.85rem 0;
+}
+
+.deliverables-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.deliverable-item {
+  display: flex;
+  align-items: baseline;
+  gap: 0.75rem;
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  line-height: 1.45;
+  color: var(--text-primary); /* Mismo negro consistente */
+}
+
+/* Bullet normal (punto discreto del mismo tono) */
+.deliverable-bullet {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+  line-height: 1;
+}
+
+/* Contenedor de chips de tecnologías en dossier */
+.dossier-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}

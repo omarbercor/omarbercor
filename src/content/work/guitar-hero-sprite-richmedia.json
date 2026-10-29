@@ -1,0 +1,76 @@
+{
+  "order": 3,
+  "title": "Interactive Rhythm Micro-Game & Sub-250KB Rich Media Engine",
+  "client": "Sprite / The Coca-Cola Company",
+  "role": "Creative Technologist & Rich Media Developer",
+  "period": "2015 – 2016",
+  "category": "Gamified Rich Media, Micro-Optimization & High-Impact AdTech",
+  "tagline": "Desarrollo de un micro-juego musical interactivo con sincronización rítmica en tiempo real, empaquetado bajo el límite estricto de 250 KB y certificado por la auditoría técnica de seguridad de Google.",
+  "impactHighlight": "Micro-videojuego rítmico a 60 FPS en banners Rich Media con payload menor a 250 KB y 100% de aprobación en Google QA",
+  "heroImage": "/images/sprite-hero.jpg",
+  "youtubeUrl": "https://www.youtube.com/embed/YZxE8ZPRUO0",
+  "metrics": [
+    {
+      "label": "Total Payload Budget (Juego completo, lógica JS, GSAP, gráficos y audio comprimidos al límite)",
+      "value": "< 250 KB"
+    },
+    {
+      "label": "Google Technical & Security QA (Certificación estricta de sandbox, uso de CPU y cero fugas de memoria)",
+      "value": "100% Pass"
+    },
+    {
+      "label": "CTR & Dwell Time Surge (Incremento sustancial en tiempo de interacción y clics frente a banners estándar)",
+      "value": "High Lift"
+    }
+  ],
+  "stack": [
+    "Google Web Designer",
+    "GSAP (GreenSock)",
+    "Vanilla JavaScript",
+    "Rich Media Advergame",
+    "Sub-250KB Optimization",
+    "Google Studio QA Certified"
+  ],
+  "overview": "Desarrollo integral de un advergame musical interactivo para la campaña cruzada entre Coca-Cola / Sprite y Guitar Hero (Activision). La pieza trasladó la mecánica rítmica de acertar notas musicales en tiempo real dentro de una unidad Rich Media display, operando bajo la estricta cuota de peso menor a 250 KB requerida por Google Marketing Platform y aprobando con honores todas las auditorías de rendimiento y seguridad.",
+  "problem": "En un ecosistema publicitario saturado donde la 'ceguera al banner' (banner blindness) reduce la efectividad de los formatos display tradicionales, el reto era capturar la atención del usuario de forma activa, no pasiva. Se requería trasladar la mecánica central de Guitar Hero —tocar notas sincronizadas con la música en el momento exacto— directamente al navegador dentro de una unidad publicitaria Rich Media. El desafío crítico de ingeniería consistía en construir un videojuego funcional con audio, animaciones fluidas y lógica de puntuación sin exceder el límite infranqueable de 250 KB de peso total, además de superar la rigurosa auditoría técnica y de seguridad de Google para garantizar que el código jamás degradara el rendimiento ni comprometiera los sitios editoriales (publishers) donde se serviría.",
+  "solution": "Diseño y programación de un advergame rítmico interactivo desarrollado con JavaScript, GSAP (GreenSock) y Google Web Designer. Se diseñó un motor ligero de sincronización temporal que hacía descender las notas por el mástil virtual al ritmo de la pista musical, permitiendo al usuario interactuar mediante touch points o clics en tiempo real. Toda la arquitectura de assets (spritesheets, vectores y pistas de audio) y el código fuente fueron sometidos a una minificación y compresión quirúrgica para caber en menos de un cuarto de megabyte, manteniendo una tasa de cuadros por segundo (60 FPS) constante.",
+  "challenges": [
+    "Ingeniería de Micro-Peso (Presupuesto estricto de 250 KB): Empaquetado de la lógica completa del juego, motor de animación GSAP, interfaz gráfica y buffers de audio dentro de un límite de 250 KB. Se implementó reutilización de nodos del DOM (object pooling), compresión extrema de sprites y optimización de audio para lograr una carga instantánea sin sacrificar la experiencia audiovisual.",
+    "Sincronización Rítmica y Hit Detection con GSAP: Programación de la ventana de colisión temporal entre la pista de audio y la posición en pantalla de cada nota. Uso de timelines de GSAP acelerados por hardware (transform: translate3d) para garantizar que el desplazamiento de las notas no sufriera lag ni desfasamiento respecto a la música.",
+    "Cumplimiento de Auditoría de Seguridad y Rendimiento de Google: Aislamiento total de variables en el scope local, manejo estricto de eventos de salida (Enabler.exit), limpieza automática de timers y event listeners al finalizar la interacción (garbage collection) y control riguroso de ciclos de CPU para aprobar al 100% la validación del equipo técnico de Google sin afectar el host site."
+  ],
+  "results": [
+    "Incremento Exponencial en Tiempo de Interacción (Dwell Time): Al transformar un espacio publicitario pasivo en una experiencia jugable de varios segundos de duración, el tiempo de exposición activa con la marca superó drásticamente los benchmarks de formatos rich media convencionales.",
+    "Aumento Directo en CTR y Engagement Rate: La gamificación generó un embudo natural de curiosidad a acción, elevando tanto la tasa de interacción (Interaction Rate) en los touch points como el Click-Through Rate (CTR) hacia el destino de conversión final.",
+    "Despliegue Impecable en Red Premium: Cero incidencias o rechazos en medios tras la certificación de Google, asegurando una ejecución fluida tanto en escritorio como en dispositivos táctiles."
+  ],
+  "architectureNotes": [
+    "Desarrollo completo del micro-juego interactivo en Google Web Designer y JavaScript.",
+    "Motor de animación de alto rendimiento basado en GSAP con detección de aciertos en tiempo real.",
+    "Optimización extrema de assets multimedia (< 250 KB) e integración de métricas de eventos de Google Studio (contadores de inicio de juego, notas acertadas, repeticiones y clics de salida)."
+  ],
+  "businessValue": "Multiplicó el engagement y tiempo de atención de la audiencia activa a través de una experiencia jugable certificada por Google.",
+  "keyArtifacts": [
+    "Sub-250KB Asset & Audio Compression Pipeline",
+    "GSAP Rhythm Timeline & Hit Detection Engine",
+    "Google Studio QA Certification Suite"
+  ],
+  "gallery": [
+    {
+      "url": "/images/sprite-01.jpg",
+      "caption": "Pantalla de inicio del micro-juego con CTA interactivo y selección de dificultad"
+    },
+    {
+      "url": "/images/sprite-02.jpg",
+      "caption": "Motor rítmico en ejecución: descenso de notas y detección de pulsación en tiempo real"
+    },
+    {
+      "url": "/images/sprite-03.jpg",
+      "caption": "Feedback visual inmediato con multiplicadores de combo y efectos en pantalla"
+    },
+    {
+      "url": "/images/sprite-05.jpg",
+      "caption": "Pantalla de puntaje final, llamado a la acción comercial y botón de replay"
+    }
+  ]
+}

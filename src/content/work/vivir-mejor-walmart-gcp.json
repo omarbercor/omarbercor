@@ -1,0 +1,74 @@
+{
+  "order": 5,
+  "title": "Vivir Mejor (Walmart) — High-Availability GCP Architecture, Automated Editorial Engine & Technical SEO",
+  "client": "Vivir Mejor — Walmart México",
+  "role": "Lead Full-Stack Developer, UX/UI Architect & GCP Cloud Administrator",
+  "period": "2020 – 2023",
+  "category": "High-Traffic WordPress, Cloud Infrastructure, Technical SEO & Retail Media",
+  "tagline": "Liderazgo técnico integral, administración de infraestructura en Google Cloud Platform, automatización de ciclos editoriales estacionales y arquitectura SEO avanzada para el ecosistema de contenidos de estilo de vida de Walmart.",
+  "impactHighlight": "Re-arquitectura en caliente en GCP para alta disponibilidad en El Buen Fin, automatización editorial estacional y Recipe Schema SEO",
+  "heroImage": "/images/vm-screenshot.jpg",
+  "metrics": [
+    {
+      "label": "High-Availability Recovery (Re-arquitectura de emergencia en nube ante picos masivos en El Buen Fin)",
+      "value": "GCP Scaling"
+    },
+    {
+      "label": "Recipe Schema Architecture (Datos estructurados avanzados para dominancia orgánica en buscadores)",
+      "value": "Rich Snippets"
+    },
+    {
+      "label": "Seasonal Content Engine (Programación automatizada de skins y feeds para campañas semanales)",
+      "value": "Auto-Feeds"
+    }
+  ],
+  "stack": [
+    "Google Cloud Platform (GCP)",
+    "WordPress High-Concurrency",
+    "Technical SEO & Schema.org",
+    "Core Web Vitals",
+    "UX/UI & Seasonal Theming",
+    "Editorial Automation"
+  ],
+  "overview": "Liderazgo técnico integral (End-to-End Ownership) para Vivir Mejor, la plataforma de contenidos editoriales, recetas y estilo de vida de Walmart México. El proyecto abarcó desde la administración y re-arquitectura en Google Cloud Platform (GCP) para garantizar alta disponibilidad en eventos comerciales de máxima afluencia (El Buen Fin, Hot Sale), hasta la automatización de tematizaciones estacionales, optimización de Core Web Vitals y diseño de micrositios de Retail Media para socios comerciales.",
+  "problem": "Vivir Mejor, la plataforma editorial de estilo de vida y recetas de Walmart México, operaba bajo una doble presión constante: la exigencia comercial de transformar el sitio cada semana según el calendario de retail (Regreso a Clases, Harvest, Navidad, Día de Reyes) y la necesidad de soportar avalanchas masivas de tráfico durante eventos críticos como El Buen Fin. Durante uno de estos picos históricos de concurrencia, la infraestructura original colapsó por saturación de peticiones, evidenciando la urgencia de reestructurar el entorno en Google Cloud Platform (GCP) en caliente. Adicionalmente, la operación manual para vestir el sitio, rotar los feeds de contenido y publicar landing pages patrocinadas para marcas comerciales generaba cuellos de botella operativos y limitaba el potencial de posicionamiento orgánico (SEO) en verticales clave como gastronomía.",
+  "solution": "Asumí la propiedad técnica y creativa de punta a punta (End-to-End Ownership): desde la administración y re-arquitectura de servidores en GCP hasta la evolución continua del UX/UI, desarrollo en WordPress y optimización de Core Web Vitals. Para eliminar la fricción operativa, diseñé un sistema semiautomático de orquestación editorial que permitía al equipo de contenido agendar con precisión quirúrgica la rotación de feeds, jerarquías y tematizaciones visuales (theming completo para eventos como El Buen Fin). En paralelo, se reconstruyó la arquitectura semántica del sitio incorporando Schema Markup especializado para recetas y se estandarizó un flujo ágil de producción de landing pages a medida para la monetización comercial con marcas aliadas.",
+  "challenges": [
+    "Reestructuración de Infraestructura GCP en Modo Crisis (Zero-to-Recovery): Ante la caída del sitio por sobrecarga de visitas en pleno evento masivo, se ejecutó una intervención de emergencia sobre la arquitectura en Google Cloud Platform. Se optimizaron las instancias de cómputo, políticas de caché, balanceo de carga y consultas a base de datos en WordPress para revivir la plataforma en tiempo récord y blindarla contra futuros picos de tráfico.",
+    "Motor Semiautomático de Calendario Estacional y Dynamic Theming: Desarrollo de una lógica de programación anticipada en el backend que permitía dejar pre-configurados los cambios de interfaz (skins de campaña como El Buen Fin) y la reordenación automática de los feeds de artículos para que se activaran exactamente en las ventanas comerciales definidas sin intervención manual de madrugada.",
+    "Ingeniería de SEO Técnico, Core Web Vitals y Schema para Recetas: Refactorización del DOM, carga diferida de recursos y limpieza de render-blocking scripts para elevar el desempeño móvil. Implementación profunda de datos estructurados (Recipe Schema con ingredientes, tiempos de cocción, información nutricional y valoraciones) para capturar Rich Results en la SERP de Google.",
+    "Ecosistema de Retail Media (Bespoke Client Landings): Diseño UX/UI y maquetación ágil de micrositios y landing pages patrocinadas dentro del ecosistema de Vivir Mejor, cumpliendo tanto con los objetivos de conversión del área comercial de Walmart como con la identidad de las marcas anunciantes."
+  ],
+  "results": [
+    "Resiliencia Operativa en Temporadas Pico: Tras la re-arquitectura en GCP y las pruebas de estrés, la plataforma absorbió sin caídas las campañas subsecuentes de alta demanda (El Buen Fin, Hot Sale y cierres de temporada decembrina).",
+    "Autonomía Editorial y Agilidad Comercial: El sistema de agendamiento programado liberó al equipo técnico de guardias manuales cada semana, permitiendo que las campañas de Harvest, Regreso a Clases o Día de Reyes entraran al aire con precisión milimétrica.",
+    "Crecimiento Orgánico y Monetización B2B: El despliegue de Schema detallado en la vertical de recetas impulsó la visibilidad orgánica en buscadores, mientras que el flujo de landing pages para clientes específicos consolidó al blog como un activo rentable de Retail Media."
+  ],
+  "architectureNotes": [
+    "Administración, monitoreo, pruebas de desempeño (load testing) y escalamiento de infraestructura en Google Cloud Platform (GCP).",
+    "Diseño UX/UI, propuestas de rediseño evolutivo y sistemas de tematización (Seasonal UI Skins) para campañas nacionales.",
+    "Desarrollo de módulo de programación semiautomática de contenidos y feeds dinámicos en WordPress.",
+    "Implementación de arquitectura SEO Técnico, optimización de Core Web Vitals e inyección dinámica de Schema.org para recetas.",
+    "Diseño y desarrollo continuo de landing pages comerciales para socios estratégicos de Walmart."
+  ],
+  "businessValue": "Blindó la estabilidad en eventos masivos de retail y potenció el canal como activo rentable de Retail Media con dominancia orgánica SEO.",
+  "keyArtifacts": [
+    "GCP High-Availability Architecture Specs",
+    "Automated Editorial Theming Engine",
+    "Recipe Schema & Structured Data Schema"
+  ],
+  "gallery": [
+    {
+      "url": "/images/vm-desktop.jpg",
+      "caption": "Home editorial de Vivir Mejor: estructura de feeds, destacados y tematización de temporada"
+    },
+    {
+      "url": "/images/vm-home-long.jpg",
+      "caption": "Recorrido integral del layout desktop con módulos dinámicos y arquitectura de navegación"
+    },
+    {
+      "url": "/images/vm-mobile-long.jpg",
+      "caption": "Experiencia móvil responsive optimizada para lectura ágil y Core Web Vitals"
+    }
+  ]
+}

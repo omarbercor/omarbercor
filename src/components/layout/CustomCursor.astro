@@ -1,0 +1,63 @@
+---
+/**
+ * CustomCursor — Cursor editorial en modo negativo (Desktop pointer: fine)
+ */
+---
+
+<div class="cursor-dot" id="cursor-dot" aria-hidden="true">
+  <div class="cursor-dot-inner"></div>
+</div>
+
+<script>
+  import gsap from 'gsap';
+
+  const dot = document.getElementById('cursor-dot');
+  const hasFinePointer = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+
+  if (hasFinePointer && dot) {
+    document.body.classList.add('has-custom-cursor');
+    gsap.set(dot, { xPercent: -50, yPercent: -50 });
+
+    const setDotX = gsap.quickTo(dot, 'x', { duration: 0.08, ease: 'power2.out' });
+    const setDotY = gsap.quickTo(dot, 'y', { duration: 0.08, ease: 'power2.out' });
+
+    let cursorVisible = false;
+
+    window.addEventListener('mousemove', (e: MouseEvent) => {
+      if (!cursorVisible) {
+        document.body.classList.add('cursor-active');
+        cursorVisible = true;
+      }
+      setDotX(e.clientX);
+      setDotY(e.clientY);
+    });
+
+    const interactiveSelector =
+      'a, button, [role="button"], input, select, textarea, .work-card, [onclick], [data-magnetic]';
+
+    const isInteractive = (el: HTMLElement | null): boolean => {
+      if (!el || !el.closest) return false;
+      return Boolean(
+        el.closest(interactiveSelector) || window.getComputedStyle(el).cursor === 'pointer'
+      );
+    };
+
+    document.addEventListener('mouseover', (e: MouseEvent) => {
+      if (isInteractive(e.target as HTMLElement | null)) {
+        document.body.classList.add('cursor-hover');
+      }
+    });
+
+    document.addEventListener('mouseout', (e: MouseEvent) => {
+      if (!isInteractive(e.relatedTarget as HTMLElement | null)) {
+        document.body.classList.remove('cursor-hover');
+      }
+    });
+
+    document.addEventListener('mouseleave', () => {
+      document.body.classList.remove('cursor-active', 'cursor-hover');
+      cursorVisible = false;
+    });
+  }
+</script>
+

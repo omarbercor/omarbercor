@@ -1,0 +1,88 @@
+---
+/**
+ * SelectedWorkGrid — Bloque 06: Galería editorial de casos de estudio destacados
+ */
+import type { ProjectItem } from '@/lib/collections';
+import Chip from '@/components/ui/Chip.astro';
+import Button from '@/components/ui/Button.astro';
+import OptimizedMedia from '@/components/ui/OptimizedMedia.astro';
+
+interface Props {
+  projects: ProjectItem[];
+}
+
+const { projects } = Astro.props;
+---
+
+<section class="works-section" id="work" aria-labelledby="works-title">
+  <div class="works-container">
+    <header class="works-header">
+      <h2 class="works-title" id="works-title">PROYECTOS</h2>
+      <p class="works-subtitle">
+        Casos de estudio y soluciones técnicas en plataformas de misión crítica, ecosistemas de contenido masivo y experiencias interactivas desarrolladas para marcas globales. Ingeniería web orientada a estabilidad, rendimiento y resultados de negocio.
+      </p>
+    </header>
+
+    <div class="works-grid">
+      {projects.map((project, idx) => (
+        <a href={`/work/${project.slug}`} class="work-card">
+          <div class="work-visual-slot">
+            {project.heroImage ? (
+              <OptimizedMedia
+                src={project.heroImage}
+                alt={`Caso de estudio: ${project.title}`}
+                class="work-card-img"
+                widths={[480, 800, 1100]}
+                sizes="(max-width: 900px) 100vw, 50vw"
+              />
+            ) : (
+              <div
+                class="work-visual-pattern"
+                style={`background: radial-gradient(circle at ${idx % 2 === 0 ? '30% 30%' : '70% 70%'}, rgba(241, 93, 73, 0.08) 0%, rgba(18, 18, 20, 0.02) 100%);`}
+              />
+            )}
+            <div class="work-img-overlay"></div>
+            <div class="work-brand-mark">{project.client.split(' ')[0]}</div>
+          </div>
+
+          <div class="work-card-content">
+            <div>
+              <div class="work-meta-row">
+                <span class="work-client">{project.client}</span>
+              </div>
+
+              <h3 class="work-card-title">{project.title}</h3>
+              <p class="work-card-desc">{project.tagline}</p>
+            </div>
+
+            <div>
+              <div class="work-stack-wrap">
+                {project.stack.slice(0, 4).map((tech) => (
+                  <Chip label={tech} />
+                ))}
+              </div>
+
+              <div class="work-footer-link">
+                <span class="work-role-text">{project.role}</span>
+                <span class="work-explore-btn">Explorar caso ↗</span>
+              </div>
+            </div>
+          </div>
+        </a>
+      ))}
+    </div>
+
+    <div class="works-archive-banner">
+      <div class="archive-banner-left">
+        <h3>Explora el archivo completo de proyectos</h3>
+        <p>
+          Una recopilación de sistemas completos, plataformas web, desarrollo interactivo y piezas de rich media.
+        </p>
+      </div>
+      <Button href="/work" variant="primary">
+        Ver Archivo Completo
+      </Button>
+    </div>
+  </div>
+</section>
+

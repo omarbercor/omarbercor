@@ -1,0 +1,40 @@
+---
+/**
+ * Button Component Universal
+ * Componente unificado para botones y enlaces de acción en todo el sitio.
+ * Incluye textura de grano cremosa, tipografía y soporte sin icono.
+ */
+interface Props {
+  href?: string;
+  variant?: 'primary' | 'secondary' | 'outline';
+  type?: 'button' | 'submit' | 'reset';
+  class?: string;
+  target?: string;
+  rel?: string;
+  [key: string]: any;
+}
+
+const {
+  href,
+  variant = 'primary',
+  type = 'button',
+  class: className = '',
+  target,
+  rel,
+  ...rest
+} = Astro.props;
+
+const classes = `ui-btn ui-btn-${variant} ${className}`.trim();
+---
+
+{
+  href ? (
+    <a href={href} class={classes} target={target} rel={rel} {...rest}>
+      <slot />
+    </a>
+  ) : (
+    <button type={type} class={classes} {...rest}>
+      <slot />
+    </button>
+  )
+}

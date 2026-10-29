@@ -1,0 +1,58 @@
+# =============================================================================
+# SECRETS & ENVIRONMENT — NEVER COMMIT THESE (Zero-Trust)
+# =============================================================================
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx
+
+# =============================================================================
+# WORKSPACE TEMPORARY & STAGING ASSETS — NEVER UPLOAD TO GITHUB
+# (Screenshots, raw images, reference docs, temporary scripts & archives)
+# =============================================================================
+.assets_temporales/
+*.zip
+
+# =============================================================================
+# AI AGENT SYSTEM (.agents/)
+# — The .agents/ folder IS the project playbook and SHOULD be committed.
+# — Only ignore machine-specific overrides and local scratchpads.
+# =============================================================================
+.agents/*.local.md
+.agents/scratch/
+
+# =============================================================================
+# ASTRO & NODE.JS
+# =============================================================================
+node_modules/
+dist/
+.astro/
+.output/
+.cache/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.tsbuildinfo
+
+# =============================================================================
+# TESTING & COVERAGE
+# =============================================================================
+coverage/
+.nyc_output/
+playwright-report/
+test-results/
+
+# =============================================================================
+# OS & IDEs
+# =============================================================================
+.DS_Store
+Thumbs.db
+Desktop.ini
+.idea/
+*.swp
+*.swo
+*~

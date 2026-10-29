@@ -1,0 +1,119 @@
+/* ==========================================================================
+   BLOCK 01: HERO STAGE (MOBILE-FIRST)
+   ========================================================================== */
+.hero-stage {
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3.5rem 1.25rem 5rem 1.25rem;
+  user-select: none;
+  position: relative;
+  overflow: visible; /* Allows photo to travel down smoothly */
+  z-index: 20;
+  pointer-events: none;
+}
+
+.hero-stage [data-magnetic],
+.hero-stage a,
+.hero-stage button,
+.traveling-photo,
+.monument-wrap,
+.hero-statement,
+.scroll-hint {
+  pointer-events: auto;
+}
+
+@media (min-width: 769px) {
+  .hero-stage {
+    padding: 4rem 2rem 5rem 2rem;
+  }
+}
+
+/* Monumental Typographic Container */
+.monument-wrap {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  text-align: center;
+  width: 100%;
+  max-width: 1400px;
+  margin-bottom: 2rem;
+  overflow: visible;
+}
+
+@media (min-width: 769px) {
+  .monument-wrap {
+    gap: 4px;
+    margin-bottom: 2.25rem;
+  }
+}
+
+/* Anchor mount in Hero where the photo starts */
+.hero-photo-mount {
+  position: static;
+  width: min(80vw, 280px);
+  height: min(80vw, 280px);
+  margin-bottom: 1.25rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@media (min-width: 769px) {
+  .hero-photo-mount {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    margin: auto;
+    width: clamp(130px, 15vw, 200px);
+    height: clamp(130px, 15vw, 200px);
+    z-index: 25;
+  }
+}
+
+/* ==========================================================================
+   THE SINGLE TRAVELING PHOTO (GLIDES FROM HERO TO ABOUT ON SCROLL)
+   ========================================================================== */
+.traveling-photo {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: var(--radius-full); /* Circular en el Hero */
+  overflow: hidden;
+  box-shadow: 0 0 0 5px rgba(250, 247, 243, 0.95), 0 24px 50px rgba(18, 18, 20, 0.22);
+  background: #E8E3D8;
+  pointer-events: auto;
+  transform-origin: center center;
+  will-change: transform, border-radius, box-shadow, filter;
+  z-index: 40;
+}
+
+.traveling-photo-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: inherit;
+  overflow: hidden;
+  will-change: transform, opacity;
+}
+
+.traveling-photo-inner img,
+.traveling-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  border-radius: inherit;
+  display: block;
+  user-select: none;
+  -webkit-user-drag: none;
+  filter: grayscale(0%);
+  will-change: filter;
+}

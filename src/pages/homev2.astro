@@ -1,0 +1,194 @@
+---
+/**
+ * Page: /homev2
+ * Bloque de Usabilidad 02: Óptica de Lente (10% periférico), Unsplash, Grano 6% y Estela por Scroll.
+ * Gobernado globalmente por SITE_OPTICS_CONFIG.
+ */
+import '@/styles/fonts.css';
+import '@/styles/homev2.css';
+import FilmGrainOverlay from '@/components/ui/FilmGrainOverlay.astro';
+import { SITE_OPTICS_CONFIG } from '@/config/site-optics';
+
+const unsplashImages = [
+  '/images/unsplash/col1.jpg',
+  '/images/unsplash/col2.jpg',
+  '/images/unsplash/col3.jpg',
+];
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Laboratorio V2: Lente 10%, Estela Scroll & Grano 6% — Omar Bermúdez</title>
+    <link rel="preload" href="/fonts/gloock-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin />
+  </head>
+  <body>
+    <!-- Componente global reutilizable de Grano analógico -->
+    <FilmGrainOverlay />
+
+    <header class="v2-top-bar">
+      <span class="v2-badge">Laboratorio V2 • Bloques Modulares</span>
+      <a href="/" class="v2-back-link">← Volver al Home Principal</a>
+    </header>
+
+    <!-- BLOQUE 1: ESPACIO VACÍO HERO (90DVH) -->
+    <section class="v2-hero-empty" id="hero-block">
+      <div class="v2-hero-placeholder-card">
+        <span class="v2-hero-tag">Bloque 01: Hero Reservado (90dvh)</span>
+        <h1 class="v2-hero-title">Espacio para Hero</h1>
+        <p class="v2-hero-desc">
+          Área reservada para ensamblar la propuesta principal. Haz scroll hacia abajo para poner a prueba el 
+          <strong>Bloque 02: Óptica de Lente (10%) & Estela de Inercia por Scroll</strong>.
+        </p>
+      </div>
+      <div class="v2-scroll-hint">
+        <span>Scroll al Bloque 02</span>
+        <div class="v2-scroll-indicator"></div>
+      </div>
+    </section>
+
+    <!-- BLOQUE 2: GALERÍA 3 COLUMNAS FULL-WIDTH CON ABERRACIÓN Y ESTELA -->
+    <section class="v2-gallery-section" id="gallery-block">
+      <header class="v2-gallery-header">
+        <h2 class="v2-gallery-title">Óptica de Lente & Estela por Scroll</h2>
+        <p class="v2-gallery-subtitle">
+          Distorsión periférica al 10% combinada con un desfase cinético suave en la refracción al scrollear. 
+          Al detenerse el scroll, los canales RGB retornan orgánicamente a su posición mediante física LERP.
+        </p>
+      </header>
+
+      <!-- Lienzo WebGL con 3 columnas de Unsplash -->
+      <div class="v2-canvas-wrapper">
+        <canvas id="lens-gallery-canvas"></canvas>
+      </div>
+
+      <!-- Controles interactivos de prueba -->
+      <div class="v2-controls-bar">
+        <div class="v2-controls-group">
+          <div class="v2-control-item">
+            <label for="aberration-slider">Aberración:</label>
+            <input 
+              type="range" 
+              id="aberration-slider" 
+              min="0" 
+              max="1.5" 
+              step="0.05" 
+              value={SITE_OPTICS_CONFIG.lens.strength} 
+            />
+            <span id="aberration-val">{SITE_OPTICS_CONFIG.lens.strength.toFixed(2)}</span>
+          </div>
+          <div class="v2-control-item">
+            <label for="trail-slider">Distancia Estela:</label>
+            <input 
+              type="range" 
+              id="trail-slider" 
+              min="0" 
+              max="1.0" 
+              step="0.05" 
+              value={SITE_OPTICS_CONFIG.lens.trail.distance} 
+            />
+            <span id="trail-val">{SITE_OPTICS_CONFIG.lens.trail.distance.toFixed(2)}</span>
+          </div>
+          <div class="v2-control-item">
+            <label for="grain-slider">Grano 35mm:</label>
+            <input 
+              type="range" 
+              id="grain-slider" 
+              min="0" 
+              max="0.30" 
+              step="0.01" 
+              value={SITE_OPTICS_CONFIG.grain.opacity} 
+            />
+            <span id="grain-val">{Math.round(SITE_OPTICS_CONFIG.grain.opacity * 100)}%</span>
+          </div>
+        </div>
+        <button id="toggle-lens-btn" class="v2-toggle-btn" type="button">
+          Efecto Lente: ON
+        </button>
+      </div>
+    </section>
+
+    <script define:vars={{ images: unsplashImages }}>
+      window.__UNSPLASH_GALLERY__ = images;
+    </script>
+
+    <script>
+      import { initFilmGrain } from '@/motion/film-grain';
+      import { initLensAberrationGallery } from '@/motion/lens-aberration';
+      import { SITE_OPTICS_CONFIG } from '@/config/site-optics';
+
+      let grainControls: { destroy: () => void; setOpacity: (v: number) => void } | null = null;
+      let lensGallery: { 
+        destroy: () => void; 
+        setStrength: (v: number) => void; 
+        setGrainStrength: (v: number) => void; 
+        setEdgeWidth: (v: number) => void;
+        setTrailDistance: (v: number) => void;
+        setTrailSpeed: (v: number) => void;
+      } | null = null;
+
+      function setup() {
+        grainControls = initFilmGrain('film-grain-canvas');
+        const images = (window as any).__UNSPLASH_GALLERY__ || [];
+        lensGallery = initLensAberrationGallery('lens-gallery-canvas', images);
+
+        const abSlider = document.getElementById('aberration-slider') as HTMLInputElement | null;
+        const abVal = document.getElementById('aberration-val');
+        const trSlider = document.getElementById('trail-slider') as HTMLInputElement | null;
+        const trVal = document.getElementById('trail-val');
+        const grSlider = document.getElementById('grain-slider') as HTMLInputElement | null;
+        const grVal = document.getElementById('grain-val');
+        const toggleBtn = document.getElementById('toggle-lens-btn');
+
+        let isEffectOn = true;
+        let currentStrength = SITE_OPTICS_CONFIG.lens.strength;
+
+        if (abSlider && abVal) {
+          abSlider.addEventListener('input', (e) => {
+            currentStrength = parseFloat((e.target as HTMLInputElement).value);
+            abVal.textContent = currentStrength.toFixed(2);
+            if (isEffectOn && lensGallery) lensGallery.setStrength(currentStrength);
+          });
+        }
+
+        if (trSlider && trVal) {
+          trSlider.addEventListener('input', (e) => {
+            const v = parseFloat((e.target as HTMLInputElement).value);
+            trVal.textContent = v.toFixed(2);
+            if (lensGallery) lensGallery.setTrailDistance(v);
+          });
+        }
+
+        if (grSlider && grVal) {
+          grSlider.addEventListener('input', (e) => {
+            const v = parseFloat((e.target as HTMLInputElement).value);
+            grVal.textContent = Math.round(v * 100) + '%';
+            if (grainControls) grainControls.setOpacity(v);
+            if (lensGallery) lensGallery.setGrainStrength(v);
+          });
+        }
+
+        if (toggleBtn) {
+          toggleBtn.addEventListener('click', () => {
+            isEffectOn = !isEffectOn;
+            toggleBtn.textContent = isEffectOn ? 'Efecto Lente: ON' : 'Efecto Lente: OFF';
+            if (lensGallery) lensGallery.setStrength(isEffectOn ? currentStrength : 0.0);
+          });
+        }
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setup);
+      } else {
+        setup();
+      }
+
+      window.addEventListener('beforeunload', () => {
+        grainControls?.destroy();
+        lensGallery?.destroy();
+      });
+    </script>
+  </body>
+</html>

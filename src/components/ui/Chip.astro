@@ -1,0 +1,22 @@
+---
+/**
+ * Chip / Badge Component Universal
+ * Un único componente para renderizar tecnologías, herramientas y metadatos
+ * en todo el sitio (Home, Proyectos, Servicios, Lab y Writing).
+ */
+interface Props {
+  label?: string;
+  variant?: 'default' | 'accent';
+  class?: string;
+}
+
+const { 
+  label, 
+  variant = 'default',
+  class: className = '' 
+} = Astro.props;
+---
+
+<span class={`ui-chip ${variant === 'accent' ? 'accent' : ''} ${className}`}>
+  {label ? label : <slot />}
+</span>

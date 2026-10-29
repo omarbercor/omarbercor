@@ -1,0 +1,82 @@
+---
+/**
+ * ExperienceStage — Bloque 07: Acordeón de trayectoria profesional y carrusel continuo de marcas
+ */
+import { experienceItems, brandLogos } from '@/data/experience';
+import Chip from '@/components/ui/Chip.astro';
+---
+
+<section class="experience-section" id="experience" aria-label="Trayectoria & Experiencia">
+  <div class="experience-container">
+    <header class="experience-header">
+      <h2 class="experience-title">TRAYECTORIA & EXPERIENCIA</h2>
+      <p class="experience-subtitle">
+        Más de una década y media liderando la intersección entre dirección de arte visual, ingeniería front-end, experimentación web y plataformas de alta demanda para marcas de escala global.
+      </p>
+    </header>
+
+    <div class="experience-list">
+      {experienceItems.map((exp) => (
+        <article class={`experience-row ${exp.defaultOpen ? 'is-open' : ''}`}>
+          <button
+            class="exp-row-trigger"
+            type="button"
+            aria-expanded={exp.defaultOpen ? 'true' : 'false'}
+          >
+            <div class="exp-period">{exp.period}</div>
+            <div class="exp-main">
+              <h3 class="exp-role">{exp.role}</h3>
+              <span class="exp-company">{exp.company}</span>
+            </div>
+            <div class="exp-specialty">
+              <span class="exp-specialty-title">{exp.specialty}</span>
+            </div>
+            <div class="exp-toggle-icon">
+              <svg
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <polyline points="6 9 12 15 18 9" />
+              </svg>
+            </div>
+          </button>
+          <div class="exp-drawer">
+            <div class="exp-drawer-inner">
+              <div class="exp-detail-body">
+                <p class="exp-desc">{exp.description}</p>
+                <div class="exp-tags">
+                  {exp.tags.map((tag) => (
+                    <Chip label={tag} />
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <div class="experience-brands-wrap">
+      <h3 class="experience-brands-title">Marcas y ecosistemas en los que he colaborado</h3>
+      <div class="brands-carousel-container" aria-label="Carrusel de marcas colaboradoras">
+        <div class="brands-carousel-track">
+          {brandLogos.map((brand) => (
+            <div class="brand-logo-item" title={brand.name}>
+              <img src={brand.src} alt={brand.name} width="160" height="60" loading="lazy" decoding="async" />
+            </div>
+          ))}
+          {brandLogos.map((brand) => (
+            <div class="brand-logo-item" aria-hidden="true" title={brand.name}>
+              <img src={brand.src} alt="" width="160" height="60" loading="lazy" decoding="async" />
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+

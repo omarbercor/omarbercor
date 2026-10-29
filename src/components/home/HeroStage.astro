@@ -1,0 +1,43 @@
+---
+/**
+ * HeroStage — Bloque 01: Escenario tipográfico monumental y montaje inicial del retrato viajero
+ */
+import OptimizedMedia from '@/components/ui/OptimizedMedia.astro';
+---
+
+<section class="hero-stage" id="hero">
+  <div class="monument-wrap">
+    <div class="hero-photo-mount" id="hero-photo-mount">
+      <div class="traveling-photo" id="traveling-photo">
+        <div class="traveling-photo-inner" id="traveling-photo-inner">
+          <OptimizedMedia
+            src="/images/omar-profile.jpg"
+            alt="Omar Bermúdez"
+            id="traveling-photo-img"
+            widths={[280, 420, 760]}
+            sizes="(max-width: 768px) 280px, 380px"
+            priority={true}
+          />
+        </div>
+      </div>
+    </div>
+
+    <div style="display: contents;">
+      <span class="name-line name-line-1" id="name-line-1">OMAR</span>
+      <span class="name-line name-line-2" id="name-line-2">BERMÚDEZ</span>
+    </div>
+  </div>
+
+  <h1 class="sr-only">Front-End Development Lead & Creative Technologist</h1>
+
+  <p class="hero-statement" id="hero-statement">
+    <strong>Front-End Development Lead & Creative Technologist</strong><br />
+    Más de 15 años conectando dirección de arte digital con arquitectura web de alto rendimiento, portales corporativos de misión crítica y ecosistemas automatizados para marcas de escala global.
+  </p>
+
+  <div class="scroll-hint">
+    <span>SCROLL</span>
+    <div class="scroll-indicator-line"></div>
+  </div>
+</section>
+

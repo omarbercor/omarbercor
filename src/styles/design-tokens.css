@@ -1,0 +1,90 @@
+/**
+ * ============================================================================
+ * DESIGN TOKENS — OMAR BERMÚDEZ DESIGN SYSTEM
+ * Single Source of Truth para tipografías, escala de textos, espaciados,
+ * radios y componentes atómicos de todo el ecosistema.
+ * Basado en las directrices de .agents/.ai (Frontend Engineer & Project Core).
+ * ============================================================================
+ */
+
+:root {
+  /* --------------------------------------------------------------------------
+     1. PALETA CROMÁTICA OFICIAL (MUSEUM EDITORIAL)
+     -------------------------------------------------------------------------- */
+  --bg-museum: #FAF7F3;          /* Lienzo editorial cálido y sereno */
+  --bg-surface: #FFFFFF;         /* Superficie de tarjetas y módulos */
+  --bg-surface-translucent: rgba(255, 255, 255, 0.72);
+  --bg-chip: rgba(18, 18, 20, 0.04); /* Fondo neutral estándar para chips */
+
+  --text-primary: #121214;       /* Tinta negra casi pura, alto contraste */
+  --text-muted: #5C5C66;         /* Gris templado para párrafos secundarios */
+  --text-subtle: #8E8E96;        /* Metadatos, fechas, roles sutiles */
+  
+  --border-subtle: rgba(18, 18, 20, 0.08);
+  --border-line: rgba(18, 18, 20, 0.12);
+  --border-strong: rgba(18, 18, 20, 0.18);
+
+  /* Color de Realce / Acento */
+  --accent: #F15D49;             /* Bermellón cálido editorial */
+  --accent-hover: #E04B37;
+  --accent-glow: rgba(241, 93, 73, 0.12);
+
+  /* --------------------------------------------------------------------------
+     2. FAMILIAS TIPOGRÁFICAS (EXCLUSIVAMENTE DOS)
+     - Titulares / Display: Inter Tight
+     - Textos normales / Body / UI: Inter
+     -------------------------------------------------------------------------- */
+  --font-display: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-body); /* Normalizado a font-body para no usar fuentes adicionales */
+  --font-sans: var(--font-body);
+
+  /* --------------------------------------------------------------------------
+     3. ESCALA DE TEXTOS Y PÁRRAFOS ESTANDARIZADA
+     -------------------------------------------------------------------------- */
+  /* Titulares Monumentales de Sección (PROYECTOS, TRAYECTORIA, PENSAMIENTOS, HABLEMOS) */
+  --text-monument: clamp(3.2rem, 10vw, 8.5rem);
+  --leading-monument: 0.88;
+  --tracking-monument: -0.045em;
+
+  /* Encabezados de Sección Medios / Títulos de Módulo */
+  --text-h2: clamp(1.8rem, 3.2vw, 2.6rem);
+  --text-h3: clamp(1.25rem, 1.8vw, 1.55rem);
+  --text-h4: clamp(1.15rem, 1.5vw, 1.35rem);
+
+  /* Párrafos: Contrato Estricto Universal */
+  --text-lead: clamp(1.1rem, 2vw, 1.45rem); /* Subtítulos e introducciones */
+  --leading-lead: 1.45;
+
+  --text-base: 1rem;                       /* Párrafos y descripciones estándar */
+  --leading-base: 1.6;
+
+  --text-small: 0.875rem;                  /* Metadatos, roles, categorías */
+  --leading-small: 1.4;
+
+  --text-micro: 0.78rem;                   /* Chips, badges, tags técnicos */
+  --leading-micro: 1.2;
+
+  /* --------------------------------------------------------------------------
+     4. BORDER-RADIUS ESTRICTO (SOLO 4 VALORES EN TODO EL SITIO)
+     -------------------------------------------------------------------------- */
+  --radius-chip: 6px;       /* Único radio para chips y badges técnicos */
+  --radius-btn: 8px;        /* Único radio para botones interactivos */
+  --radius-card: 24px;      /* Único radio para tarjetas, foto morfeable y contenedores */
+  --radius-pill: 9999px;    /* Elementos completamente redondeados (docks, avatars) */
+
+  /* --------------------------------------------------------------------------
+     5. SOMBRAS Y ELEVACIÓN EDITORIAL (APAGADAS: NINGUNA CAJA CON SOMBRA)
+     -------------------------------------------------------------------------- */
+  --shadow-subtle: none;
+  --shadow-card: none;
+  --shadow-float: none;
+
+  /* --------------------------------------------------------------------------
+     6. TEXTURA DE GRANO CREMOSO UNIVERSAL (ESTANDARIZADA)
+     Usa /assets/grain_transparent.png con fondo transparente.
+     No requiere multiplicadores ni filtros que alteren el tono base #F15D49.
+     -------------------------------------------------------------------------- */
+  --texture-grain-img: url('/assets/grain_transparent.png');
+  --grain-size: 320px 320px; /* Tamaño consistente y calibrado */
+}

@@ -1,0 +1,180 @@
+/* ==========================================================================
+   BLOCK 07: TRAYECTORIA / TRACK RECORD (EDITORIAL DOSSIER ROWS)
+   ========================================================================== */
+.experience-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-museum);
+  padding: 8rem 1.5rem 10rem 1.5rem;
+}
+
+@media (min-width: 769px) {
+  .experience-section {
+    padding: 11rem 3rem 13rem 3rem;
+  }
+}
+
+.experience-container {
+  max-width: 1380px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.experience-header {
+  margin-bottom: 5rem;
+}
+
+@media (min-width: 769px) {
+  .experience-header {
+    margin-bottom: 7rem;
+  }
+}
+
+.experience-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.2rem, 10vw, 8.5rem);
+  font-weight: 900;
+  line-height: 0.88;
+  letter-spacing: -0.045em;
+  background-color: var(--accent);
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent);
+  margin: 0 0 1.5rem 0;
+  text-transform: uppercase;
+}
+
+.experience-subtitle {
+  font-family: var(--font-body);
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  font-weight: 400;
+  line-height: 1.4;
+  color: var(--text-muted);
+  max-width: 720px;
+  margin: 0;
+}
+
+/* Lista / Tabla editorial de roles */
+.experience-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.experience-row {
+  background: #FFFFFF;
+  border-radius: var(--radius-lg);
+  border: none;
+  box-shadow: none;
+  transition: background 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden;
+}
+
+.experience-row:hover {
+  border: none;
+}
+
+.experience-row.is-open {
+  border: none;
+  box-shadow: 0 14px 34px -12px rgba(18, 18, 20, 0.06);
+}
+
+/* Cabecera interactiva clickeable para desplegar detalles */
+.exp-row-trigger {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+  padding: 2.25rem 2rem;
+  background: transparent;
+  border: none;
+  text-align: left;
+  cursor: pointer;
+  align-items: center;
+  font-family: inherit;
+  color: inherit;
+}
+
+@media (min-width: 900px) {
+  .exp-row-trigger {
+    grid-template-columns: 160px 1.4fr 1.6fr 40px;
+    gap: 2.25rem;
+    padding: 2.5rem 3rem;
+  }
+}
+
+/* 1. Período / Año */
+.exp-period {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent); /* #F15D49 */
+  letter-spacing: -0.02em;
+}
+
+/* 2. Puesto y Empresa */
+.exp-main {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.exp-role {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.7vw, 1.45rem);
+  font-weight: 800;
+  color: var(--text-primary);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  margin: 0;
+}
+
+.exp-company {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* 3. Columna Derecha: Subtítulo / Especialidad */
+.exp-specialty {
+  display: flex;
+  align-items: center;
+}
+
+.exp-specialty-title {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.35;
+  margin: 0;
+}
+
+/* Icono Toggle (Flecha / Chevron animado) */
+.exp-toggle-icon {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  color: var(--text-muted);
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.2s ease;
+}
+
+.exp-toggle-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.experience-row:hover .exp-toggle-icon {
+  color: var(--accent);
+}
+
+.experience-row.is-open .exp-toggle-icon {
+  transform: rotate(180deg);
+  color: var(--accent);
+}

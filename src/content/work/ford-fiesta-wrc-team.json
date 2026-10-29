@@ -1,0 +1,75 @@
+{
+  "order": 2,
+  "title": "Ford Fiesta WRC Team — High-Impact Motorsport Hub & Rapid Rollout",
+  "client": "Ford Fiesta WRC Team",
+  "role": "Art Director, Lead UX/UI Designer & Front-End Developer",
+  "period": "2011",
+  "category": "High-Impact Brand Platforms & Visual Performance Engineering",
+  "tagline": "Dirección de arte, arquitectura UX/UI y desarrollo integral en tiempo récord para la plataforma oficial del equipo Ford Fiesta en el World Rally Championship.",
+  "impactHighlight": "Plataforma oficial full-bleed con matriz de texturizado óptico y rollout exprés aprobado por Ford y FIA WRC",
+  "heroImage": "/images/wrc-ford.jpg",
+  "metrics": [
+    {
+      "label": "Time-to-Market Execution (Ciclo completo de conceptualización a producción en tiempo récord)",
+      "value": "Express"
+    },
+    {
+      "label": "Dual QA — Ford & FIA WRC Compliance (Aprobación directa bajo normativas globales de marca y patrocinios)",
+      "value": "Dual QA"
+    },
+    {
+      "label": "Zero-Pixelation Matrix Engine (Fondos inmersivos de carga rápida con enmascaramiento óptico)",
+      "value": "Full-bleed"
+    }
+  ],
+  "stack": [
+    "Art Direction",
+    "UX/UI Design",
+    "Front-End Development",
+    "Optical Texture Overlay",
+    "Full-Viewport Scaling",
+    "Rapid Prototyping & Delivery"
+  ],
+  "overview": "Dirección de arte, diseño de interfaz y desarrollo front-end end-to-end para la plataforma digital del equipo oficial Ford Fiesta en el Campeonato Mundial de Rally (WRC). La plataforma resolvió el despliegue de fotografía de acción full-bleed en alta definición mediante una matriz de texturizado óptico que permitió una compresión extrema de assets sin degradación perceptible, completando el ciclo completo en tiempo récord y con validación ejecutiva simultánea de Ford y FIA.",
+  "problem": "El lanzamiento de la plataforma digital para el equipo Ford Fiesta WRC enfrentaba una ventana de tiempo crítica vinculada al calendario oficial del campeonato mundial de rally. El proyecto exigía una experiencia visualmente agresiva e inmersiva —dominada por fotografía de acción a pantalla completa— que debía cumplir simultáneamente con los estrictos lineamientos de identidad corporativa de Ford y las regulaciones comerciales de la WRC. A nivel técnico, el reto central consistía en escalar imágenes de gran formato en monitores de alta resolución sin penalizar los tiempos de carga ni exponer artefactos de pixelación por compresión.",
+  "solution": "Ejecución integral (end-to-end) abarcando desde la Dirección de Arte y arquitectura UX hasta la maquetación y desarrollo del sitio. Para acelerar las aprobaciones interinstitucionales, se diseñó un sistema visual de alto contraste que integraba orgánicamente las jerarquías de ambos organismos. En el frente técnico, se implementó una arquitectura de fondos adaptativos combinada con una capa de texturizado óptico (overlay matrix), logrando una estética nítida a pantalla completa con una fracción del peso en bytes de una imagen de alta definición sin comprimir.",
+  "challenges": [
+    "Mitigación Óptica de Pixelado mediante Texturas Overlay: Implementación de capas superpuestas con micro-patrones repetitivos (tramas halftone/scanline en CSS) sobre fotografías de fondo dinámicas. Esta técnica permitió aplicar una compresión agresiva a los assets fotográficos para lograr cargas casi instantáneas, mientras la textura disimulaba los artefactos de interpolación al escalar el viewport en pantallas de gran formato.",
+    "Escalado Fluido de Fondos de Gran Formato: Ajuste dinámico de backgrounds inmersivos para mantener el encuadre dramático de los vehículos en acción a través de distintas relaciones de aspecto sin deformación ni cortes en elementos clave de patrocinio.",
+    "Pipeline de Diseño a Código sin Fricción: Al centralizar la Dirección de Arte, el diseño UI y la maquetación HTML/CSS/JS en un mismo flujo de trabajo, se eliminó la pérdida de fidelidad en el handoff y se comprimieron semanas de iteración en un despliegue exprés libre de deuda visual."
+  ],
+  "results": [
+    "Lanzamiento en Tiempo Récord (Zero-Delay Rollout): Cumplimiento estricto del deadline inamovible del campeonato, saliendo a producción a tiempo para capitalizar el pico mediático de la temporada de rally.",
+    "Validación Ejecutiva Simultánea (Ford + WRC): Aprobación del producto final por parte de los equipos globales de supervisión de Ford y del World Rally Championship sin rondas de rechazo técnico o visual.",
+    "Equilibrio entre Impacto Visual y Rendimiento: Entrega de una experiencia full-screen de estética motorsport con tiempos de respuesta ligeros, evitando la tasa de rebote habitual en sitios promocionales pesados de la época."
+  ],
+  "architectureNotes": [
+    "Dirección de Arte, conceptualización visual y diseño de interfaz (UI/UX) alineado a manuales globales de Ford y WRC.",
+    "Sistema de renderizado de fondos adaptativos con técnica de enmascaramiento de compresión por overlay de texturas.",
+    "Maquetación pixel-perfect (HTML/CSS/JS), optimización extrema de recursos gráficos y despliegue en producción."
+  ],
+  "businessValue": "Despliegue a tiempo para la fecha oficial del WRC con doble homologación corporativa y entrega visual de alto impacto.",
+  "keyArtifacts": [
+    "Optical Texture Masking Architecture",
+    "Full-Viewport Asset Scaling Pipeline",
+    "Ford & FIA Dual-Brand Design System"
+  ],
+  "gallery": [
+    {
+      "url": "/images/wrc-01.jpg",
+      "caption": "Hero full-bleed con composición motorsport y matriz óptica"
+    },
+    {
+      "url": "/images/wrc-02.jpg",
+      "caption": "Navegación de secciones del equipo con encuadre dinámico"
+    },
+    {
+      "url": "/images/wrc-03.jpg",
+      "caption": "Módulo de especificaciones técnicas del vehículo y pilotos"
+    },
+    {
+      "url": "/images/wrc-05.jpg",
+      "caption": "Exhibición de galería y cobertura de etapas del rally"
+    }
+  ]
+}

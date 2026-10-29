@@ -1,0 +1,115 @@
+/* ==========================================================================
+   BLOCK 04: TECHNICAL SKILLS STAGE (PINNED MONUMENT TITLE + OVERLAPPING TAPE)
+   ========================================================================== */
+.skills-stage {
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  right: 50%;
+  margin-left: -50vw;
+  margin-right: -50vw;
+  min-height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--bg-museum);
+}
+
+/* Título Monumental "SKILLS": En mobile VERTICAL (apilado letra por letra), en Desktop HORIZONTAL */
+.skills-monument-wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skills-monument-title {
+  display: flex;
+  flex-direction: column; /* Vertical en mobile */
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-size: clamp(5.2rem, 22vw, 8.5rem); /* Mucho más grande en mobile */
+  font-weight: 900;
+  line-height: 0.82;
+  letter-spacing: -0.04em;
+  background-color: var(--accent);
+  background-image: var(--texture-grain-img);
+  background-size: var(--grain-size);
+  background-repeat: repeat;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: var(--accent);
+  margin: 0;
+  user-select: none;
+}
+
+.skills-monument-title .letter {
+  display: inline-block;
+  line-height: 0.82;
+}
+
+@media (min-width: 769px) {
+  .skills-monument-title {
+    flex-direction: row; /* Horizontal en desktop */
+    font-size: clamp(8rem, 26vw, 30rem);
+    line-height: 0.78;
+    letter-spacing: -0.055em;
+  }
+}
+
+/* Pleca simétrica con inclinación: 120vw con -10vw de margen y giro suave de -2.5° */
+.caution-tape-strip {
+  position: relative;
+  width: 120vw;
+  margin-left: -10vw;
+  transform-origin: 50% 50%;
+  transform: rotate(-2.5deg);
+  background-color: var(--text-primary); /* Negra (#121214) */
+  background-image: 
+    linear-gradient(rgba(18, 18, 20, 0.93), rgba(18, 18, 20, 0.93)),
+    var(--texture-grain-img);
+  background-size: auto, var(--grain-size);
+  background-repeat: repeat;
+  padding: 3.2rem 0;
+  box-shadow: 
+    0 24px 50px -10px rgba(0, 0, 0, 0.22),
+    0 8px 20px rgba(0, 0, 0, 0.12);
+  user-select: none;
+  overflow: hidden;
+  z-index: 10;
+  border: none;
+}
+
+@media (min-width: 769px) {
+  .caution-tape-strip {
+    width: 120vw;
+    margin-left: -10vw;
+    transform: rotate(-2deg);
+    padding: 4.2rem 0;
+  }
+}
+
+.tape-track {
+  display: flex;
+  width: max-content;
+  padding-left: 20vw;  /* Da un margen holgado y elegante para que el primer item no aparezca pegado */
+  padding-right: 20vw;
+  will-change: transform;
+}
+
+.tape-group {
+  display: flex;
+  align-items: center;
+  gap: clamp(2.5rem, 5vw, 4.5rem); /* Espaciado uniforme entre items */
+  flex-shrink: 0;
+}

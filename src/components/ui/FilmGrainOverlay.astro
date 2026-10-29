@@ -1,0 +1,33 @@
+---
+/**
+ * FilmGrainOverlay.astro
+ * Componente reutilizable y universal para proyectar grano analógico 35mm.
+ * Puede montarse en cualquier Layout o página sin duplicar lógica ni estilos.
+ */
+interface Props {
+  id?: string;
+  opacity?: number;
+  class?: string;
+}
+
+const {
+  id = 'film-grain-canvas',
+  opacity,
+  class: className = '',
+} = Astro.props;
+---
+
+<canvas id={id} class={`film-grain-overlay ${className}`} aria-hidden="true" data-initial-opacity={opacity}></canvas>
+
+<style>
+  .film-grain-overlay {
+    position: fixed;
+    inset: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    z-index: 900;
+    mix-blend-mode: overlay;
+  }
+</style>
+

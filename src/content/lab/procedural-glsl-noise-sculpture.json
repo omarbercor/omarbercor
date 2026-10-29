@@ -1,0 +1,20 @@
+{
+  "order": 5,
+  "title": "Procedural GLSL Morphing Sculpture",
+  "tagline": "Simplex 4D noise vertex displacement reacting dynamically to pointer velocity.",
+  "category": "3d-webgl",
+  "categoryLabel": "3D & WebGL",
+  "status": "Live Interactive",
+  "techStack": [
+    "WebGL Fragment Shaders",
+    "Three.js",
+    "GLSL",
+    "Custom Post-Processing"
+  ],
+  "description": "An experimental organic 3D shape displaced in vertex shaders using mathematical 4D noise fields. The sculpture shifts between liquid chrome, obsidian, and matte clay based on user proximity and audio frequencies.",
+  "interactiveDetails": "Mouse inertia velocity mapping to noise frequency, chromatic aberration lens toggle, and screenshot export.",
+  "highlightMetricOrFeature": "Pure GPU-computed displacement: 0% CPU thread load",
+  "githubUrl": "https://github.com/omarbercor",
+  "liveDemoUrl": "#demo-glsl",
+  "date": "2023"
+}

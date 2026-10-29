@@ -1,0 +1,81 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getSortedProjects } from '@/lib/collections';
+import Chip from '@/components/ui/Chip.astro';
+import OptimizedMedia from '@/components/ui/OptimizedMedia.astro';
+import CaseStudyDossier from '@/components/work/CaseStudyDossier.astro';
+
+export async function getStaticPaths() {
+  const projects = await getSortedProjects();
+  return projects.map((project, idx) => ({
+    params: { slug: project.slug },
+    props: {
+      project,
+      nextProject: projects[(idx + 1) % projects.length],
+    },
+  }));
+}
+
+const { project, nextProject } = Astro.props;
+---
+
+<BaseLayout
+  title={`${project.client}: ${project.title} — Caso de Estudio — Omar Bermúdez`}
+  description={project.tagline}
+  ogImage={project.heroImage || '/images/omar-profile.jpg'}
+  ogType="article"
+  bodyClass="writing-archive-page"
+  showTopbar={true}
+  backHref="/work"
+  backLabel="← Todos los proyectos"
+>
+  <main>
+    <section class="article-hero-wrap" aria-labelledby="case-study-title">
+      <div class="article-hero-card">
+        <div class="article-hero-media">
+          <OptimizedMedia
+            src={project.heroImage || '/images/omar-profile.jpg'}
+            alt={project.title}
+            widths={[640, 1200, 1600]}
+            sizes="(max-width: 1440px) 100vw, 1380px"
+            priority={true}
+          />
+        </div>
+        <div class="article-hero-overlay"></div>
+        <div class="article-hero-grain"></div>
+
+        <div class="article-hero-content">
+          <h1 class="article-hero-title" id="case-study-title">
+            {project.title}
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <div class="article-lead-wrap">
+      <div class="article-lead-meta">
+        <Chip label={project.client} />
+        <span class="article-meta-date">{project.period}</span>
+        <span class="article-meta-time">{project.category}</span>
+      </div>
+
+      <p class="article-lead-excerpt">{project.tagline}</p>
+    </div>
+
+    <CaseStudyDossier project={project} />
+
+    <section class="article-pagination-wrap" aria-label="Navegación de proyectos">
+      <a href={`/work/${nextProject.slug}`} class="next-article-row" data-magnetic>
+        <div class="next-article-meta">
+          <span class="next-article-label">SIGUIENTE CASO</span>
+          <span class="next-article-category">{nextProject.client}</span>
+        </div>
+
+        <div class="next-article-body">
+          <h3 class="next-article-title">{nextProject.title}</h3>
+          <p class="next-article-excerpt">{nextProject.tagline}</p>
+        </div>
+      </a>
+    </section>
+  </main>
+</BaseLayout>

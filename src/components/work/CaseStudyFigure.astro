@@ -1,0 +1,27 @@
+---
+/**
+ * CaseStudyFigure — Figura editorial intercalada para galerías de casos de estudio
+ */
+import OptimizedMedia from '@/components/ui/OptimizedMedia.astro';
+
+interface Props {
+  item?: { url: string; caption?: string };
+  fallbackAlt: string;
+}
+
+const { item, fallbackAlt } = Astro.props;
+---
+
+{item && (
+  <figure class="case-study-interleaved-figure">
+    <div class="case-study-interleaved-media">
+      <OptimizedMedia
+        src={item.url}
+        alt={item.caption || fallbackAlt}
+        widths={[640, 1080, 1600]}
+        sizes="(max-width: 960px) 100vw, 900px"
+      />
+    </div>
+  </figure>
+)}
+

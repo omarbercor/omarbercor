@@ -1,0 +1,176 @@
+---
+/**
+ * CaseStudyDossier — Cuerpo estructurado de métricas, reto, solución y resultados de un proyecto
+ */
+import type { ProjectItem } from '@/lib/collections';
+import Chip from '@/components/ui/Chip.astro';
+import CaseStudyFigure from '@/components/work/CaseStudyFigure.astro';
+
+interface Props {
+  project: ProjectItem;
+}
+
+const { project } = Astro.props;
+
+const metaItems = [
+  { label: 'Cliente / Cuenta', value: project.client },
+  { label: 'Rol Desempeñado', value: project.role },
+  { label: 'Periodo de Ejecución', value: project.period },
+  { label: 'Área de Especialidad', value: project.category },
+];
+---
+
+<article class="case-study-container">
+  <div class="case-study-meta-grid">
+    {metaItems.map((item) => (
+      <div class="case-study-meta-item">
+        <span class="case-study-meta-label">{item.label}</span>
+        <span class="case-study-meta-val">{item.value}</span>
+      </div>
+    ))}
+  </div>
+
+  {project.heroImage && (
+    <div class="case-study-main-photo-wrap">
+      <img
+        src={project.heroImage}
+        alt={`Exhibición de proyecto ${project.client} - ${project.title}`}
+        class="case-study-main-photo"
+        loading="lazy"
+        decoding="async"
+      />
+    </div>
+  )}
+
+  {(project.liveUrl || project.repoUrl) && (
+    <div class="case-study-links-bar">
+      {project.liveUrl && (
+        <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="case-study-ext-link" data-magnetic>
+          <span>Visitar Sitio Oficial / Plataforma ↗</span>
+        </a>
+      )}
+      {project.repoUrl && (
+        <a href={project.repoUrl} target="_blank" rel="noopener noreferrer" class="case-study-ext-link" data-magnetic>
+          <span>Ver Repositorio de Código ↗</span>
+        </a>
+      )}
+    </div>
+  )}
+
+  <section class="case-study-section">
+    <div class="case-study-section-header">
+      <h2 class="case-study-section-title">Métricas de Alto Impacto</h2>
+    </div>
+    <div class="case-study-metrics-grid">
+      {project.metrics.slice(0, 3).map((m) => (
+        <div class="case-study-metric-card">
+          <span class="case-study-metric-val">{m.value}</span>
+          <span class="case-study-metric-lbl">{m.label}</span>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="case-study-section">
+    <div class="case-study-section-header">
+      <h2 class="case-study-section-title">El Problema</h2>
+    </div>
+    <div class="case-study-box case-study-box-problem">
+      <p class="case-study-text">{project.problem}</p>
+    </div>
+  </section>
+
+  {project.youtubeUrl ? (
+    <div class="case-study-video-wrap">
+      <iframe
+        src={project.youtubeUrl}
+        title={`Demostración interactiva de ${project.title}`}
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen
+        loading="lazy"
+      ></iframe>
+    </div>
+  ) : (
+    <CaseStudyFigure item={project.gallery?.[0]} fallbackAlt={project.title} />
+  )}
+
+  <section class="case-study-section">
+    <div class="case-study-section-header">
+      <h2 class="case-study-section-title">La Solución</h2>
+    </div>
+    <div class="case-study-box case-study-box-solution">
+      <p class="case-study-text">{project.solution}</p>
+    </div>
+  </section>
+
+  <CaseStudyFigure item={project.gallery?.[1]} fallbackAlt={project.title} />
+
+  {project.challenges && project.challenges.length > 0 && (
+    <section class="case-study-section">
+      <div class="case-study-section-header">
+        <h2 class="case-study-section-title">Retos Técnicos Resueltos</h2>
+      </div>
+      <div class="case-study-box">
+        <ul class="case-study-bullet-list">
+          {project.challenges.map((challenge) => (
+            <li class="case-study-bullet-item">
+              <span class="deliverable-bullet">•</span>
+              <span>{challenge}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )}
+
+  <CaseStudyFigure item={project.gallery?.[2]} fallbackAlt={project.title} />
+
+  <section class="case-study-section">
+    <div class="case-study-section-header">
+      <h2 class="case-study-section-title">Resultados de Negocio</h2>
+    </div>
+    <div class="case-study-box case-study-box-results">
+      {project.results && project.results.length > 0 ? (
+        <ul class="case-study-bullet-list">
+          {project.results.map((res) => (
+            <li class="case-study-bullet-item">
+              <span class="deliverable-bullet">•</span>
+              <span>{res}</span>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="case-study-text">{project.businessValue}</p>
+      )}
+    </div>
+  </section>
+
+  <CaseStudyFigure item={project.gallery?.[3]} fallbackAlt={project.title} />
+
+  <section class="case-study-section">
+    <div class="case-study-section-header">
+      <h2 class="case-study-section-title">Entregables & Arquitectura</h2>
+    </div>
+    <div class="case-study-box">
+      <ul class="case-study-bullet-list">
+        {project.architectureNotes.map((note) => (
+          <li class="case-study-bullet-item">
+            <span class="deliverable-bullet">•</span>
+            <span>{note}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section class="case-study-section">
+    <div class="case-study-section-header">
+      <h2 class="case-study-section-title">Tecnologías & Entorno</h2>
+    </div>
+    <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 0.5rem;">
+      {project.stack.map((tech) => (
+        <Chip label={`#${tech}`} />
+      ))}
+    </div>
+  </section>
+</article>

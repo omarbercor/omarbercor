@@ -1,0 +1,162 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { getSortedExperiments } from '@/lib/collections';
+import Chip from '@/components/ui/Chip.astro';
+import CodeBlock from '@/components/ui/CodeBlock.astro';
+import OptimizedMedia from '@/components/ui/OptimizedMedia.astro';
+
+export async function getStaticPaths() {
+  const experiments = await getSortedExperiments();
+  return experiments.map((experiment, idx) => ({
+    params: { slug: experiment.slug },
+    props: {
+      experiment,
+      nextExperiment: experiments[(idx + 1) % experiments.length],
+    },
+  }));
+}
+
+const { experiment, nextExperiment } = Astro.props;
+---
+
+<BaseLayout
+  title={`Lab: ${experiment.title} — Omar Bermúdez`}
+  description={experiment.tagline}
+  ogType="article"
+  showTopbar={true}
+  backHref="/lab"
+  backLabel="← Todos los experimentos"
+>
+  <main>
+    <section class="article-hero-wrap" aria-labelledby="lab-title">
+      <div class="article-hero-card">
+        <div class="article-hero-media">
+          <OptimizedMedia
+            src="/images/omar-profile.jpg"
+            alt={experiment.title}
+            widths={[640, 1200, 1600]}
+            sizes="(max-width: 1440px) 100vw, 1380px"
+            priority={true}
+          />
+        </div>
+        <div class="article-hero-overlay"></div>
+        <div class="article-hero-grain"></div>
+
+        <div class="article-hero-content">
+          <h1 class="article-hero-title" id="lab-title">
+            {experiment.title}
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <div class="article-lead-wrap">
+      <div class="article-lead-meta">
+        <Chip label={experiment.categoryLabel} />
+        <span class="article-meta-date">{experiment.date}</span>
+        <span class="article-meta-time">{experiment.status}</span>
+      </div>
+
+      <p class="article-lead-excerpt">{experiment.tagline}</p>
+    </div>
+
+    <article class="article-reading-container">
+      <div class="article-prose">
+        <div class="article-source-links">
+          {experiment.githubUrl && (
+            <a href={experiment.githubUrl} target="_blank" rel="noopener noreferrer" data-magnetic style="font-weight: 700;">
+              <span>Ver Repositorio GitHub ↗</span>
+            </a>
+          )}
+          {experiment.codepenUrl && (
+            <a href={experiment.codepenUrl} target="_blank" rel="noopener noreferrer" data-magnetic style="font-weight: 700;">
+              <span>Ver en CodePen ↗</span>
+            </a>
+          )}
+          {experiment.liveDemoUrl && (
+            <a href={experiment.liveDemoUrl} target="_blank" rel="noopener noreferrer" data-magnetic style="font-weight: 700;">
+              <span>Abrir Demo en Nueva Pestaña ↗</span>
+            </a>
+          )}
+        </div>
+
+        {experiment.embedUrl && (
+          <div class="article-embed-frame">
+            <iframe
+              src={experiment.embedUrl}
+              title={`Live Preview: ${experiment.title}`}
+              loading="lazy"
+              allow="accelerometer; gyroscope; magnetometer"
+            ></iframe>
+          </div>
+        )}
+
+        {experiment.videoUrl && (
+          <div class="article-embed-video">
+            <video controls playsinline preload="metadata">
+              <source src={experiment.videoUrl} type="video/mp4" />
+              Tu navegador no soporta reproducción de video.
+            </video>
+          </div>
+        )}
+
+        <h2>Descripción y Fundamentos</h2>
+        <p>{experiment.description}</p>
+
+        <h3>Interacciones y Controles</h3>
+        <p>{experiment.interactiveDetails}</p>
+
+        <blockquote>
+          <p><strong>Clave técnica:</strong> {experiment.highlightMetricOrFeature}</p>
+        </blockquote>
+
+        <h2>Estructura de Montaje HTML & Canvas</h2>
+        <p>
+          Fragmento de integración directa para incrustar el viewport 3D y conectar la escucha del acelerómetro del dispositivo:
+        </p>
+
+        <CodeBlock lang="HTML">{`<!-- Viewport de Experimentación Interactiva -->
+<div class="interactive-stage" id="stage-${experiment.slug}">
+  <canvas id="webgl-canvas" aria-label="${experiment.title}"></canvas>
+  <div class="hud-overlay" data-status="${experiment.status}">
+    <span class="hud-metric">${experiment.highlightMetricOrFeature}</span>
+  </div>
+</div>
+
+<script type="module">
+  import { initSimulation } from './scripts/${experiment.slug}.js';
+  
+  // Inicialización con soporte de física y acelerómetro
+  initSimulation({
+    container: '#stage-${experiment.slug}',
+    fpsTarget: 60,
+    enableGyroscope: true
+  });
+</script>`}</CodeBlock>
+      </div>
+    </article>
+
+    <div class="article-footer-tags-wrap">
+      <div class="article-tags-header">Tecnologías & Entorno</div>
+      <div class="article-tags-cloud">
+        {experiment.techStack.map((tech) => (
+          <Chip label={`#${tech}`} />
+        ))}
+      </div>
+    </div>
+
+    <section class="article-pagination-wrap" aria-label="Navegación entre experimentos">
+      <a href={`/lab/${nextExperiment.slug}`} class="next-article-row" data-magnetic>
+        <div class="next-article-meta">
+          <span class="next-article-label">SIGUIENTE EXPERIMENTO</span>
+          <span class="next-article-category">{nextExperiment.categoryLabel}</span>
+        </div>
+
+        <div class="next-article-body">
+          <h3 class="next-article-title">{nextExperiment.title}</h3>
+          <p class="next-article-excerpt">{nextExperiment.tagline}</p>
+        </div>
+      </a>
+    </section>
+  </main>
+</BaseLayout>

@@ -1,0 +1,136 @@
+/* Contenedor colapsable / desplegable con transición suave */
+.exp-drawer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.experience-row.is-open .exp-drawer {
+  grid-template-rows: 1fr;
+}
+
+.exp-drawer-inner {
+  overflow: hidden;
+}
+
+.exp-detail-body {
+  padding: 0 2rem 2.25rem 2rem;
+  border-top: none;
+  margin-top: 0;
+  padding-top: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+@media (min-width: 900px) {
+  .exp-detail-body {
+    padding: 0 3rem 2.5rem 3rem;
+    margin-top: 0;
+    padding-top: 0.5rem;
+    margin-left: 160px; /* Alineado armónicamente con la columna de contenido */
+  }
+}
+
+.exp-desc {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: var(--leading-base);
+  color: var(--text-muted);
+  margin: 0;
+  max-width: 900px;
+}
+
+/* Contenedor de tags de experiencia */
+.exp-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+/* Franja de Marcas y Clientes de Confianza (Carrusel Continuo Solo Logos) */
+.experience-brands-wrap {
+  margin-top: 4.5rem;
+  padding-top: 0;
+  border-top: none; /* Sin separador entre empleos y marcas */
+  display: flex;
+  flex-direction: column;
+  gap: 2.25rem;
+  overflow: hidden;
+}
+
+.experience-brands-title {
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 1.8vw, 1.55rem); /* Mismo tamaño que Lead Front-End & CMS Specialist (.exp-role) */
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  text-transform: none; /* Tipografía natural editorial */
+}
+
+.brands-carousel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 1rem 0;
+  mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+}
+
+.brands-carousel-track {
+  display: flex;
+  align-items: center;
+  gap: clamp(1.5rem, 3.5vw, 4rem);
+  width: max-content;
+  animation: brandsScroll 28s linear infinite;
+  will-change: transform;
+}
+
+.brands-carousel-container:hover .brands-carousel-track {
+  animation-play-state: paused;
+}
+
+@keyframes brandsScroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Logo Puro sin cajas ni texto, más grande y sin hover */
+.brand-logo-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #111111;
+  opacity: 0.85;
+  user-select: none;
+  flex-shrink: 0;
+  /* Ancho consistente para el canvas estándar 160x60 */
+  width: clamp(130px, 13vw, 175px);
+  padding: 0.5rem 0;
+  transition: opacity 0.3s ease;
+}
+
+.brand-logo-item svg,
+.brand-logo-item img {
+  display: block;
+  height: clamp(34px, 4vw, 48px);
+  max-width: 100%;
+  width: auto;
+  object-fit: contain;
+}
+
+@media (max-width: 768px) {
+  .brand-logo-item {
+    width: clamp(110px, 40vw, 140px); /* Aproximadamente 2 visibles en viewport móvil */
+  }
+
+  .brand-logo-item svg,
+  .brand-logo-item img {
+    height: clamp(30px, 7.5vw, 40px);
+  }
+}

@@ -1,0 +1,32 @@
+/* ==========================================================================
+   MAIN STYLESHEET ORCHESTRATOR — OMAR BERMÚDEZ
+   Orden estricto de cascada: Fuentes -> Tokens -> Primitivas -> Base -> Vistas
+   ========================================================================== */
+
+@import './fonts.css';
+@import './design-tokens.css';
+@import './ui-primitives.css';
+@import './base.css';
+@import './home/hero-stage.css';
+@import './home/hero-typography.css';
+@import './home/about-triptych.css';
+@import './home/dock-manifesto.css';
+@import './home/skills-stage.css';
+@import './home/skills-cards.css';
+@import './home/services-nav.css';
+@import './home/services-dossier.css';
+@import './home/works-grid.css';
+@import './home/works-cards.css';
+@import './home/experience-rows.css';
+@import './home/experience-brands.css';
+@import './home/writing-preview.css';
+@import './home/writing-banner.css';
+@import './layout/footer-cta.css';
+@import './layout/footer-links.css';
+@import './editorial/topbar-hero-shell.css';
+@import './editorial/article-hero-lead.css';
+@import './editorial/article-prose.css';
+@import './editorial/article-embeds-code.css';
+@import './editorial/article-pagination-archive.css';
+@import './editorial/case-study-meta-boxes.css';
+@import './editorial/case-study-media.css';

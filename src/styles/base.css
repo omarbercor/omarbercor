@@ -1,0 +1,122 @@
+:root {
+  /* Museum Warm Canvas (Alabaster / Fine Paper) */
+  --bg-museum: #FAF7F3;
+  --bg-museum-subtle: #F2EDE4;
+  --bg-card: #FFFFFF;
+  --text-primary: #121214;
+  --text-muted: #585860;
+  --text-subtle: #8E8E96;
+  --border-subtle: rgba(18, 18, 20, 0.08);
+  --border-strong: rgba(18, 18, 20, 0.16);
+
+  /* High-Contrast Vibrant Accent */
+  --accent: #F15D49; /* Museum Warm Vermilion */
+  --accent-glow: rgba(241, 93, 73, 0.12);
+
+  /* Floating Frosted Bottom Dock */
+  --dock-bg: rgba(250, 247, 243, 0.86);
+  --dock-border: rgba(18, 18, 20, 0.08);
+  --dock-shadow: 0 16px 40px -8px rgba(18, 18, 20, 0.08), 0 4px 12px -2px rgba(18, 18, 20, 0.04);
+
+  /* ==========================================================================
+     BORDER RADIUS DESIGN SYSTEM (ESTÁNDAR DEL SITIO)
+     ========================================================================== */
+  --radius-xs: 4px;       /* Micro badges, tags de código */
+  --radius-sm: 8px;       /* Botones secundarios, píldoras pequeñas */
+  --radius-md: 16px;      /* Tarjetas compactas, inputs */
+  --radius-lg: 24px;      /* [ESTÁNDAR PRINCIPAL] Foto morfeada, cards de proyectos */
+  --radius-xl: 32px;      /* Contenedores bento de gran formato */
+  --radius-full: 9999px;  /* Avatar circular inicial, dock flotante, botones cápsula */
+
+  /* Tipografías: Exclusivamente DOS familias (Titulares: Inter Tight / Textos: Inter) */
+  --font-display: 'Inter Tight', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: var(--font-body);
+  --font-sans: var(--font-body);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  min-height: 100%;
+  background-color: var(--bg-museum);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  position: relative;
+  scroll-behavior: smooth;
+}
+
+/* Screen reader only utility (SEO & a11y) */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* ==========================================================================
+   MAGNETIC CUSTOM CURSOR (Desktop only)
+   - Único puntero principal (cursor-dot) con efecto negativo (mix-blend-mode: difference).
+   - En reposo: punto sólido de 10px.
+   - En hover: crece con animación elástica/rebote (cubic-bezier) de 0.3s y se contrae al salir.
+   ========================================================================== */
+.cursor-dot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 12px;
+  height: 12px;
+  pointer-events: none;
+  z-index: 999999;
+  opacity: 0;
+  will-change: transform, opacity;
+  transition: opacity 0.2s ease;
+  mix-blend-mode: difference;
+}
+
+.cursor-dot-inner {
+  width: 100%;
+  height: 100%;
+  background-color: #FFFFFF;
+  border-radius: var(--radius-full);
+  transform: scale(1);
+  transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  will-change: transform;
+}
+
+body.has-custom-cursor {
+  cursor: none;
+}
+
+body.has-custom-cursor a,
+body.has-custom-cursor button,
+body.has-custom-cursor .work-card {
+  cursor: none;
+}
+
+/* Cursor visible en pantalla */
+body.cursor-active .cursor-dot {
+  opacity: 1;
+}
+
+/* En hover de elementos clicables: el puntero principal crece al TRIPLE con rebote elástico de 0.3s */
+body.cursor-hover .cursor-dot-inner {
+  transform: scale(3); /* Crece al triple exacto (de 12px a 36px) con rebote elástico */
+}
+
+/* Al presionar clic (active/mousedown) */
+body:active .cursor-dot-inner {
+  transform: scale(2.4);
+}

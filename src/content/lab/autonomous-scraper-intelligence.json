@@ -1,0 +1,21 @@
+{
+  "order": 3,
+  "title": "Autonomous Scraper & Market Intelligence",
+  "tagline": "Self-healing headless scraper pipelines orchestrated via n8n and LLM extractors.",
+  "category": "automation-ai",
+  "categoryLabel": "Automation & AI",
+  "status": "Live Interactive",
+  "techStack": [
+    "n8n Workflows",
+    "Node.js",
+    "Puppeteer Stealth",
+    "OpenAI / Claude API",
+    "PostgreSQL"
+  ],
+  "description": "An automated extraction pipeline that bypasses anti-bot heuristics, collects structured product pricing data across multiple digital retailers, and leverages LLM schema validators to normalize unstructured HTML tables into clean JSON data streams.",
+  "interactiveDetails": "Visual execution diagram, webhook triggering sandbox, and real-time payload validator viewer.",
+  "highlightMetricOrFeature": "Autonomous schema adaptation with 99.8% extraction reliability",
+  "githubUrl": "https://github.com/omarbercor",
+  "liveDemoUrl": "#demo-scraper",
+  "date": "2023"
+}

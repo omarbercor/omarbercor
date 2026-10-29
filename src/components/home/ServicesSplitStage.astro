@@ -1,0 +1,67 @@
+---
+/**
+ * ServicesSplitStage — Bloque 05: Selector lateral interactivo y dossier detallado de servicios
+ */
+import { services } from '@/data/services';
+import Chip from '@/components/ui/Chip.astro';
+---
+
+<section class="services-section" id="services" aria-labelledby="services-title">
+  <div class="services-container">
+    <header class="services-header">
+      <h2 class="services-title" id="services-title">SERVICIOS</h2>
+      <p class="services-subtitle">
+        Transformando requerimientos de negocio y diseño en plataformas de alto rendimiento, arquitecturas estables e infraestructura que escala sin deuda técnica.
+      </p>
+    </header>
+
+    <div class="services-split-stage">
+      <nav class="services-nav-list" aria-label="Catálogo de Servicios">
+        {services.map((service, idx) => (
+          <button
+            class={`service-nav-btn ${idx === 0 ? 'is-active' : ''}`}
+            data-service-target={service.id}
+            type="button"
+          >
+            <div class="service-btn-left">
+              <span class="service-num">{service.number}</span>
+              <span class="service-btn-title">{service.navTitle}</span>
+            </div>
+            <span class="service-arrow">→</span>
+          </button>
+        ))}
+      </nav>
+
+      <div class="service-dossier-wrap">
+        {services.map((service, idx) => (
+          <article class={`service-dossier-card ${idx === 0 ? 'is-active' : ''}`} id={service.id}>
+            <h3 class="dossier-headline">{service.headline}</h3>
+            <p class="dossier-desc">{service.description}</p>
+
+            <div class="dossier-deliverables">
+              <div class="dossier-section-title">Entregables Clave</div>
+              <ul class="deliverables-list">
+                {service.deliverables.map((item) => (
+                  <li class="deliverable-item">
+                    <span class="deliverable-bullet">•</span>
+                    <span>{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <div class="dossier-section-title">Tecnologías & Entorno</div>
+              <div class="dossier-stack">
+                {service.stack.map((tech) => (
+                  <Chip label={tech} />
+                ))}
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
