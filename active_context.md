@@ -1,4 +1,4 @@
-> Last Updated: 2026-10-29 | Version: 2.9 | Fase: Sincronización 1:1 Foto Vertical y Título Horizontal en Galería
+> Last Updated: 2026-10-29 | Version: 3.0 | Fase: Módulo Reutilizable de Aberración por Puntero (Thibaut Lefrançois)
 
 # Active Context — RAM y Memoria Persistente del Proyecto
 
@@ -12,11 +12,12 @@
 ## 🗓️ Última Actualización
 
 - **Fecha**: 2026-10-29
-- **Sesión**: Sincronización matemática geométrica entre fotos y marquesina en [`/homev2`](file:///o:/Desarrollo/omarbercor/src/pages/homev2.astro):
-  1. **Alineación de centros**: En el punto exacto en que la foto de un proyecto alcanza el centro vertical de la pantalla (`cy === viewport.height / 2`), el título de ese mismo proyecto en la marquesina coincide exactamente en el centro horizontal (`cx === viewport.width / 2`).
-  2. **Interpolación continua por tramos**: Cálculo dinámico de `syncPoints` que mapea `track.y` con `marqueeInner.x` en cada frame, garantizando transición suave e impecable en ambos sentidos del scroll (bajada y subida).
-  3. **Marquesina continua sin vacíos**: Estructura de tres juegos (clones previo/posterior y set principal `is-main`) para mantener el cruce tipográfico sin espacios en blanco en pantallas ultra anchas.
-- **Estado**: 🟢 Estable (`36 page(s) built in 1.98s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
+- **Sesión**: Creación del módulo óptico interactivo de aberración cromática controlada por puntero (estilo *3D Carousel* de Thibaut Lefrançois):
+  1. **Configuración Global (`src/config/site-optics.ts`)**: Parámetros centralizados `pointerAberration` (`radius: 0.32`, `strength: 0.045`, `smoothing: 0.12`, `enabled: true`).
+  2. **Módulo Reutilizable (`src/motion/pointer-aberration.ts`)**: Clase `PointerAberrationController` y función GLSL `applyPointerAberration` que puede vincularse a uno o múltiples materiales y elementos WebGL/Three.js.
+  3. **Aplicación al Carrusel de Proyectos**: Integrado en `src/motion/rolling-shaders.ts` y `src/motion/rolling-gallery.ts`. Al mover el cursor o interactuar con las fotos, los canales RGB se separan radialmente desde el punto exacto del puntero con amortiguación suave LERP.
+  4. **Clics y Distribución**: Clic exclusivo en las fotos hacia `/work/[slug]` (marquesina pasiva) y fotos repartidas de forma armónica por el ancho del viewport.
+- **Estado**: 🟢 Estable (`36 page(s) built in 1.97s`, 0 errores, dev activo en `http://localhost:4321/homev2`).
 
 ---
 

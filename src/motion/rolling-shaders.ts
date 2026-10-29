@@ -1,3 +1,5 @@
+import { POINTER_ABERRATION_GLSL } from './pointer-aberration';
+
 export const ROLLING_GALLERY_SHADERS = {
   vertexShader: /* glsl */ `
     uniform vec2 uSize;
@@ -12,6 +14,7 @@ export const ROLLING_GALLERY_SHADERS = {
       vec3 pos = position * vec3(uSize, 1.0);
       vec3 facing = vec3(0.0, 0.0, 1.0);
 
+      // The paper rolls downwards while entering and upwards while leaving.
       vec2 dir = vec2(sin(uAngle), -cos(uAngle)) * sign(uRoll);
       float extent = dot(abs(dir), uSize * 0.5);
       float edge = mix(extent, -extent, abs(uRoll));
@@ -36,16 +39,39 @@ export const ROLLING_GALLERY_SHADERS = {
     uniform vec2 uSize;
     uniform vec2 uImageSize;
 
+    // Pointer Chromatic Aberration uniforms (Thibaut Lefrançois style)
+    uniform vec2 uMouse;
+    uniform vec2 uResolution;
+    uniform float uPointerRadius;
+    uniform float uPointerStrength;
+    uniform float uPointerEnabled;
+
     varying vec2 vUv;
     varying float vLight;
 
+    ${POINTER_ABERRATION_GLSL}
+
     void main() {
+      // 1. Relación cover para no deformar texturas
       vec2 ratio = vec2(
         min((uSize.x / uSize.y) / (uImageSize.x / uImageSize.y), 1.0),
         min((uSize.y / uSize.x) / (uImageSize.y / uImageSize.x), 1.0)
       );
-      vec3 color = texture2D(uTexture, (vUv - 0.5) * ratio + 0.5).rgb;
+      vec2 baseUv = (vUv - 0.5) * ratio + 0.5;
 
+      // 2. Muestreo con aberración cromática radial dependiente del puntero
+      vec3 color = applyPointerAberration(
+        uTexture,
+        baseUv,
+        gl_FragCoord.xy,
+        uResolution,
+        uMouse,
+        uPointerRadius,
+        uPointerStrength,
+        uPointerEnabled
+      );
+
+      // 3. Sombreado de curvado de papel (anverso / reverso)
       if (gl_FrontFacing) {
         color *= mix(0.35, 1.0, max(vLight, 0.0));
       } else {
@@ -57,4 +83,3 @@ export const ROLLING_GALLERY_SHADERS = {
     }
   `,
 };
-

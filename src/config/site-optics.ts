@@ -26,12 +26,18 @@ export interface OpticsConfig {
       speed: number;        // Velocidad de interpolación/fricción LERP (ej: 0.08)
     };
   };
+  pointerAberration: {
+    enabled: boolean;       // Aberración cromática controlada por puntero (estilo Thibaut Lefrançois)
+    radius: number;         // Radio de alcance esférico alrededor del cursor (0.1 - 0.6)
+    strength: number;       // Intensidad del split RGB radial (0.01 - 0.1)
+    smoothing: number;      // Factor de amortiguación LERP del puntero (0.05 - 0.25)
+  };
 }
 
 export const SITE_OPTICS_CONFIG: OpticsConfig = {
   grain: {
     enabled: true,
-    opacity: 0.06,
+    opacity: 0.11,
     fps: 24,
     patternSize: 256,
     noiseAlpha: 180,
@@ -46,5 +52,11 @@ export const SITE_OPTICS_CONFIG: OpticsConfig = {
       distance: 0.45,
       speed: 0.08,
     },
+  },
+  pointerAberration: {
+    enabled: true,
+    radius: 0.32,
+    strength: 0.045,
+    smoothing: 0.12,
   },
 };

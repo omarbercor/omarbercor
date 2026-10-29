@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import Lenis from 'lenis';
 import { ROLLING_GALLERY_SHADERS } from './rolling-shaders';
+import { PointerAberrationController, createPointerAberrationUniforms } from './pointer-aberration';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -48,6 +49,9 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
   const angles = [-0.18, 0.16, -0.14, 0.18, -0.15];
   const syncPoints: SyncPoint[] = [];
 
+  // Módulo óptico interactivo: aberración cromática controlada por el cursor
+  const pointerAberration = new PointerAberrationController({ targetElement: window });
+
   function getItemCenterY(itemEl: HTMLElement, trk: HTMLElement): number {
     const trkRect = trk.getBoundingClientRect();
     const itemRect = itemEl.getBoundingClientRect();
@@ -69,11 +73,9 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
     mainTitles.forEach((titleEl, i) => {
       const itemEl = itemLinks[i];
       if (!itemEl) return;
-      const Y_i = getItemCenterY(itemEl, track!);
-      const X_i = getTitleCenterX(titleEl, marqueeInner!);
       syncPoints.push({
-        trackY: vMidY - Y_i,
-        marqueeX: vMidX - X_i,
+        trackY: vMidY - getItemCenterY(itemEl, track!),
+        marqueeX: vMidX - getTitleCenterX(titleEl, marqueeInner!),
       });
     });
   }
@@ -107,7 +109,6 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
   function positionItems() {
     const itemWidth = itemLinks[0]?.offsetWidth || 480;
     const maxOffset = (window.innerWidth - itemWidth) / 2;
-    // Distribución horizontal equilibrada y más amplia en la pantalla (izquierda, centro, derecha)
     const offsets = [-0.65, 0.45, -0.40, 0.60, -0.25];
     itemLinks.forEach((item, i) => {
       const factor = offsets[i % offsets.length];
@@ -132,8 +133,11 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
         uRoll: { value: 0 },
         uAngle: { value: angles[i % angles.length] },
         uRadius: { value: 50 },
+        ...createPointerAberrationUniforms(),
       },
     });
+
+    pointerAberration.addMaterial(material);
 
     const plane = new THREE.Mesh(geometry, material);
     plane.frustumCulled = false;
@@ -193,6 +197,8 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
     const rect = container!.getBoundingClientRect();
     if (rect.bottom < 0 || rect.top > window.innerHeight) return;
 
+    pointerAberration.update(viewport.width, viewport.height);
+
     planes.forEach((plane, i) => {
       const itemRect = itemLinks[i].getBoundingClientRect();
       const cx = itemRect.left + itemRect.width / 2;
@@ -218,6 +224,7 @@ export function initRollingProjectsGallery(containerSelector = '#rolling-project
 
   return {
     destroy: () => {
+      pointerAberration.destroy();
       lenis.destroy();
       gsap.ticker.remove(tickerHandler);
       gsap.ticker.remove(render);
